@@ -70,3 +70,64 @@
 
 ## Chapter 5
 * Something
+
+## Lecture
+* **Industry Definition**
+  * Firm / group of firms that produce and / or sell the same or similar products/services to the same market.
+  * No definitive rule on where to drawn boundries
+    * Avoid being too inclusive or exclusive
+  * **Industry Analysis**
+    * Understand value
+    * understand drivers of profitability
+    * attractive
+    * macro-economic influence
+    * key success factors
+  * **Game Theory**
+    * Doesn't really work in real life (more than 2 players)
+    * Ideal: Cooperate for as long as you can, until you know longer can.
+* **Industry Value System** - The entire industry
+  * Raw materials -> customer
+  * Objective is to add value at each step.
+  * usually, firm has minimal controll of activities.
+  * Backwards vs. Forward integration.
+  * Why? Want to be in control of value
+  * **Internal Value Chain** - Activities within local firm scope
+* **Porter's Five Forces**
+  * All it tells you about is if a particular industry has high profitability.
+  * Minimize Rivalry and threat of new is most progitable.
+  * **Suppliers**
+    * Increased threat if they can forward integrate
+  * **Buyers**
+    * Think about the impact of one customer (McDonald's customer vs. Apple purchase from supplier)
+      * Caveat: this one customer has a large following that can potentially influence other people (social media), but very difficult to do.
+    * Think about who is the actual buyer (B2C, B2B).
+  * **Industry Analysis**
+    * 10% of profits can be explained by industry, 90% the others
+* **PEST** 
+  * Consider what is going on in the industry right now, and how can changes impact the current state.
+    * McDonald's -> Social trends (Super Size Me) can potentially have a large effect.
+    * Different than Porter5 which is just a snapshot in time. Can be used together to get a full picture.
+  * **Economic** - Think about if this is a recession proof industry
+* **Key Success Factors**
+  * What do I need to be able to complete in this industry?
+  * Need to understand the time horizon.
+* Environment / Industry Analysis Examples
+  * Ontario Wine Industry - Present Day
+    * Governement: Sets up the regulations (who / where / price you can sell etc.) **Huge**. 
+    * Suppliers : Bottels, Barrels, Corks 
+    * Vinyards
+    * Wineries
+    * Distributors
+    * Wine Brokers / Agents
+    * Retailers
+      * LCBO - **Has the most power in Ontario**
+        * If you want to be a player in Ontario, need a good relationship with them.
+      * Wine Rack
+      * Grocery Stores
+    * **Key Success Factors**
+      * Government Permits
+      * Quality / Pricing
+      * Capital
+      * Relationships
+      * Need Vines / grapes / climate / geographical constraints
+
