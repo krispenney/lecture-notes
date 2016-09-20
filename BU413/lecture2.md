@@ -114,4 +114,21 @@
     * One stage usually dominates
     * Financial Planner focuses on the most relavent isses relating to that stage, unique to the individual.
 * Financial Needs During Life Cycle - see slide 26
+## Demographics
+* Statistical studies of populations
+  * Population Growth (births, deaths, net immigrations)
+  * Age distribution
+  * Family structures
+  * Income and education levels
+  * Has effects on
+    * Labout Markets
+    * Career Choices
+    * Markets Demands
+      * New houses, transportation needs, health care
+    * Government Policies
+      * Adjust their policies for demographics
+      * i.e. Tax break for manufacturing
+      * Life expectancy tracked from 1966 -> Introduction of the Canadian Pension Plan.
+      * No defined benefits pensions, massive financial burdon if have to keep paying as life expectancy increases.
+      * Bigger drain on the systems (pensions, health care) as people age and life expectancy increases.
 
