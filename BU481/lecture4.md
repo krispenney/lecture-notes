@@ -15,10 +15,18 @@
 2. After conducting a PEST analysis, are there any opportunities / red flags for the electric car industry? Are they the same or different as the traditional car industry?
   * Political 
     * Government rebates on electric cars
-    * 
+    * Regulation regarding dealerships 
   * Economic
+    * Higher upfront cost of an electric car
+    * cheaper over the lifetime (no gas, oil, less maintenance)
   * Social
+    * Challenge: Social Adoption
+      * range anxiety
+    * Be apart of the green movement
+    * Uncertainty about the future (ability to charge, resale value)
   * Technological
+    * Traditional cars expensive to design and make
+    * Can take advantage of more standard parts (electric motors, LI-Ion batteries)
 3. What are the key success factors required for the electric car industry? Are they the same or different from the traditional car industry?
   * Electric Cars
     * 
