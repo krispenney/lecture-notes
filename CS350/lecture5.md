@@ -25,6 +25,7 @@
 ``` C
 struct buffer {
     void *items[N];
+    lock buf_lock;
     sem num_of_items;
     sem remaining_space;
 };
@@ -37,9 +38,19 @@ void init_buffer(struct buffer *b){
 void producer(struct buffer *b){
     // generating data d
     P(remaining_space); // decrements remaining space (waits until there's space)
+    acquire(b->buf_lock);
     push(b, d);
+    release(b->buf_lock);
     V(num_of_items);
 }
-void consumer(struct buffer *b){}
+void consumer(struct buffer *b){
+    P(num_of_items); // decrements (may wait)
+    acquire(b->buf_lock);
+    d = pop(b);
+    release(b->buf_lock);
+    V(remaining_space);
+    //do something with data
+}
 ```
-  * Why do we want both count and remaining space? 
+  * Why do we want both count and remaining space?
+  * In the above example, the semaphores are not being used for mutual exclusion (unlike slide 33). In this case, locks are for mutual exclusion (could have added a 3rd semaphore to do this) and semaphores are used to communicate the state of the buffer. 
