@@ -38,6 +38,7 @@
   * If a vision or mission exist it is likely that the goals will develop as a natural extension.
   * The value proposition is often easier to articulate when you focus on how value is created in the eyes of the customer.
 * Need to ensure that all value components are in alignment.
+
 #### Goals
 
 
