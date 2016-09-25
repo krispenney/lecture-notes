@@ -21,6 +21,25 @@
   * Everyone not clear on strategy / no strategy can lead to internal clashes and confusion.
   * Not sure how to prioritize activities / products / services.
 
+1. **A Hub for Analysis**
+  * Strategy provides a baseline to organize and discuss understanding of what a business is all about.
+  * Starting point for analyzing and debating choices that affect the future direction of the business.
+    * Base Case - continue forward with existing strategy.
+      * Does it make sense given the future market / competition to do this?
+      * What performance can be expected, at what level of risk?
+2. **A Link to Action**
+  * Strategy provides a vehicle for you to translate general ideas about direction and performance into explicit, actionable terms.
+  * **Goals** set up the targets against which progress and performance can be assessed.
+  * **Product Market Focus** provides critical direction to people throughout the business so that they can focus their effort on targeted markets and products and avoid wasting their time.
+  * **Value Proposition** provides a beacon for employees everywhere, detailing specifically what the business is trying to do for it's customers and the requirements of their particular role.
+  * **Core Activities** highlight the key jobs that will have to be done and the capabilities that need most to be developed and reinforced.
+### Strategy in a Single Business
+* Easier entry points to discover strategy:
+  * If a vision or mission exist it is likely that the goals will develop as a natural extension.
+  * The value proposition is often easier to articulate when you focus on how value is created in the eyes of the customer.
+* Need to ensure that all value components are in alignment.
+#### Goals
+
 
 ## Chapter 3
 ## Readings - What is Strategy?
