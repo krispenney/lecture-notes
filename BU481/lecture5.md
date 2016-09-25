@@ -13,12 +13,13 @@
   * What benefits constitute it's offer or value proposition in the marketplace?
 4. Core Activities
   * What are the primary value-adding activities that the business intends to perform and how does it intend to perform them?
+  
 ### The Role of Strategy
 * Strategy allows managers to establish, sustain, and monitor the direction of their business.
 * The absence of strategy can lead to frustration.
   * Everyone not clear on strategy / no strategy can lead to internal clashes and confusion.
   * Not sure how to prioritize activities / products / services.
-  
+
 
 ## Chapter 3
 ## Readings - What is Strategy?
