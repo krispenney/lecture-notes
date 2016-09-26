@@ -129,7 +129,87 @@
 * Superior Profitability: delivering greater value allows companies to charge a higher average unit price; greater efficiency allows for a lower average unit price.
 * **Operational Effectiveness**: Performing similar activities **better** than rivals can perform them.
 * **Strategic Positioning**: performing **different** activities than rivals, or performing similar activities in different ways.
-
+* Homogeneity - Similar to others
 
 ## Lecture
-*
+
+### What is Strategy?
+* How to be #1
+* Where to get there
+* Bridge between everyday actions and end goals.
+* Competitive advantage that can't be replicated. Uniqueness that is valuable to consumers, sustainable.
+* Tradeoffs between sustainable strategy
+* Strategy has to fit with the organization.
+* A clear strategy is often dependant on leadership.
+  * Senior leadership must fully buy into the strategy.
+  * How does the strategy tie directly to employees.
+* **Operational Effectiveness vs. Strategic Positioning Video - very short!**
+  * Operational Effectiveness : Staying with best practices, doing things well.
+
+### Strategy Creates a Competitive Advantage
+* Strategy Triangle
+  1. Goals
+    * Investors typically care about short terms.
+    * Long term - family firms.
+    * Tie incentives to goal performances
+    * Measurable
+    * relative to competition
+    * Often includes growth (financial, geographical)
+  2. Core activities
+    * Main set of activities, critical to success of the business
+    * Outsourcing - key jobs should be done in house
+      * Not long term advantage.
+  3. Product Market Focus
+    * What / where are we selling (tangible)?
+    * Who are my customers?
+    * Market Development
+    * Market Penetration
+    * Product Development
+    * Diversification
+  4. Value Proposition
+    * Fundamental Benefit that the company has chosen to offer to the marketplace.
+    * Low cost
+    * Differentiated products
+
+### Strategic Positions - Will Not be on Quiz!!!
+
+### Generic Competitive Strategies
+1. Low Cost Provider Strategy
+  * Firm provides products / services at a lower price than the competition.
+  * Organized internally in order to fulfil.
+  * Find approaches to achieve a cost advantage that is hard to replicate.
+  1. Be More efficient than anyone else
+  2. Take away parts that aren't relevant to the consumer.
+    * Costco
+    * Ikea
+    * Tangerine
+    * Discount Airlines
+2. Broad Differentiation Strategy
+  * Something different (features) that allows a **price premium**
+  * Examples
+    * Brand
+    * Quality
+    * Features
+  3. Best cost provider / Hybrid Strategy
+    * Low Cost + Differentiation
+  4. Stuck in the middle / Black hole
+
+* Broad
+  * Coke
+* Focused
+  * Competing based on price to a narrow market.
+  * Customized products to niche markets
+
+### How can you tell if a generic strategy is actually working
+* Companies are imitating you.
+* Are you making money? -> Profitable
+* Are you doing better than last year?
+* Are your employees motivated and excited?
+
+### Business Strategy - Assessment
+1. How are you choosing to compete?
+  * Low cost vs. Differentiation
+  
+2. Do the 4 elements complement and reinforce each other?
+3. Does value prop resonate to market?
+4. Does the business strategy resonate throughout the entire business?
