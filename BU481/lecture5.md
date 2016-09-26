@@ -119,12 +119,17 @@
   * Identify the organizational capabilities required to implement the strategy.
   * Check consistency between the required capabilities and those evident in the organization.
     * Critical variables that have impact of organization's capabilities
-
       1. Leadership.
       2. Structure.
       3. Management Processes.
       4. Culture.
 
 ## Readings - What is Strategy?
+* Positioning is no longer effective, at best, temporary competitive advantage. Rivals can quickly copy any given market position.
+* Superior Profitability: delivering greater value allows companies to charge a higher average unit price; greater efficiency allows for a lower average unit price.
+* **Operational Effectiveness**: Performing similar activities **better** than rivals can perform them.
+* **Strategic Positioning**: performing **different** activities than rivals, or performing similar activities in different ways.
+
+
 ## Lecture
 *
