@@ -1,5 +1,5 @@
 # Lecture 5 - Business Strategy, Diamond E, Comp. Advantage - Sept 26. 2016
-## Chapter 2 (up to 38)
+## Chapter 2 (up to 38) - Strategy
 ### The essentials of the Strategy Model
 * Each component is a distinct aspect of the strategy.
 * Understand of each component, bringing together will give insights of strategy (whether it is consistent or ambiguous).
@@ -90,9 +90,11 @@
     * Costco - low unit price on quantity purchases.
     * Whole Foods - Emphasis on unique product features pesticide-free produce, hormone-free meat, etc.
 
+## Chapter 3 - The Diamond-E Framework
+* A high level roadmap for strategic analysis, identifies key variables, and structures the critical relationships among them.
+* Strategy is the critical linking variable in the model. Tells what opportunities the business is pursing in the environment and what resources, organizational capabilities and management preferences are required for effective execution.
+* Principal logic underlying the framework is **consistency** or **alignment**. High consistency among the variables will lead to successful performance, while conflict or inconsistencies will lead to poor performance.
 
-
-## Chapter 3
 ## Readings - What is Strategy?
 ## Lecture
 *
