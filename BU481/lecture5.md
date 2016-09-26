@@ -95,6 +95,36 @@
 * Strategy is the critical linking variable in the model. Tells what opportunities the business is pursing in the environment and what resources, organizational capabilities and management preferences are required for effective execution.
 * Principal logic underlying the framework is **consistency** or **alignment**. High consistency among the variables will lead to successful performance, while conflict or inconsistencies will lead to poor performance.
 
+### Diamond-E Components
+* **Strategy <-> Environment**
+  * Need to translate environment forces into implications for the bsiness in terms of specific strategic opportunities and challenges.
+  * can then check for consistency in strategy.
+  * Put together a performance forecast for the proposal under study based on the assumption that it could be successfully implemented.  This assumption will be challenged later in the analysis.
+* **Strategy <-> Resources**
+  * Identify the resource requirements for the current strategy / new strategic proposal.
+  * Compare the required resources with those avaliable to the business and identify resource gaps.
+  * Determine the probability of closing resource gaps and the consequences of failing to do so.
+  * Learnings can be used to influence future proposals.
+    * Emphasizes the non-linearity of the Diamond-E. Continuos feedback loop that incorporates new information.
+* **Strategy <-> Management Preferences**
+  * Managers are the authors and implement the strategy, thus their preferences will constitute strategic drives and constraints just as resources and organizational capabilities.
+  * Start with identification of preferences that are consistent with the execution of the strategy.
+  * Compare these preferences to those of the business managers who are critical to execution.
+    * If consistent, move on
+    * Else -> Problems
+      1. May find that management preferences are similar, but at odds with the proposed strategy. Judgement will have to be made on whether preferences can be reasonably modified.
+      2. Differences in individual strategic preferences are causing conflicts among the managers as well as with the strategy. **Recall**, prime function of strategy is to get managers to work towards same goals and vision.
+* **Strategy <-> Organization**
+  * Last step, made it this far and want to determine if the organization an implement it effectively.
+  * Identify the organizational capabilities required to implement the strategy.
+  * Check consistency between the required capabilities and those evident in the organization.
+    * Critical variables that have impact of organization's capabilities
+
+      1. Leadership.
+      2. Structure.
+      3. Management Processes.
+      4. Culture.
+
 ## Readings - What is Strategy?
 ## Lecture
 *
