@@ -33,11 +33,13 @@
   * **Product Market Focus** provides critical direction to people throughout the business so that they can focus their effort on targeted markets and products and avoid wasting their time.
   * **Value Proposition** provides a beacon for employees everywhere, detailing specifically what the business is trying to do for it's customers and the requirements of their particular role.
   * **Core Activities** highlight the key jobs that will have to be done and the capabilities that need most to be developed and reinforced.
+
 ### Strategy in a Single Business
 * Easier entry points to discover strategy:
   * If a vision or mission exist it is likely that the goals will develop as a natural extension.
   * The value proposition is often easier to articulate when you focus on how value is created in the eyes of the customer.
 * Need to ensure that all value components are in alignment.
+
 * **Goals**
   * Are an expression of what a business intends to achieve - absolutely and relative to competition.
   * Contrasts a vision, which may included very long-term goals, strategic goals are more immediate.
@@ -60,6 +62,7 @@
       * **Harvest**: A stingy approach to investment and spending as priority is given to milking cash and profits from a business.
       * **Divest**: Give priority to actions that prepare and initiate the sale of the business.
     * Can use a goal structure as a competitive advantage. May choose to make greater risks than others in the industry (Boeing).
+
 * **Product Market Focus**
   * Spells out the nature of the products / services that a business intends to offer and the characteristics of the markets that it intends to compete in.
   * Firms can focus on existing products and markets through a **penetration strategy**.
@@ -73,6 +76,7 @@
     * a visualization of the product market focus.
   * **Product Market Focus and Competitive Advantage**
     * Concentrate on product market niches where competitors are relatively weak or uninterested.
+
 * **Value Proposition**
   * A statement of the fundamental benefit that it has chosen to offer the market.
   * Generic Value Propositions - Michael Porter
