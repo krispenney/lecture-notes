@@ -38,8 +38,58 @@
   * If a vision or mission exist it is likely that the goals will develop as a natural extension.
   * The value proposition is often easier to articulate when you focus on how value is created in the eyes of the customer.
 * Need to ensure that all value components are in alignment.
+* **Goals**
+  * Are an expression of what a business intends to achieve - absolutely and relative to competition.
+  * Contrasts a vision, which may included very long-term goals, strategic goals are more immediate.
+  * **Hard Goals**
+    * Focus on the aims and performance of the business as a classic economic entity be it for profit or non-profit, revealing measurable targets and time frames.
+    * Examples
+      * Grow revenues at a rate of 10%.
+      * Be the first or second in sales in the market it serves.
+      * Hospital focusing on patient safety measures.
+  * **Soft Goals**
+    * Set targets for the social conduct of the business.
+    * Focus on the intentions of the business w.r.t managers, employees, and in the community.
+    * Often overlooked because typically analysts only focus on economics.
+    * Harder to state in measurable terms (May lead to them being overlooked).
+  * **Goal Structures**
+    * Goals should represent the important aims of the business (would be true if they reflect the balanced scorecard).
+    * Goal structure is the ordering of goals in terms of priority.
+    * Types of goal structures
+      * **Growth** : Priority on the market, plant and personnel investments to grow the business, potentially at the expense of current profitability.
+      * **Harvest**: A stingy approach to investment and spending as priority is given to milking cash and profits from a business.
+      * **Divest**: Give priority to actions that prepare and initiate the sale of the business.
+    * Can use a goal structure as a competitive advantage. May choose to make greater risks than others in the industry (Boeing).
+* **Product Market Focus**
+  * Spells out the nature of the products / services that a business intends to offer and the characteristics of the markets that it intends to compete in.
+  * Firms can focus on existing products and markets through a **penetration strategy**.
+    * Suggests that there is market share to be gained by focusing on the current products and markets.
+    * Or perhaps there is growth in the market that would provide for growth even if market share were to remain the same.
+  * **Product Development strategy** Develop new products for existing market.
+  * **Market Development Strategy** - existing products in new markets.
+    * Typically in the case for geographic expansion.
+  * Firms may choose to diversify both products and markets.
+  * **Product Market Matrix**
+    * a visualization of the product market focus.
+  * **Product Market Focus and Competitive Advantage**
+    * Concentrate on product market niches where competitors are relatively weak or uninterested.
+* **Value Proposition**
+  * A statement of the fundamental benefit that it has chosen to offer the market.
+  * Generic Value Propositions - Michael Porter
+    1. **Low Cost**
+      * Provide products and services at a lower cost than competitors and enable firms to compete on price.
+    2. **Differentiation**
+      * Broadly defined to include anything such as service, quality, or features that sets a product of service apart from competitors.
+  * Goal to express value propositions in terms of fundamental customer benefits (price, features, service, execution).
+  * Example
+| Price | Features | Execution |
+| --------------------------- | -------- | --------- |
+| * **Direct** | | |
+|   * List Price | | |
 
-#### Goals
+
+
+
 
 
 ## Chapter 3
