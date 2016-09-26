@@ -81,14 +81,10 @@
     2. **Differentiation**
       * Broadly defined to include anything such as service, quality, or features that sets a product of service apart from competitors.
   * Goal to express value propositions in terms of fundamental customer benefits (price, features, service, execution).
-  * Example
-| Price | Features | Execution |
-| --------------------------- | -------- | --------- |
-| * **Direct** | | |
-|   * List Price | | |
-
-
-
+  * **Competitive Advantage**
+    * Most obvious way in which a business can attempt to differentiate itself from the competition.
+    * Costco - low unit price on quantity purchases.
+    * Whole Foods - Emphasis on unique product features pesticide-free produce, hormone-free meat, etc.
 
 
 
