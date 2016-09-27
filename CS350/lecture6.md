@@ -62,3 +62,49 @@ void V(struct semaphore *sem){
 * Slides 44 and 45
   * Need to check in the while loop because signal may change by the time that the thread it woken up.
   * cv_signal doesn't actually touch the lock.
+
+* In class problem:
+``` C
+struct semaphore *sa; // mutex : 1 - just be having as locks
+struct semaphore *sb; // mutex : 1 - just be having as locks
+struct semaphore *sc; // 0 - something more complicated
+
+void func1() {
+  P(sa);
+  funcA();
+  V(sa);
+  P(sc);
+}
+
+void func2(){
+  P(sb);
+  funcB();
+  V(sb);
+  V(sc);
+}
+
+// Solution - Not a complete Solution yet!!!
+struct lock *sa; // mutex : 1
+struct lock *sb; // mutex : 1
+
+struct lock *sc; // 0 - something more complicated
+struct cv *func2fin;
+
+void func1() {
+  lock_aquire(sa);
+  funcA();
+  lock_release(sa);
+  lock_acquire(sc);
+  cv_wait(func2fin, sc);
+  lock_release(sc);
+}
+
+void func2(){
+  lock_aquire(sb);
+  funcB();
+  lock_release(sb);
+  lock_aquire(sc);
+  cv_signal(func2fin, sc);
+  lock_release(sc);
+}
+```
