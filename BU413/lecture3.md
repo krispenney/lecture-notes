@@ -190,4 +190,144 @@
     * After April 30, 1997:
       * Child support is not taxed as income for receiver and not a deduction for the payer.
       * Existing orders can opt-in or if order varied (considered a new order and new rules kick in).
-      
+
+* RRSP Income (129)
+  * RRSP Funds are usually taxable when withdrawn
+  * Exceptions:
+    1. Use the money for the homebuyer's program (up to $25,000) -> Need to put back within 15 year
+    2. Taken out for educational purposes, lifetime learning program -> Need to put back within 10 years
+    * If fail to pay back the money, taxable.
+  * Funds withdrawn from **Spousal RRSP** are taxable (to contributor) if withdrawal is within 3 years of contribution.
+    * A way to bring income levels between partners closer together.
+
+* Other Income (130)
+  * Scholarships, fellowships, bursaries and artist grants (above $3000) (2000 - 2006)
+    * Now fully exempt
+  * Lump sum payments from pensions and DPSPs
+  * Retirement Allowances
+  * RESP (**Registered Educational Savings Plan**): Income
+    * Contribution not taxed
+    * Income that has been earned inside of the plan has been taxed.
+  * Income "attributed" to taxpayer
+    * They didn't actually earn the money, but for tax purposes, it's as though they did.
+    * If you gift bonds to someone else, they earn the money. It is attributed to you.
+  * Income not reported elsewhere.
+
+* Self Employment Income
+  * Reported On separate forms
+  * The net amount gets taxed
+  * For each must supply income statement and balance sheet.
+  * Sole Proprietorships / Partnerships
+  1. Business Income
+  2. Professional Income
+  3. Farming Income
+  4. Fishing Income
+
+* Worker's Compensation, Social Assistance & Net federal Supplements
+  * Not taxable
+  * Included in income to determine clawback of social benefits.
+  * Will be deducted on lines 235 and 250
+
+### Tax Planning ReIncome
+* Employment Income
+  * When renegotiating contract can do things to lower taxes
+  * take more health care benefits instead of lower salary
+* Pension Income
+  * Defer it, can get a higher benefits (for both CPP and OAS)
+  * May be able to split it with a spouse (company pension plan, CPP)
+  * Spousal RRSP
+* Investment Income
+  * Taxed differently depending on how it is received.
+  * Consideration of risk when changing portfolio mix.
+* RRSP Withdrawals
+  * Limited amount of contribution room in your life
+  * Only put money in if your sure it will stay there for a long time (If need it TFSA may be better)
+* Support Payments
+  * If existing pre 1997, try not to change the existing order. Make extra payments out of court.
+* Self Employed Income
+  * Have to keep track of expenses need to submit an Income statement and Balance sheet
+  * More deductions available to you.
+
+## Determine Taxable Income
+* Taxable Income = Total Income - Tax Deductions
+
+* Pension Adjustment (206)
+  * **Not** a deduction
+  * For information purposes for RPs or DPSPs
+  * Used to determine following years RRSP deduction limit
+
+* Registered Pension Plan contributions (207)
+  * Employee's contributions, not the employer's
+
+* Registered Retirement Pension Plan Contributions (RRSPs) (208)
+  * Deduction limit in prior year's Notice of Assessment
+  * Contributions include one'w own and those to spousal RRSP (The most is $15,000 for each individual)
+    * What if relationship breaks down?
+      * Probably won't matter as assets earned while together need to be split equally.
+  * Latest in year when turn 71.
+  * Latest to Spousal Plan in year when spouse turns 71 (if you have income).
+
+* Child Care Expenses
+  * If someone paid to care for children so that spouses can
+    1. Work
+    2. Have educational training
+    3. Conduct research from grant
+  * Requirement in most cases that the lower income spouse would claim this.
+    * Exceptions: Lower income spouse is in prison.
+  * Allowed deduction is min:
+    1. Amount Paid
+    2. 2/3 of amount earned by person claiming deduction
+    3. $7000/child if < 7 plus $4000/child between 7 - 16
+
+* Moving Expenses
+  * To be applied against income earned at new location
+  * Unused amounts can be applied to the following year.
+  * To apply requires **both**:
+    1. Move was to start a new job / School
+    2. New location is 40km closer to new workplace or school.
+  * Note: This requires that you incur the expense (i.e. if company pays all / portion then can't claim all)
+
+* Support Payments Made - Alimony or Maintenance Paid (220)
+  * Deduction only if recipient is required to include it in income.
+  * Payment is child support unless otherwise specified in agreement
+  * Example
+    * Total Payment: $2000 -> $1500 kids, $500 Spouse
+    * Can only pay $900 -> All goes towards child support
+
+* Carrying Charges & Interest (221) -> Schedule 4
+
+## Calculate Non-Refundable Tax Credits
+* Schedule-1
+* 2 Forms
+
+  1. Tax Credits: Reduce taxes payable
+
+    1. Refundable
+
+      * If you go below 0, and have excess, you get that money back.
+      * Example: GST credit, Over Contributions to EI & CPP, Child fitness benefits
+
+    2. Non-Refundable
+
+      * Excess not available if credit exceeds tax payable
+      * Usually credit = 15% * amount
+      * Exception: Charitable Donations > $200
+        * 29% * amount above $200
+
+    * Age Amount (301)
+      * if 65+ as of end or year
+      * Subject to clawback
+      * $7033 if net income < $35466
+        * reduced at rate of $0.15/$
+        * Eliminated if net income > $82,353
+      * Unused amount can be transferred to spouse
+    * Spouse / Common Law Partner Amount (303)
+      * If taxpayer suppports spouse
+    * Amount for Eligible Dependant (305)
+      * If taxpayer is single, divorced, separated or widowed and supports a dependant (similar to Equivalent to Spouse)
+      * Dependant must be:
+        * < 18 (18 < -> see 306)
+        * related by blood, marriage, adoption (legal or otherwise <-- step parent)
+        * Living with taxpayer
+        * Resident of Canada
+    * Amount for children < 18 - (367)
