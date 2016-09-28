@@ -81,13 +81,113 @@
   * Partner with car rental and hotel companies
   * One stop shop for travel destinations
 * Self check in
-* Began to add more features 
+* Began to add more features
+
+## PEST Analysis
+1. Political
+  * Deregulation from 1988, leading to price wars.
+2. **Economic**
+  * Recession
+  * not recession proof - discretionary spending
+  * Canadian Dollar rising
+  * Fuel Prices
+3. Social
+  * Carbon emissions
+  * Anxiety flying (terrorism)
+  * Busy lives / Time sensitive
+  * Domestic Travel
+4. Technology
+  * Fuel efficient planes
+  * Electronic Tickets
+  * More detailed Analysis
+  * Video Conferencing
+5. Environment
+  * Weather
+  * Turbulence
+  * Seasonal
+
+* WestJet has been able to protect itself from the economy with it's low cost model.
+* Huge issue: Fuel Prices <-- Can't control it.
+
+## Generic Strategy - Strategy Triangle
+
+### Goals -> For 2016
+* Low Cost
+* Expand the Fleet
+* Partnerships with SouthWest
+* 10% Revenue Growth
+* Amazing Customer Experience
+* Unique Corporate Culture
+* Business Customer's
+* **For Shareholders**:
+  * Majority owned by employees, who would be concerned long term
+  * Large amount of cash on hand.
+  * Constantly looking for new opportunities/partnerships.
+
+### Product Market Focus
+* What am I selling?
+  * **Main Focus:** Consumer Flights
+  * Cargo
+  * Vacation Packages
+  * Charter
+* Where am I selling?
+  * Majority of Canada
+  * US
+  * Caribbean + Mexico
+* Who are our customers?
+  * Domestic Focussed
+  * Middle Class
+  * Not Time sensitive: Like a bus, multiple stops, smaller planes.
+  * Price Sensitive
+
+### Core Activities
+* HR + Talent Development + Training
+* Customer Service
+* Marketing
+* Logistics
+* Business Relations
+* Logistics
+* Sales
+* Sourcing (Vacations)
+
+### Value Proposition
+* **Low Cost, No Frills**
+* Customer Experience
+* Culture
+* Domestic Flights (flying) - More often than other airlines
+
+### Generic Strategy
+* Low Cost
+* Focussed / Niche
+  * Geographic
+  * Target Customer: Price trumps all.
+    * Indications in case: trying to broaden (Business class)
+
+### WestJet 2000 vs. WestJet 2009
+| WestJet 2000 | WestJet 2009 |
+|--------------|--------------|
+| No Meals     | Safety       |
+| Limited Locations | Amenities |
+| Secondary Airports | Reward Programs |
+| 1 type of fleet | Partnerships |
+| No rewards | SouthWest Partnerships |
+| No Amenities | Charter Airlines |
+| Beginnings of Culture | Customer Service |
+| Sales Centres (phone, call centres) | Larger airports |
+| Less Capitally intense | Reward Program |
+|| Multiple Fare classes |
+|| Bundling (flights, hotel, car) |
+|| More Employees |
+|| Expanded Fleet |
+|| International |
 
 ## Case Questions
 1. What are WestJet's key competitive advantage?
   * Lower operational costs and lower prices to consumers.
   *
 2. How has WestJet faired in the industry?
+  * Profitable in all years except one.
+  * Steady growth over the years
 3. Discuss WestJet's generic strategy in 1996.
   * Low Cost provider strategy
     * Efficiency
@@ -96,4 +196,8 @@
     * Targeting an average person who just wants to go somewhere.
     * Doesn't care about amenities.
 4. Compare WestJet's current business model (2009) to the template it started in  1996.
+  * Still strong focus on employee culture
+  *
 5. What are the implications for adding a second fleet of planes?
+  * Potentially higher operational / maintenance costs
+  * More coordination required between them.
