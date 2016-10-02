@@ -7,7 +7,7 @@
     * Capital gain: $1000 - $909.09 = $90.91.
     * Rate of Return: $90.91 / $909.09 = 10%
     * Rate of return formula:
-    <img src="http://www.sciweavers.org/tex2img.php?eq=k%20%3D%20%5Cfrac%7BCF_1%20-%20CF_0%7D%7BCF_0%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0"  />
+    * <img src="http://www.sciweavers.org/tex2img.php?eq=k%20%3D%20%5Cfrac%7BCF_1%20-%20CF_0%7D%7BCF_0%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0"  />
       * k = rate of return
       * CF_0, CF_1 = Cash flows at the beginning and end of the year, respectively.
   * **Note**: This equation only holds for a single period with cash flows at the beginning and end of the period.
@@ -34,4 +34,4 @@
   * The periodic rate is multiplied by the number of periods is a year.
   * m = number of periods in one year.
   * k_m = rate of return for one period
-  <img src="http://www.sciweavers.org/tex2img.php?eq=APR%20%3D%20m%2Ak_m&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" />
+  * <img src="http://www.sciweavers.org/tex2img.php?eq=APR%20%3D%20m%2Ak_m&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" />
