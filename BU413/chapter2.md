@@ -21,3 +21,17 @@
 
 ### Arithmetic vs. Geometric Rate of Return
 <img src="http://www.sciweavers.org/tex2img.php?eq=%5Ctextrm%7BArithmetic%20Mean%20Return%7D%20%3D%20%5Csum_%7Bt%3D1%7D%5En%20%5Cfrac%7Bk_t%7D%7Bn%7D%20%5C%5C%0A%5Ctextrm%7BGeometric%20Mean%20Return%7D%20%3D%20%28%5Cprod_%7Bt%3D1%7D%5En%281%2Bk_t%29%29%5E%5Cfrac%7B1%7D%7Bn%7D%20-%201&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="\textrm{Arithmetic Mean Return} = \sum_{t=1}^n \frac{k_t}{n} \\\textrm{Geometric Mean Return} = (\prod_{t=1}^n(1+k_t))^\frac{1}{n} - 1" width="364" height="106" />
+* **Arithmetic Mean Return**: Take the mean of all discount rates.
+  * Use when wanting to estimate an average or expected return across different investments in the same period.
+* **Geometric Mean Return**: Find the rate of return which would compound to the same final answer as the individual rates multiplied together.
+* Geometric <= Arithmetic
+
+### Compounding more Frequently than Annually
+* When compounded more frequently than once per year, typically convert to annual rate for comparison purposes.
+
+* **Annual Percentage Rate (APR)**
+  * Is a conventional method of quoting interest rates that ignores the compounding effect completely.
+  * The periodic rate is multiplied by the number of periods is a year.
+  * m = number of periods in one year.
+  * k_m = rate of return for one period
+  <img src="http://www.sciweavers.org/tex2img.php?eq=APR%20%3D%20m%2Ak_m&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="APR = m*k_m" width="119" height="18" />
