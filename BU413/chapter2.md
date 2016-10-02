@@ -34,4 +34,4 @@
   * The periodic rate is multiplied by the number of periods is a year.
   * m = number of periods in one year.
   * k_m = rate of return for one period
-  * <img src="http://www.sciweavers.org/tex2img.php?eq=APR%20%3D%20m%2Ak_m&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" />
+  * <img src="http%3A%2F%2Fwww.sciweavers.org%2Ftex2img.php%3Feq%3DAPR%2520%253D%2520m%252Ak_m%26bc%3DWhite%26fc%3DBlack%26im%3Djpg%26fs%3D12%26ff%3Darev%26edit%3D0" />
