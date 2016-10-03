@@ -54,4 +54,9 @@
     * Functional - actual abilities, what can it do.
   6. Time.  
     * Trends that have staying power over time.
-    
+
+### Four Action Framework
+1. Reduce
+2. Eliminate
+3. ?
+4. Create
