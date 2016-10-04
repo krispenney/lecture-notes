@@ -6,6 +6,7 @@
 * Slide 29
   * Each wait channel has it's own blocked queue
   * Need to make sure that waking always happens after sleeping (be very careful of preemption)
+
 ## Semaphores
   * A semaphore is a synchronization primitive that can be used to enforce mutual exclusion requirements. It can also e used to solve other kinds of synchronization problems.
   * More powerful than locks (can use semaphores to implement locks)
