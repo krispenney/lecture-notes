@@ -31,7 +31,25 @@
 
 * **Annual Percentage Rate (APR)**
   * Is a conventional method of quoting interest rates that ignores the compounding effect completely.
+  * Used for quoting consumer loans, residential mortgages, bond yields, etc.
   * The periodic rate is multiplied by the number of periods is a year.
   * m = number of periods in one year.
   * k_m = rate of return for one period
-  * <img src="http%3A%2F%2Fwww.sciweavers.org%2Ftex2img.php%3Feq%3DAPR%2520%253D%2520m%252Ak_m%26bc%3DWhite%26fc%3DBlack%26im%3Djpg%26fs%3D12%26ff%3Darev%26edit%3D0" />
+  * APR = m * k_m
+
+* **Effective Annual Rate**
+  * Compound the periodic rate the number of times there are periods in the year.
+  * EAR = (1 + k_m)^m - 1
+  * **Assumption**
+    * The **APR** assumes that the periodic payments are not reinvested at all. --> An unreasonable assumption
+    * The **EAR** assumes that the periodic payments are reinvested at the same rate as the original loan.
+
+## Mechanics of Time Value
+
+### Future and Present Value - Single Period
+* FV = PV(1+k)
+### Future and Present Value - Multiperiod
+* **Compound Interest**
+  * Invest interest payments with principal, earn interest on interest (and thus interest increases over periods).
+* FV = PV(1+k)^t
+* (1+k)^t : **Future Value Interest Factor (FVIF)**
