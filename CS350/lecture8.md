@@ -1,4 +1,4 @@
- # Lecture  8 - Oct 4, 2016
+# Lecture  8 - Oct 4, 2016
 
  ``` C
 // queuefxer solution
