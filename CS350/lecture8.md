@@ -1,4 +1,4 @@
- # Lecture  8 - Oct 4, 2016
+# Lecture  8 - Oct 4, 2016
 
  ``` C
 // queuefxer solution
@@ -98,7 +98,7 @@ If the process has complete control over the registers, it can set the stack poi
 
 **Solution**: User and Kernel Stacks
 * Each OS/161 process has two stacks, although it only uses one at a time.
-* **User (Application) Stack): used while application code is executing.
+* **User (Application) Stack**: used while application code is executing.
   * Cannot be trusted (for safety)
 * **Kernel Stack**: Used while the thread is executing kernel code (after an exception/interrupt)
   * Part of the kernel
