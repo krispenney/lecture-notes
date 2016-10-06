@@ -32,7 +32,7 @@
   * Big Ideas
 
 ### Blue Ocean Strategy
-* Blue oceans are not about tech innovations
+* Blue oceans are not (always) about tech innovations
 * Incumbents often create blue oceans and usually within their core business
 * Company and industry are the wrong units of analysis
 * Creating blue oceans build brands
@@ -58,5 +58,5 @@
 ### Four Action Framework
 1. Reduce
 2. Eliminate
-3. ?
+3. Raise
 4. Create
