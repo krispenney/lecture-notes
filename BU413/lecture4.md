@@ -114,10 +114,91 @@
 * Now impossible for income trusts to move to corporate taxes.
 
 ## Capital Gains Tax
+
+### G = S-ACB
+* **ACB** : Adjusted Cost Base
+
 1. Transition Rules
   * Pre 1972 purchases
+    * Prior to 1972 no capital gains tax.
+    * **Valuation Day** : December 22, 1971
+      * T+5 : Didn't need to pay for **5 business days**
+        * Transfer ownership doesn't take place until the money was exchanged.
+      * Dec 22 was the last day that you could purchase and have it settle in 1971.
+      * Can Use to determine ACB:
+        * Valuation Day Price
+        * Tax-Free Zone Method
+          * If selling price falls in tax free zone, no capital gains tax.
+          * Median Rule: Use as ACB the median value of:
+            1. Selling Price
+            2. Actual Cost
+            3. V-Day Price
+        * Decision is binding on all future
   * Lifetime Exemption
+    * $100,000 Lifetime CG Exception - terminated 1994
+    * Could write up the ACB of assets to use up remaining LE (Crystallization of CG)
+      * Not above the asset price as of Feb 22, 1994.
+      * Has the side effect of raising net income (could eat into pension)
+
 2. Acquisition at Different Prices
+  * When **identical assets** are acquired at different prices, the ACB is the **average cost** of all purchases.
+  * Dollar cost averaging: Buy a fixed dollar amount on a recurring basis.
+  * **Before and After 1972**
+    * Two pools : Pre-72 pool and Post-72 pool
+
 3. Personal Use Property
+  * **G = S - ACB**
+  * **ACB = max{COST, $1000}**
+  * **Selling Price = max{Selling Price, $1000}**
+    * $1000-Rule
+      * So people don't break the law on trivial use cases.
+  * Buy property that goes up in value, taxed on gain.
+  * Benefit if it goes down in value.
+  * Principal residence doesn't get taxed.
+  * Not securities
+  * Types of Personal Use Property
+    1. Ordinary
+      * Likely to decline in value from use (Car).
+      * Can't claim loss -> No Capital Losses.
+    2. Listed
+      * Goes down in value because of economic events (not use).
+      * Applies to collectibles.
+      * Goes up - pay tax on gain
+      * Loss : Can be carried back 3 years and forward 7 years.
+      * Can only be applied against gains in this category (can only be within this class).
 4. Gifts/Loans & Bequests
-5.
+  1. Gifts/Loans to One's Spouse
+    * No tax consequences when gift given.
+    * Transfer done at Giver's ACB
+    * **Attribution Rule*: Any capital gains go back to the giver of the gift.
+      * Also applies to interest or dividends earned on the property.
+      * **2nd Generation income**: Spouse receives interest from property, puts it into a savings account and earns interest. Only original interest would apply. Need to set up a separate bank account.
+      * Doesn't apply if transfer at Fair Market value
+        * Payment: Funds or property
+        * Promissory note
+      * Applies to investment loans if no / too low interest is given.
+      * Attribution does not apply to income or capital gains from business loans.
+      * Get around --> Formalized Loan
+        * Terms, rates * specified
+        * Interest must be paid by Dec 31, or within 30 days.
+    2. Children under 18
+      * Attribution rule applies only to income, not capital gains
+      * Gift is deemed to be transferred at FMV, so gains are triggered when gift given.
+    3. Give Loans to others
+      * Someone not a minor child / spouse.
+      * **GAARD : General Anti-Avoidance Rules**
+    4. Inheritance
+      * Two cases : Spouse or anyone else
+      * What should spouse trigger capital gain
+        * When lifetime excemption avaliable, want to use as much as possible
+        * If surviving spouse is in a higher tax bracket
+        * Estate has capital losses (can't carry forward in death.
+5. Convertible Securities
+
+6. Worthless Securities
+
+7. Superficial Losses
+
+8. Trade Settlement
+
+9. Donate Shares
