@@ -138,5 +138,6 @@ Creates a new process, but doesn't load a new program. Note that we don't know t
 ### Paging Example 28 - Next Time
 
 | Name | Process 1 | Process 2 |
+|:-----|:---------:|:---------:|
 | Physical 1 |  | |
 | Physical 2 | | |
