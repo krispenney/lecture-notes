@@ -190,7 +190,7 @@
     4. Inheritance
       * Two cases : Spouse or anyone else
       * What should spouse trigger capital gain
-        * When lifetime excemption avaliable, want to use as much as possible
+        * When lifetime exception available, want to use as much as possible
         * If surviving spouse is in a higher tax bracket
         * Estate has capital losses (can't carry forward in death.
 5. Convertible Securities
