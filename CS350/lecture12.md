@@ -75,7 +75,8 @@
 
 ### Segmented Address Translation Example (Process A)
 * Didn't give the segment size on slide: Assume
-| Limit Register | Relocation Register     |
+
+| Limit Register | Relocation Register |
 | :------------- | :------------- |
 | 0x2000       | 0x38000       |
 | 0x5000       | 0x10000       |
