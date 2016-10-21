@@ -1,51 +1,35 @@
-# Lecture 16 - October 21, 2016
+# Lecture 16
 
-## Direct Manipulation and Instrument Interaction
-* Interactions given intention.
+## [The Story of the Ribbon](https://channel9.msdn.com/Events/MIX/MIX08/UX09)
+* Story of UI for Office 2007 (Ribbon UI).
+* Differences in understanding between Microsoft and users
+  * no one knew about new features
+  * users found UI complicated --> bloated.
+  * little change in UI between 1989-2003
+  * UI not predictable
+    * unlabelled icons
+    * randomly hide/show menu items - "based on usage"
+  * Office had grown beyond the scope of existing paradigms
+  * **Results-Oriented Design**: present higher level features, visually
+    * Opposed to **Command-Oriented**, which is more about selecting features and changing properties.
 
-### Direct Manipulation
-* Attempting to make affordances in the interface like affordances for analogous actions in the real world.
-* Affordances
-  * A quality of an object / environment which allows one to perform an action (a door knob is turnable)
-  * Norman: affordances should suggest usage.
-* Characteristics
-  * There is a visible and continuous representation of the task object (what you care about in the interface (words in a word processor)) and their actions. Consequently, there is little syntax.
-  * Task objects: physically manipulated, clicking and dragging.
-    * Every operation is legal (can drag)
-    * Rapid and incremental operations: Drawing, see it happen as you do it.
-    * results immediately visible.
-    * Almost all interactions are reversible (i.e. dragging to printer). Allows the user to explore without fear.
-* Benefits:
-  * Users feel like their working directly with the task objects rather than with an interface.
-  * Video: Live code editor
+### Microsoft Design Process
+* Research
+  * "The Fish" - Diagram to find why people are unhappy with office, give priority.
+  *  "Sense of Mastery": The user feels like their in controll of the software.
+  * Collected alot of customer data, directly from customers. No interference from employees/managment
+    * Which commands do people use the most?
+    * how are commands used together?
+    * Where do people fail?
+    * Tracked user command usage.
+    * Tracked user input methods (Cut, Copy, past - toolbar vs. keyboard?).
+      * Used to allow for similar usage patterns between versions.
 
-## Evaluating GUIs
+* Design Tenents
+  * Goals for new Design --> How to get there?
+  * Helps to make decisions
 
-### Instrumental Interaction
-* **Domain Objects**: Like task objects - the things of interest.
-* **Interaction Instrument**: mediator between the user and domain objects
-* Interaction Instruments interact with domain objects.
-
-### WIMP
-* Windows
-* Icons
-* Menus
-* Pointers
-
-### Instrument Activation
-* When instrument is under the user's control (similar to focus).
-* Temporal Activation
-  * Caused by something that you have done before (i.e. rectangle creation)
-  * Stays until taken control by another instrument.
-  * Could be on screen / keyboard / mouse
-  * Costs:
-    * Have to divert the users attention to actually do that thing.
-    * Takes more time.
-* Spatial Activation
-  * Move into an area (hover mouse over scroll bar)
-  * Requires an on-screen representation.
-  * Cost:
-    * Takes up screen real estate (i.e. need room for scroll bars).
-    * Need to physically move mouse to activate.
-    
-* Lightning bolt example: when dialog pops up, no longer direct manipulation.
+* Prototypes
+  * started with paper prototypes.
+  * **Conceptual Prototypes**: Explore one specific use case.
+  * iterations and explorations
