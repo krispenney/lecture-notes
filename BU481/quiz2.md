@@ -6,6 +6,7 @@
 
 ### Management Preferences
 * Very hard to separate the decision making from the personal values of management preferences.
+
 | Diamond - E | Description     |
 | :------------- | :------------- |
 | Strategy <--> Management Preferences | Want to Do |
@@ -54,7 +55,7 @@
 * What is management's role in value creation, capture and distribution?
   * **Positive:** Preferences focus and motivate efforts of firm
   * **Negative:** Preferences may lead to inappropriate ventures, inflexibility or a focus on personal versus shareholder interests.
-  
+
 * How to address governance shortcomings
   * Board members must be experts
   * Board meetings should focus on the future, not just the past
