@@ -19,7 +19,7 @@
 * Differences in personal preferences lead to differences in their strategic preferences lead to differences in organizational strategy.
 
 **The Roots of Strategic Preference**
-* **Basic Needs*
+* **Basic Needs**
   * Central aspect of a manager's personality
   * Stable, enduring, generally consistent
   * Fundamental influences on strategic preference.
