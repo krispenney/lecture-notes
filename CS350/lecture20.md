@@ -13,15 +13,16 @@ Need to consider: seek time (assume average 5ms), rotation, transfer time.
     * 10ms -> 0.3125ms
 * Total Disk Time: 5+5+0.3125 = 10.3125ms (Average time to service request)
 * Cycle Time: 5ms (CPU running) + 10.3125ms = 15.3125ms
+
 1. Suppose that k=1. Estimate the CPU utilization, i.e. the fraction of the time that the CPU is not idle.
-* 5 / 15.3125 = ~32%
+    * 5 / 15.3125 = ~32%
 
 2. Repeat Q1, Assume k = 2
-* 10 / (10.3125\*2) = ~48% Utilization
-* In this case, always blocked by the disk
+    * 10 / (10.3125\*2) = ~48% Utilization
+    * In this case, always blocked by the disk
 
 3. If k = 3?
-* After this point, blocking by the disk
+    * After this point, blocking by the disk
 
 ## File Systems
 
