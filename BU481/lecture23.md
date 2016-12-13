@@ -136,8 +136,8 @@
 
 ### Competitive Analysis
 
-| Competitors | Revenues     | Products | Licensing | Market Position |
-| :------------- | :------------- | :- | :- | :- |
+| Competitors | Revenues | Products | Licensing | Market Position |
+| :-------------: | :-------------: | :--: | :--: | :--: |
 | Hasbro | $4B | Toys, Playdoh, Board Games, building blocks | Marvel / Disney | 2 |
 | Mattel | $5.8B | Hot Wheels, Barbie | Disney | 1 |
 | Tyco | - | Building blocks (cheaper) | - | - |
