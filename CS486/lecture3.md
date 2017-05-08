@@ -68,7 +68,7 @@
 
 ### A\* Example
 | Selected | Queue |
----------------------
+|----------|-------|
 | S | A(5) |
 | S, A | B(5), C(7) |
 | S, A, B, | C(5), C(7) |
@@ -76,7 +76,7 @@
 | S, A, B, C, G | C(7) |
 
 | Selected | Queue |
---------------------
+|----------|-------|
 | S | B(4), A(8) |
 | S, B | C(4), A(8) |
 | S, B, C | A(8), G(10) |
@@ -87,7 +87,7 @@
   - **In General**, only terminate if a goal state is in the queue and it has the lowest f value.
 
 | Selected | Queue |
----------------------
+|----------|-------|
 | S | G(3), A(7) |
 | G | |
 
