@@ -134,9 +134,19 @@ A framework for companies looking to go international
 - Increased distance => Increased complexity to interact with eachother
 
 1. Cultural Distance
+  - Management preferences
+  - social norms
+  - business practices
 2. Administrative and political distance
+  - trade
+  - government regulations
 3. Geographic distance
+  - resources
+  - physical distance
+  - climate
 4. Economic Distance
+  - mean income
+  - minimum wages
 
 Means of Internationalization (Increasing levels of commitment and control)
 1. Export
@@ -155,4 +165,5 @@ Means of Internationalization (Increasing levels of commitment and control)
   - Partner with a local company (understands the foreign market)
 5. Subsidiaries
   - Fully owned in the local market
-
+  - Pro: Full control
+  - Con: Full risk / financial commitment
