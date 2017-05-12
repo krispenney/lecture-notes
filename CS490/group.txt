@@ -1,0 +1,42 @@
+Customer support
+
+User Management
+- Login/User management
+- Membership
+- Record customer favorite collection of product
+
+Sales Module
+- Bid an auction item
+- Pricing strategy
+- Coupons/promotional products
+- Sales and Discounts
+- subscriptions
+
+Search Module
+- product search
+- product recommandation
+- Search engine optimization (tags and stuff)
+- Browsing and buying products
+
+Product Display Module (UI)
+- Display all product information
+- Browsing and buying products
+- Bid an auction item
+
+Payments Processing Module
+- Payout to bank
+- Accept payments
+- Payment processing
+
+Finacial Reporting
+- Accounting
+- Financial Reporting
+- Admin Page for managing products
+
+SCM
+- Inventory Management
+- Warranty services
+- Communication with product distributor / warehouse / where the stuff comes from
+- Supply chain & logistics (+ storage)
+- Product supply status
+- Marketing Shipping and handling (operations)
