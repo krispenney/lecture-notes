@@ -36,7 +36,7 @@ MNE's strategic challenge: exploit all 3 sources of globl competitive advantage 
 
 - **Global Integration-National Responsiveness Framework**
   - y-axis: Efficiency benefits from global integration
-  - x-axis: Differentiation benefitsfrom national responsiveness
+  - x-axis: Differentiation benefits from national responsiveness
 
 **Multinational Flexibility**
 The ability of a company to manage the risks and exploit the opportunities that arise from the diversity and volatility of the global environment.
@@ -45,6 +45,11 @@ Requires the MNDto scan it's broad environment to detect changes and discontinui
 - MNE's faces an operating environment characterized by diversity and volitility
 - Some opportunities and risks geneerated by the environment are experienced by all firms
 - Some are unique
+
+- **Important Skills**
+  - Adaptability
+  - People who know the political landscapes
+  - Resources
 
 - **Sources of Diversity and volatility**
   - Common thread across all risks: they vary across countries and change over time.
@@ -62,6 +67,10 @@ Requires the MNDto scan it's broad environment to detect changes and discontinui
 **Worldwide Learning**
 - Key asset to MNE: Diversity in the environment in which it operates
 - Exposes the MNE to multiple stimulti, causing it to develop diverse capabilities
+- Can learn the key success factors for a particular market
+  - Figure out what your missing
+  - Use it to prioritize and inform decisions
+
 
 ### The Means
 
@@ -92,8 +101,10 @@ Requires the MNDto scan it's broad environment to detect changes and discontinui
 **Scope Economies**
 - certain economies arise from the fact that the cost of the joint production (dev / dist) of two+ products can be less than the cost of producing them separately.
 - Gives the firm the ability to share investments and costs across value chains
+- Product market focus
 
 ### International, Multinational, Global, and Transnational Strategies
+Cases will Typically give an org structure, use this to identify strategy:
 
 **International Strategy**
 - Approach focus on creating and exploiting innovations on a worldwide basis, using all the different means to achieve this end.
@@ -116,6 +127,8 @@ Requires the MNDto scan it's broad environment to detect changes and discontinui
 ### Strategic Tasks
 **Defending Worldwide Dominance**
 - Must master all of: {global efficiency, multinational flexibility, and worldwide learning} at the same time
+- As a large company, Afraid of the little company that can move master than you can.
+  - But a large company can afford to take more risks.
 
 **Challenging the Global Leader**
 
@@ -127,12 +140,20 @@ Requires the MNDto scan it's broad environment to detect changes and discontinui
 3. Form an alliance with a viable global company.
 
 ## AAA Triangle
+**What the tools does**
+- Compare yourself to industry averages, competitors
+- Find where you fit
+- Get ideas on where to do things differently
+
 **Adaption**
+- Advertising to Sales ratio
 - Boost revenes and market share by maximizing a firm's local relevance.
 **Aggregation**
+- R&D to Sales ratio
 - Deliver economies of scale by creating regional / global operations
 - involves standardizing products, grouping the development and production process
 **Arbitrage**
+- Labour to Sales ratio
 - exploitation of differneces between national or regional markets, often by locating separate parts of the supply chain in diferent places.
 
 ### Why Transformation Efforts Fail
@@ -145,3 +166,15 @@ Requires the MNDto scan it's broad environment to detect changes and discontinui
 7. Declaring Victory too soon
 8. Not anchoring changes in the corporation's culture
 
+### 7 C's
+- Relate 7 C's (See the Managing Differences article) in terms of the A Triangle
+- **How to use**:
+  - Look at each A, compare and contrast in each country
+
+1. Competitive Advantage
+2. Configuration
+3. Coordination
+4. Control
+5. Change Blockers
+6. Corporate Diplonacy
+7. Corporate Strategy
