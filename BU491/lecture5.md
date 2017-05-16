@@ -125,3 +125,23 @@ Requires the MNDto scan it's broad environment to detect changes and discontinui
 1. Defend against the competitor's global advantage
 2. Offset the competitor's global advantage
 3. Form an alliance with a viable global company.
+
+## AAA Triangle
+**Adaption**
+- Boost revenes and market share by maximizing a firm's local relevance.
+**Aggregation**
+- Deliver economies of scale by creating regional / global operations
+- involves standardizing products, grouping the development and production process
+**Arbitrage**
+- exploitation of differneces between national or regional markets, often by locating separate parts of the supply chain in diferent places.
+
+### Why Transformation Efforts Fail
+1. Not establishing a great enough sense of urgency
+2. not creating a powerful enough guiding coalition
+3. lacking a vision
+4. Undercommunicating the vision by a factor of ten
+5. Not removing obstacles to the new vision
+6. Not systematically planning for, and creating, short-term wins
+7. Declaring Victory too soon
+8. Not anchoring changes in the corporation's culture
+
