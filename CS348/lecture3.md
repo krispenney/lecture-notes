@@ -41,7 +41,7 @@ Complex queries can be built from many simple ones using logical connectives and
 - Answers to queries can be used to define derived relations (views)
 - Exted a DB schema
 - **Example**
-  - Boss(z) = {z | Exists x, y st. EMP(x, y, z) }
+  - Boss(z) = ${z | Exists x, y st. EMP(x, y, z) }$
   - For all z, Boss(z) <-> (Exists x, y st. EMP(x, y, z)))
 
 ### Safe Queries
