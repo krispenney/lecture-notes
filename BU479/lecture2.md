@@ -166,6 +166,7 @@ In a traditional industry, typically have only one of these. High-tech, all, sim
     - Why would anyone join if nobody's on it?
     - If nobody's on it, nobody will join
     - **How to start the network**?
+    - How to reach the critical mass so that the network becomes self sustaining.
 2. Indirect Network Effects
   - Based on the availability of "Complementary"
 
@@ -179,5 +180,4 @@ In a traditional industry, typically have only one of these. High-tech, all, sim
 3. Partner with important players
   - Indirect Network effects
   - Creates incentives to create complementary products
-
 

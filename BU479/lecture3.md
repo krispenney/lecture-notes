@@ -138,3 +138,9 @@ Did backing only PS2 make sense?
 - **Equity**
   - Not able to additionally monatize users
   - How can you recoupe costs?
+
+### FUN Analysis
+- Fast paced environment
+- High uncertainty
+- direct / indirect network effects
+
