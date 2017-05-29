@@ -17,7 +17,7 @@ Use Bayes Rule to rewrite the problem:
 |0|0.6|0.4|
 |1|0.1 |0.9|
 
-```python3
+```python
 # f(A, B)
 f = np.array([[0.6, 0.4],
               [0.1, 0.9]])
@@ -53,7 +53,7 @@ print(h.shape)
 - Used for evidence in inference, conditioning based on evidence
 - In python, use slicing to achieve this
 
-```python3
+```python
 # Slice f(A, B) with A=True
 f[1, :]
 
