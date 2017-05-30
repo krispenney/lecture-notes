@@ -148,10 +148,12 @@ Cases will Typically give an org structure, use this to identify strategy:
 **Adaption**
 - Advertising to Sales ratio
 - Boost revenes and market share by maximizing a firm's local relevance.
+
 **Aggregation**
 - R&D to Sales ratio
 - Deliver economies of scale by creating regional / global operations
 - involves standardizing products, grouping the development and production process
+
 **Arbitrage**
 - Labour to Sales ratio
 - exploitation of differneces between national or regional markets, often by locating separate parts of the supply chain in diferent places.
