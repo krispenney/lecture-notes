@@ -1,0 +1,24 @@
+digraph {
+	concept_stage
+	start_up
+	concept_stage -> start_up
+	first_stage_expansion
+	start_up -> first_stage_expansion
+	valley_of_death
+	first_stage_expansion -> valley_of_death
+	financial_distress
+	valley_of_death -> financial_distress
+	liquidation
+	financial_distress -> liquidation
+	restructuring
+	financial_distress -> restructuring
+	later_stage_expansion
+	first_stage_expansion -> later_stage_expansion
+	later_stage_expansion -> financial_distress
+	harvesting_growth
+	later_stage_expansion -> harvesting_growth
+	acquisition
+	harvesting_growth -> acquisition
+	IPO
+	harvesting_growth -> IPO
+}
