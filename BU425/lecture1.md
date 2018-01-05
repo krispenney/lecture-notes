@@ -37,7 +37,7 @@ Categorize by the goal, methods used, etc.
 
 Utimately want to answer "how is Y related to X?"
 - Y dependant
-- ![latex-60364788-cbb7-4994-bb92-c6ec66b0a00b](data/lecture1/latex-60364788-cbb7-4994-bb92-c6ec66b0a00b.png) - n independent variables
+- ![latex-56fad552-017d-4f55-8298-c4ba80d38d0b](data/lecture1/latex-56fad552-017d-4f55-8298-c4ba80d38d0b.png) - n independent variables
 - Linear relationship
 
 ### Descriptive POV
@@ -53,13 +53,13 @@ Use "quantified relationships" to predict new values of Y, given some X values.
 - Given some information about a house, predict it's price.
 
 ## Linear regression
-![latex-0c43c4e9-0efb-46df-ac82-ac00bbd59d28](data/lecture1/latex-0c43c4e9-0efb-46df-ac82-ac00bbd59d28.png)
+![latex-6dc83aab-a4f2-4bec-b00b-aac097012a39](data/lecture1/latex-6dc83aab-a4f2-4bec-b00b-aac097012a39.png)
 
 The betas are unknown and need to be estimated from the data.
 
 ### Estimation of Params
-Let ![latex-2bb76c28-148d-4c84-a125-822ff3393cc0](data/lecture1/latex-2bb76c28-148d-4c84-a125-822ff3393cc0.png) be our estimate for the true function.
-To find the best estimation for the samples, optimize the squared error: ![latex-03131fa0-f371-45e6-aea9-ed11385a852d](data/lecture1/latex-03131fa0-f371-45e6-aea9-ed11385a852d.png)
+Let ![latex-ce2f804f-983e-4a7f-95c8-9924e2c0b044](data/lecture1/latex-ce2f804f-983e-4a7f-95c8-9924e2c0b044.png) be our estimate for the true function.
+To find the best estimation for the samples, optimize the squared error: ![latex-ca59ebe5-5a5c-4ea8-804c-13e1a3d09dc8](data/lecture1/latex-ca59ebe5-5a5c-4ea8-804c-13e1a3d09dc8.png)
 
 ### Example
 
@@ -69,6 +69,25 @@ To find the best estimation for the samples, optimize the squared error: ![latex
 - Independent are number of homeworks completed
 - **Note:** There could be missing information/variables that represent the true relationship (ex. hours studied, attendence)
 
-This could produce ![latex-a216b516-5fc9-4faa-a8f8-1663cc17b2e2](data/lecture1/latex-a216b516-5fc9-4faa-a8f8-1663cc17b2e2.png)
+This could produce ![latex-9be97ff0-c291-446c-9e76-029223c14dc2](data/lecture1/latex-9be97ff0-c291-446c-9e76-029223c14dc2.png)
 
+## Multiple Linear Regression
+Regression model with ![latex-e998a42e-9a38-449d-a1c1-5a47575c2077](data/lecture1/latex-e998a42e-9a38-449d-a1c1-5a47575c2077.png) independent variables. Each indepedent variable influences the relationship in some proportion
 
+## Assessing a Regression Model
+Least squares will produce a regression line *regardless* if there is actually a linear relationship in the data.
+
+### Model Error
+- Residuals: Error between the models and the sample data.
+
+### Coefficent of Determination
+- Measures goodness of fit
+- Adding independent variables **always** increases $$R^2![latex-e19eb431-b118-4356-a869-8da49fc01623](data/lecture1/latex-e19eb431-b118-4356-a869-8da49fc01623.png)
+
+### Hypothesis Testing (p-value)
+- Null hypothesis: ![latex-05f27a7a-8ead-4594-a3e1-d16111733b47](data/lecture1/latex-05f27a7a-8ead-4594-a3e1-d16111733b47.png)
+- lower p-values are better
+
+## Assumptions
+- Y is linearly related to X
+- Relevant X's are used
