@@ -27,17 +27,17 @@ A neuron usually keeps a membrane potential of around $$V = -70mV$$.
 ### Potassium Channels
 The fraction of potassium channels that are open is $$n^4$$.
 
-$$\frac{dn}{dt} = \frac{1}{\tau_n(v)}{n_\inf(v) - n) \\ = \frac{1}{\text{time constant}}(\text{equilibrium value} - n)$$
+$$\frac{dn}{dt} = \frac{1}{\tau_n(v)} (n_{\infty}(v) - n) \\ = \frac{1}{\text{time constant}}(\text{equilibrium value} - n)$$
 
 - Larger time constant means it takes longer to get to equilibrium.
 
-Typically written as $$\tau_n(v) * \frac{dn}{dt} = (n_\inf(v) - n)$$
+Typically written as $$\tau_n(v) * \frac{dn}{dt} = (n_{\infty}(v) - n)$$
 
 ### Sodium Channels
 The fractionof sodium ion channels open is $$m^3h$$
 
-$$\frac{dm}{dt} = \frac{1}{\tau_m(v)}(m_\inf(v) - m)$$
-$$\frac{dh}{dt} = \frac{1}{\tau_h(v)}(h_\inf(v) - h)$$
+$$\frac{dm}{dt} = \frac{1}{\tau_m(v)}(m_{\infty}(v) - m)$$
+$$\frac{dh}{dt} = \frac{1}{\tau_h(v)}(h_{\infty}(v) - h)$$
 
 ### When the input current is negative?
 Resting state
@@ -46,7 +46,7 @@ Resting state
 
 ### When the input current is zero?
 - Depolarizing the neuron, voltage will start going up
-- $$n_\inf + m_\inf$$ increase, while $$h_\inf$$ decreases
+- $$n_{\infty} + m_{\infty}$$ increase, while $$h_{\infty}$$ decreases
 - Gates opening, positive feedback loop -> Action potential
 - Until eventually the potassium channels close.
 

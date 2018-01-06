@@ -22,22 +22,22 @@ This exchange creates a net positive charge outisde of the cell (net negative in
 A model of an action potential (spike)
 - "Spikes" -> what happens when neurons fire
 
-A neuron usually keeps a membrane potential of around ![latex-243aa410-3ca3-487e-b5b2-427d1f3fe4b6](data/lecture2/latex-243aa410-3ca3-487e-b5b2-427d1f3fe4b6.png).
+A neuron usually keeps a membrane potential of around ![latex-3270f3bd-579d-496a-b15c-5ccb3f010d65](data/lecture2/latex-3270f3bd-579d-496a-b15c-5ccb3f010d65.png).
 
 ### Potassium Channels
-The fraction of potassium channels that are open is ![latex-2c4bbfa9-353e-4bcf-8ba8-6c807289ffec](data/lecture2/latex-2c4bbfa9-353e-4bcf-8ba8-6c807289ffec.png).
+The fraction of potassium channels that are open is ![latex-2f421044-2b1f-4652-860b-3ffcefc5c9f9](data/lecture2/latex-2f421044-2b1f-4652-860b-3ffcefc5c9f9.png).
 
-![latex-4697c748-4ae5-4928-9e64-83f0f1719617](data/lecture2/latex-4697c748-4ae5-4928-9e64-83f0f1719617.png)
+![latex-8b4e1487-161c-4acb-9364-187f5bcf3cde](data/lecture2/latex-8b4e1487-161c-4acb-9364-187f5bcf3cde.png)
 
 - Larger time constant means it takes longer to get to equilibrium.
 
-Typically written as ![latex-26be3f36-8644-44ed-90c5-d04a54ab5fde](data/lecture2/latex-26be3f36-8644-44ed-90c5-d04a54ab5fde.png)
+Typically written as ![latex-bcf56e73-4b34-448f-b401-660f7b5967db](data/lecture2/latex-bcf56e73-4b34-448f-b401-660f7b5967db.png)
 
 ### Sodium Channels
-The fractionof sodium ion channels open is ![latex-b1c7a763-b157-4cdf-bff7-9a40a5147d31](data/lecture2/latex-b1c7a763-b157-4cdf-bff7-9a40a5147d31.png)
+The fractionof sodium ion channels open is ![latex-4de7baa5-23ea-4121-92b7-1a8c4e77ee33](data/lecture2/latex-4de7baa5-23ea-4121-92b7-1a8c4e77ee33.png)
 
-![latex-aa26b88f-eeef-4731-b706-74b0682adc84](data/lecture2/latex-aa26b88f-eeef-4731-b706-74b0682adc84.png)
-![latex-aa1c59a4-5219-4653-80da-2725560ee03f](data/lecture2/latex-aa1c59a4-5219-4653-80da-2725560ee03f.png)
+![latex-21b20284-893f-4270-a76e-28ad487833a1](data/lecture2/latex-21b20284-893f-4270-a76e-28ad487833a1.png)
+![latex-273e0aa5-af4b-4d24-8761-dca410829a29](data/lecture2/latex-273e0aa5-af4b-4d24-8761-dca410829a29.png)
 
 ### When the input current is negative?
 Resting state
@@ -46,7 +46,7 @@ Resting state
 
 ### When the input current is zero?
 - Depolarizing the neuron, voltage will start going up
-- ![latex-4aacfc41-df8e-4d27-a6d1-1ef16b0371a2](data/lecture2/latex-4aacfc41-df8e-4d27-a6d1-1ef16b0371a2.png) increase, while ![latex-658897ad-5791-4fed-9dfc-b9d0ec315ee3](data/lecture2/latex-658897ad-5791-4fed-9dfc-b9d0ec315ee3.png) decreases
+- ![latex-861d6a47-2429-45fc-8eaa-daaf78d6dfc8](data/lecture2/latex-861d6a47-2429-45fc-8eaa-daaf78d6dfc8.png) increase, while ![latex-695e6ba2-e62b-49c2-8dfd-e47369ff4268](data/lecture2/latex-695e6ba2-e62b-49c2-8dfd-e47369ff4268.png) decreases
 - Gates opening, positive feedback loop -> Action potential
 - Until eventually the potassium channels close.
 
