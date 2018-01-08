@@ -1,0 +1,33 @@
+# Lecture 3 - January 8, 2018
+
+## Simpler Neural Models
+In a HH model, you need to solve a 4-D system. Instead, we can use 1 variable. Don't need to model the spike itself, just when it happens.
+
+### Leaky Integrate and Fire (LIF) Model
+- Simply records when the spike occurs (i.e. when the voltage reaches the threashold)
+
+Let $$g_L = \frac{1}{R}$$
+$$$
+c \frac{dv}{dt} = J_{in} - g_L(v - v_L) \\
+\implies Rc \frac{dv}{dt} = RJ_{in} - Rg_L(v - v_L) \\
+\implies \tau_m \frac{dv}{dt} = V_{in} - (V - V_L) \{ V < V_{in} \} \text{ (Ohm's Law)}\\
+\\
+v = \frac{V - V_L}{V_{in} - V_{L}} \implies v < 1 \\
+\implies \tau_m \frac{dv}{dt} = v_in - v ; v < 1
+$$$
+
+**Eurler's Method for assignment 1**
+
+If $$v_{in} > 1$$ the LIF neuron will spike.
+
+$$$
+t_{isi} = \tau_{ref} + t^*; v(t^*) = 1 \\
+\implies v(t^*) = 1 = v_{in}(1 - e^\frac{-t^*}{t}) \\
+\implies 1 - e^\frac{-t^*}{t} = \frac{1}{v_{in}} \\
+\implies e^\frac{-t^*}{t} = 1 - \frac{1}{v_{in}} \\
+\implies t^* = -t \ln{1 - \frac{1}{v_{in}}} \\
+\therefore t_{isi} = t_{ref} - t\ln{1 - \frac{1}{v_in}}  \\
+v_in = 1
+$$$
+
+
