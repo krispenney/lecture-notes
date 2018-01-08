@@ -88,13 +88,13 @@ WI-FI introduced many new security concerns.
 
 Proof $$(v, c')$$ will be accepted:
 
-$$$$$$$$$
-c' = c + (\delta || CRC(\delta)) = RC4=(v||k) + (m||S) | (\delta || CRC(\delta)) \
-\implies RC4(v || k) + (m + \delta || CRC(m) + CRC(\delta)) \
-\implies RC4(v || k) + (m + \delta || CRC(m + \delta)) \
-\implies RC4(v || k) + (m' || CRC(m + \delta)) \
+$$$
+c' = c + (\delta || CRC(\delta)) = RC4=(v||k) + (m||S) | (\delta || CRC(\delta)) \\
+\implies RC4(v || k) + (m + \delta || CRC(m) + CRC(\delta)) \\
+\implies RC4(v || k) + (m + \delta || CRC(m + \delta)) \\
+\implies RC4(v || k) + (m' || CRC(m + \delta)) \\
 \therefore RC4(v || k) + (m' || CRC(m'))
-$$$$$$$$$
+$$$
 
 **Integrity function is unkeyed**
 - Attack on access control

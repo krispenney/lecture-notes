@@ -36,9 +36,9 @@ Cons:
 - Design criteria are proprietary
 
 **Key scheduling algorithm**
-- Example: Key is 128-bits or 16 bytes long (i.e. ![latex-6af92097-94bd-476b-b09b-ae48ea199abc](data/lecture3/latex-6af92097-94bd-476b-b09b-ae48ea199abc.png)).
-- ![latex-af97b2f9-5c45-47f2-a808-4ada1c4295c2](data/lecture3/latex-af97b2f9-5c45-47f2-a808-4ada1c4295c2.png) is just the secret key, repeated enough times to fill the array (256 bits)
-- Iterate over the repeated key and S, perform 256 swaps to produce the a random looking permutation of ![latex-198a6f9f-2b60-4a2c-a4c5-efb0ad3d93e7](data/lecture3/latex-198a6f9f-2b60-4a2c-a4c5-efb0ad3d93e7.png)
+- Example: Key is 128-bits or 16 bytes long (i.e. ![latex-a6d5e62c-351f-4f71-9adf-5a1f0274a732](data/lecture3/latex-a6d5e62c-351f-4f71-9adf-5a1f0274a732.png)).
+- ![latex-ea3ca469-ba08-4fff-8899-13b1c4de5d13](data/lecture3/latex-ea3ca469-ba08-4fff-8899-13b1c4de5d13.png) is just the secret key, repeated enough times to fill the array (256 bits)
+- Iterate over the repeated key and S, perform 256 swaps to produce the a random looking permutation of ![latex-09b8295a-176d-40f6-9f6b-8018dd3fce62](data/lecture3/latex-09b8295a-176d-40f6-9f6b-8018dd3fce62.png)
 
 **Keystream generator**
 - For each byte of the plaintext, select a keystream byte (see slides), XOR with the plaintext.
@@ -70,15 +70,15 @@ WI-FI introduced many new security concerns.
 - Select a 24-bit Initialization Vector (IV)
   - Meaning every packet would have a separate secret key.
   - Either random or The IV is set to 0 and incremented by 1.
-    - Bad because the IV is short, only ![latex-68c73d12-75d4-4f03-8f49-ed24758afce6](data/lecture3/latex-68c73d12-75d4-4f03-8f49-ed24758afce6.png) possibilities, eventually collisions.
+    - Bad because the IV is short, only ![latex-b69f22f3-de00-4387-9cb6-4941ba978562](data/lecture3/latex-b69f22f3-de00-4387-9cb6-4941ba978562.png) possibilities, eventually collisions.
 - `CRC` is the checksum function, allows use to tell if a packet has been tampered with.
 
 **Does it achieve it's goals / is it secure?**
 - Many attacks have been found, breaking WEP.
 
 **IV Collisions**
-- On a high traffic network, since the IV is only ![latex-e5f350aa-5c49-4f9e-978a-716a0be4e4dd](data/lecture3/latex-e5f350aa-5c49-4f9e-978a-716a0be4e4dd.png) bits long, eventually they will collide.
-- Counter actually provides better repition than random selection -> birthday paradox ![latex-22695118-cc28-4006-8dad-abb58ba9a449](data/lecture3/latex-22695118-cc28-4006-8dad-abb58ba9a449.png) packets for a collision.
+- On a high traffic network, since the IV is only ![latex-0e19d01a-86f3-4687-ad59-34ce15bf8777](data/lecture3/latex-0e19d01a-86f3-4687-ad59-34ce15bf8777.png) bits long, eventually they will collide.
+- Counter actually provides better repition than random selection -> birthday paradox ![latex-85543c06-16a3-4dae-9a09-665c5a03a36e](data/lecture3/latex-85543c06-16a3-4dae-9a09-665c5a03a36e.png) packets for a collision.
 - Then it is possible to XOR to ciphertext's together to get their plaintexts.
 - Doesn't totally break things, doesn't reveal the secret key.
 
@@ -86,18 +86,12 @@ WI-FI introduced many new security concerns.
 - Attack on data integrity
 - The attacker can create a delta vector and calculate it's checksum, XOR-ing this with the ciphertext (and it's checksum) a valid message with changes
 
-Proof ![latex-4982febf-57f9-4a22-851a-2775b6398fb1](data/lecture3/latex-4982febf-57f9-4a22-851a-2775b6398fb1.png) will be accepted:
+Proof ![latex-50c8b67a-2104-4db3-99eb-13e9d2b35f24](data/lecture3/latex-50c8b67a-2104-4db3-99eb-13e9d2b35f24.png) will be accepted:
 
-![latex-a3440ed6-f7e5-47b3-ab28-c689ed13bdcd](data/lecture3/latex-a3440ed6-f7e5-47b3-ab28-c689ed13bdcd.png)$$$$
-c' = c + (\delta || CRC(\delta)) = RC4=(v||k) + (m||S) | (\delta || CRC(\delta)) \
-\implies RC4(v || k) + (m + \delta || CRC(m) + CRC(\delta)) \
-\implies RC4(v || k) + (m + \delta || CRC(m + \delta)) \
-\implies RC4(v || k) + (m' || CRC(m + \delta)) \
-\therefore RC4(v || k) + (m' || CRC(m'))
-![latex-977da3f6-0ab4-4a4c-bd5a-0aa20f3df8fd](data/lecture3/latex-977da3f6-0ab4-4a4c-bd5a-0aa20f3df8fd.png)$$$$
+![latex-07904495-8f37-46fe-ab77-3096d2f86baf](data/lecture3/latex-07904495-8f37-46fe-ab77-3096d2f86baf.png)
 
 **Integrity function is unkeyed**
 - Attack on access control
-- Suppose an attacker learns the plaintext corresponding to a single encrypted packet ![latex-c78507d7-510f-40f8-86b3-76c640ef98e3](data/lecture3/latex-c78507d7-510f-40f8-86b3-76c640ef98e3.png)
+- Suppose an attacker learns the plaintext corresponding to a single encrypted packet ![latex-225afb50-802c-47d5-ae82-2571ec6d63f5](data/lecture3/latex-225afb50-802c-47d5-ae82-2571ec6d63f5.png)
 - Then, the attacker can compute the RC4 keystream.
 - The attacker can compute a valid encrypted packet for any plaintext `m'`
