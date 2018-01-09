@@ -1,0 +1,7 @@
+digraph {
+	reducers
+	record_readers
+	reducers -> record_readers
+	output_file
+	record_readers -> output_file
+}

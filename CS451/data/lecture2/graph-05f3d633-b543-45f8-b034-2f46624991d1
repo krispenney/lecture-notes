@@ -1,0 +1,8 @@
+digraph {
+	useful_service
+	analyze_behaviour
+	useful_service -> analyze_behaviour
+	transform_insights_to_actions
+	analyze_behaviour -> transform_insights_to_actions
+	transform_insights_to_actions -> useful_service
+}
