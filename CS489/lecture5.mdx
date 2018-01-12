@@ -1,0 +1,77 @@
+# Lecture 5 - January 12
+
+## Representation of Neural Networks
+- Input, output vectors
+- Weights on the edges and a bias vector
+- Can represent everything as matrix-vector operations.
+- A layer can be represented as $$z = W(x) + b$$ and $$y = \sigma(z)$$
+
+------
+x_1 -> y_1
+x_1 -> y_2
+x_1 -> y_3
+x_2 -> y_1
+x_2 -> y_2
+x_2 -> y_3
+------
+
+Alternatevly:
+
+------
+x_1 -> y_1
+x_1 -> y_2
+x_1 -> y_3
+x_2 -> y_1
+x_2 -> y_2
+x_2 -> y_3
+b -> y_1
+b -> y_2
+b -> y_3
+------
+
+## Neural Learning
+- To get the network to do what you want, you must find the connection weights that yeild the desired behaviour.
+- Adjust connection weights + biases
+
+### Supervised Learning
+- Labelled data
+- Can compute the real error and adjust.
+
+### Unsupervised Learning
+- Unlabelled data
+- Not clear what the output should be
+- Goal is to find an efficient representation of the structure of the data.
+
+### Reinforement Learning
+- Given infrequent feedback to guide
+- Example: feedback when win/loose a game, no mention of inbetween steps / how to improve.
+
+## Cost Functions
+Need to quantify how close the true output and prediction were for input $x$, our target is $$t(x)$$ and the output of the network is $$y(x)$$.
+
+### Mean Squared Error
+- Associated with linear or ReLu activation functions
+- Regression problems
+
+$$E(y, t) = \frac{1}{N} \norm{y - t}^2 = \frac{1}{N} \sum_{i=1}^N (y_i - t_i)^2$$
+
+### Cross Entropy
+- **Assumption**: Output is between `[0,1]` / binary.
+- Sigmoid activation functions
+
+$$E(y, t) = -\frac{1}{N} \sum_{i=1}^N t_i\ln{y_i} + (1-t_i)\ln{1-y_i}$$
+
+#### Sidenote: Softmax Activation Function
+- Ensures the elements add up to 1 (think a probability distribution)
+- Take each element as the power of e (i.e. $$e^{z_i}$$), divided by the sum of the new vector.
+- $$softmax(z)_i = \frac{e^{z_i}}{\sum_j e^{z_j}}$$
+- $$\therefore \sum_i softmax(z)_i = 1$$
+
+#### One-Hot Encoding
+- Set the max element of a vector to 1, the remainder to 0
+
+## Optimization
+- One the cost function is formulated, we can define the neural network as an optimization problem.
+
+Let the network be represented by $$y=f(x, \theta)$$
+Goal: $$\min_{\theta}{Expected_cost(E(y, t))}$$
