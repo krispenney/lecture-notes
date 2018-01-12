@@ -1,0 +1,5 @@
+digraph {
+	online
+	profits
+	online -> profits
+}
