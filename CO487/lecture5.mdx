@@ -1,0 +1,60 @@
+# Lecture 5 - January 12
+
+## Feistel Ladder
+- $$(m_0, m_1) \rightarrow (m_1, f(m_0) XOR m_1)$$
+
+### Chosen plaintext attack on NDS
+**Scenario**: Alice and Bob share the secret key *k*
+**Adversary's goal: Find *k*
+
+**Adversary's capabilities:**
+- Knows everything about the NDS (i.e. the algo), except for *k*
+- Has an encryption oracle (wrt *k*)
+
+**Main Observation:**
+Let $$T: {0, 1}^{128} \rightarrow {0,1}^{128}$$ denote one round of encryption (wrt *k*), so $$T((m_{i-1}, m_i)) \rightarrow f(m_i) + m_{i-1}$$
+
+Let $$F: {0, 1}^{128} \rightarrow {0,1}^{128}$$ denote the enryption function (i.e. all 16 rounds), meaning $$F = T^{16}$$
+
+Then for all m 128-bit strings, we have:
+
+$$F(T(m)) = T^{16}(T(m)) = T^{17}(m) = T(T^{16}(m)) = T(F(m))$$
+Therefore, we have the communitive property.
+
+**Attack**:
+Fix a byte r, we'll determine $$R(r)$$ as follows.
+Select $$u = (m_0, m_1)$$ such that:
+  1. $$m_1^* = r_i$$: First bit in every byte in $$m_1$$
+  2. $$S_0(n_i^j) \neq S_1(n_2^j)$$ for each j, 1 <= j <= 8.
+Next, encrypt u (by asking the oracle) and recieve the ciphertext, $$F(u) = (a, b)$$
+
+**Note**: $$T(F(u)) = T((a, b)) = (b, ?)$$, we can't know the right half, since we can't do the encryption ourselves.
+Hence, $$F(T(u)) = (b, ?)$$
+
+Now, let's guess that $$k(r) = t$$, where *t* is a byte.
+Apply one round of encryption to u, assuming that *t* was guessed correctly. Call the result $$T_t(u)$$
+To check the guess, obtain the encryption $$T_t(u)$$ from the oracle: $$F(T_t(u)) = (c, d)$$.
+- If the guess was correct: then $$T_t(u) = T(u)$$, so $$F(T_t(u)) = F(T(u)) = (c, d) \implies b = c$$
+- If the guess was incorrect: Then $$T_t(u) \neq T(u)$$ (by condition of selecting *u* above)
+
+Hence, if we make the heuristic assumption that: F behaves like a random function, the probability that the left half (c) of $$F(T_t(u))$$ equals the left half of $$F(T(u))$$ is $$\frac{1}{2^{64}}$$, which is neglidgibly small.
+- If $$b \neq c$$, then $$k(r) \neq t$$
+- If $$b = c$$, then $$k(r) = t$$ with high probability.
+
+Summary:
+For each $$r \in {0, 1}^{128}$$ for the following
+  - Select $$u = (m_0, m_1)$$ such that the conditions above are true
+  - Obtain $$F(u) = (a, b)$$ from Alice
+  - For each byte t do:
+    - Compute $$T_t(u)$$, obtain $$F(T_t(u)) = (c, d)$$
+    - If $$b=c$$, then
+      - $$k(r)=t$$
+      - goto the next r.
+    - If $$b \neq c$$, then
+      - goto next r
+
+Analysis:
+- The number of chosen plaintexts is at most $$256(1 + 256) ~ 2^8 * 2*8 = 2^{16} ~ 64,000$$ iterations
+- Note that this is a feasible number of iterations.
+
+**Assignment 2: Is an MDS-like toy cipher.**
