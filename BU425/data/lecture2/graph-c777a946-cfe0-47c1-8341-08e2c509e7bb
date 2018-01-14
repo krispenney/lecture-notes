@@ -1,0 +1,7 @@
+digraph {
+	net_worth
+	profits
+	net_worth -> profits
+	online
+	net_worth -> online
+}
