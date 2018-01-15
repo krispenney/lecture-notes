@@ -1,0 +1,52 @@
+# Lecture 6 - January 15, 2018
+
+## Supervised Learning
+Types of problems:
+
+### Regression
+Goal: Estimate some continuous value
+- Mean squared error is a more relevant cost function
+
+### Classification
+Goal: Estimate the class of the input
+- Example: Given an image, determine what digit it is.
+- Think the cross-entropy cost function
+
+## Cross-Entropy Cost Function Derivation - Assignment 2
+
+------
+x -> f_x_theta
+f_x_theta -> y
+------
+
+Suppose we are given a training set:
+
+$${(x^1, t^1), (x^2, t^2), \ldots, (x^n, t^n)}$$
+
+Where the true class is expressed in the target: $$t^i$$
+
+```
+t^i = 1 if x^i in C
+t^i = 0 otherwise
+```
+
+$$P(x^i \rightarrow t^i | \theta) = (y^i)^{t^i}(1-y^i)^{1-t^i}$$
+
+The liklihood of observing the data set is the product:
+
+$$P(x_1, \ldots, x_n, t_1, \ldots, t_n) = \Pi_{i=1}^n P(x^i \rightarrow t^i | \theta)$$
+$$\implies \Pi_{i=1}^n (y^i)^{t^i}(1-y^i)^{1-t^i}$$
+
+More convenient to look at log liklihood (note $$\ln{AB} = \ln{A} + \ln{B}$$)
+
+$$\therefore \ln{P(x_1, \ldots, t_n)} = \sum_{i=1}^n t^i\ln{y^i} + (1-t^i)\ln{1-y^i}$$
+
+## Perception
+Most basic neural network.
+
+-----
+x_1 -> y
+x_2 -> y
+x_3 -> y
+x_4 -> y
+----

@@ -1,0 +1,7 @@
+digraph {
+	x
+	f_x_theta
+	x -> f_x_theta
+	y
+	f_x_theta -> y
+}
