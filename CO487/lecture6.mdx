@@ -1,0 +1,81 @@
+# Lecture 6 - January 15, 2018
+
+## New Data Seal (NDS)
+
+### Chosen Plaintext Attack (continued from lecture 5)
+- Find the table *k* (mapping of values between $$0, 1, \ldots, 255$$ to function values)
+
+Foreach $$r \epsilon {0, 1}^8 do:
+- Pick *u* and obtain $$F(u)$$
+- For each possible byte *t*, check if $$k(r) = t$$
+  - obtain the encryption $$F(T_t(u))$$
+  - Check if the guess is correct (i.e. $$k(r) = t$$)
+
+Note that the total number of chosen plaintexts is $$256 * (1 + 256) > 64000$$
+- Alternatevly, the expected number of chosen plaintexts is $$256 * (1 + 128) > 32000$$, in this case randomly guess *t*'s, on average you'll need to guess half of them.
+- **Excercise**: Modify the attack so that the number of chosen plaintexts is $$256 * (8 (1+1)) = 2^{12} = 4096$$. This approach check each bit of *t*.
+  - Make reasonable assumptions about $$S_0, S_1$$ (substitution functions)
+- **Harder Excercise**: Reduce this to 556 chosen plaintexts.
+
+Is this feasible?
+- Note that Alice and Bob probably aren't real people, think devices.
+- Try to get a secret key off of someone's computer, automate the generation of ciphertexts.
+
+## Data Encryption Standard (DES)
+- Designed by IBM mid-70's
+- US government and banking standard.
+- Falling out of use.
+- 16-round Feistel ladder.
+  - Made use of subkeys, each round in the ladder uses a different key.
+  - Avoids the attack of NDS.
+- Designed with hardware in mind.
+
+### Problem 1
+The key size is too small (only 56-bits).
+
+### Problem 2
+The block size is too small.
+- Example: Imagine encrypting a large file, on average collisions will occur after about $$2^32$$ blocks.
+  - An attacker can examine the blocks and look for repeats.
+
+### Sophisticated Attacks on DES
+
+1. Differential Cryptanalysis
+  - Not practical because of key rotation, would be able to obtain enough `(m, c)` pairs
+2. Linear Cryptanalysis
+  - Requires fewer `(m, c)` pairs.
+  - Key rotation still a problem
+
+## Multiple Encrpytion
+- Since DES was implemented in hardware, it made it more difficult to switch away from.
+- Goal was to find a way to use DES, without upgrading hardware.
+- Solution: Re-Encrypt ciphertext one or more times. Hope that this increases the effective key length.
+- Doesn't always result in a better ciphertext.
+
+## Double DES
+- Run DES twice, with 2 keys.
+- $$k = (k_1, k_2)$$, 2 56-bit keys.
+- Encryption: $$c = E_{k_2}(E_{k_1}(m))$$
+- Decryption: $$m = E^{-1}_{k_1}(E^{-1}_{k_2}(c))$$
+
+### Problem: Meet in the middle attack
+$$$
+c = DES_{k_2}(DES_{k_1}(m))
+
+\implies DES^{-1}_{k_2}(c) = DES_{k_1}(m)
+$$$
+
+Given 3 PT/CT pairs, find the key:
+
+$$$
+DES^{-1}_{k_2}(c_1) = DES_{k_1}(m_1)
+
+DES^{-1}_{k_2}(c_2) = DES_{k_1}(m_2)
+
+DES^{-1}_{k_2}(c_3) = DES_{k_1}(m_3)
+$$$
+
+Generate a guesses $$h_2$$ for $$k_2$$, apply $$E^{-1}_{h_2}$$ to *c*, Store them in a table.
+Do the same for $$k_1$$, see if there are any matching pairs. For each match, compare to the other pairs.
+- If it is a match for both, then it is a match with high probability.
+- If not, then it is not a match.
