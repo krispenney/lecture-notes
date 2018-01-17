@@ -1,0 +1,39 @@
+# Lecture 7 - January 17, 2018
+
+## Perceptrons
+- Basic threshold activation function
+- Single Layer (no hidden layers)
+
+### Graphical Representation
+Can represent the network as a linear combination of the inputs, represents a plane.
+- Linear separation of the data into classes (linear classifier)
+- Limits the capabilities of perceptrons, can only separate linear classes. Need more complex architecture to handle nonlinear.
+
+## Gradient Descent
+
+The operations of the network can be written as $$y = f(x, \theta)$$ with some cost (loss) function $$E(y, t)$$, then learning is the optimization problem.
+
+$$\min_{\theta} ExpectedValue [E(f(x, \theta), t)]$$
+
+Need the gradient for E: Take partial derivatives wrt to each $$\theta_i$$ param (weights and biases).
+
+$$\delta_{\theta}E = \begin{bmatrix} \frac{dE}{d\theta_0} & \frac{dE}{d\theta_1} & \dlots & \frac{dE}{d\theta_P} \end{bmatrix}^T$$
+
+### Gradient Based Optimization
+
+If you want to find the local maximum of a function, start somewhere, and keep going up the hill. Want to maximize $$E(a, b)$$:
+
+$$(a, b) = argmax_{(a, b)} E(a, b)$$
+
+If your current position is $$(a_n, b_n)$$, then the next position is $$(a_{n+1}, b_{n+1}) = (a_n, b_n) + k * \deltaE(a_n, b_n)$$
+
+In the case of neural networks, we're typically interested in minimizing the loss/error. **Gradient Descent**.
+
+#### Note
+Gradient learning provides no guarantees that the optima found is the global optima, possible to get stuck on some local.
+
+#### Approximation of Gradients
+
+We can estimate the partial derivitives $$\frac{df}{d\theta}$$ neumerically, using **Finite-Difference Approximation**, Central differencing.
+
+$$\frac{df}{d\theta} = \frac{f(\theta + \delta\theta) - f(\theta - \delta\theta)}{2\delta\theta}$$
