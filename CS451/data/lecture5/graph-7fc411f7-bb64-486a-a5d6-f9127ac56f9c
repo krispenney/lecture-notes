@@ -1,0 +1,8 @@
+digraph {
+	hdfs
+	MapReduce1
+	hdfs -> MapReduce1
+	MapReduce1 -> hdfs
+	MapReduce2
+	hdfs -> MapReduce2
+}

@@ -1,0 +1,11 @@
+digraph {
+	list_k1_v1
+	map
+	list_k1_v1 -> map
+	list_k2_v2
+	map -> list_k2_v2
+	reduce
+	list_k2_v2 -> reduce
+	list_k3_v3
+	reduce -> list_k3_v3
+}

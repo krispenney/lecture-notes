@@ -1,0 +1,11 @@
+digraph {
+	hdfs
+	mapreduce1
+	hdfs -> mapreduce1
+	mapreduce1 -> hdfs
+	mapreduce2
+	hdfs -> mapreduce2
+	mapreduce2 -> hdfs
+	etc
+	hdfs -> etc
+}
