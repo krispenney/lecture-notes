@@ -1,0 +1,19 @@
+digraph {
+	query
+	rep_function
+	query -> rep_function
+	query_rep
+	rep_function -> query_rep
+	comp_function
+	query_rep -> comp_function
+	hits
+	comp_function -> hits
+	documents
+	rep_function_doc
+	documents -> rep_function_doc
+	doc_rep
+	rep_function_doc -> doc_rep
+	inverted_index
+	doc_rep -> inverted_index
+	inverted_index -> comp_function
+}
