@@ -1,0 +1,85 @@
+# Lecture 11 - January 26, 2018
+
+## Analysis Time Stage 1
+- Using birthday paradox: approx $$\sqrt{\frac{\pi 2^n}{2}} + \frac{1}{\theta}$$
+- expected number of steps for a collision to occur + number of steps to detect the collision
+
+## Analysis Time Stage 2
+- $$\frac{3}{\theta}$$
+- Minor detail: Navigating 2 paths between 2 pairs of distringuished points.
+
+## Total Expected Time
+- $$\sqrt{\frac{\pi 2^n}{2}} + \frac{4}{\theta}$$
+
+## Expected Space
+- $$\theta \sqrt{\frac{\pi 2^n}{2}} * 3n$$ bits.
+- Size of a table entry: $$3n$$ `(x_i, i, LP)`
+
+### Example
+- n = 128
+- h: {0, 1}(128) -> {0, 1}128
+
+#### Naive Method
+- Time ~ $$2^{64}$$
+- Space ~ $$700 * 10^6$$ tbytes
+
+#### VW Method
+- $$\theta = \frac{1}{2^{32}}$$
+- Time ~ $$2^{64}$$
+  - Note that since were only storing 1 in ~billion results, lookup time is negligible.
+- Space ~ 256 Gbytes
+  - Feasible for consumer to obtain this much storage
+
+## Parallelizing VW (with m processors)
+- Ideal case: Hope for a speed up factor of m
+- Idea: Have each processor pick a different starting point.
+  - For each machine, pick a different (random) starting point
+  - Each machine reports the distingished points to a central server.
+  - Sequences could collide with itself, or with another processor.
+
+### Expected Time
+- $$\frac{1}{m} * \sqrt{\frac{\pi * 2^n}{2}} + \frac{4}{\theta}$$
+
+### Expected Space
+- same as before
+- $$\theta * \sqrt{\frac{\pi * 2^n}{2}} * 3n$$
+- Note, would need some additional space to store the index of the processor (say an extra n bits), which is negligible.
+
+### Notes
+1. Speedup is by a factor of `m`
+2. Communication does not need to happen between processors, only to the central server.
+3. **Objection**: Realistically, the collision produced are really 2 random messages. Therefore, useless in a specific application.
+  - Note: Small modifications to the attack can be made to produce meaningful collisions.
+
+## Finding Meaningful Collisions With VW
+
+- let $$m_1 =$$ "Alice owes Bob $1 million...."
+- let $$m_2 =$$ "Alice owes Bob $1...."
+- Alice would like to find variant $$\bar{m_1}, \bar{m_2}$$ of $$m_1, m_2$$
+  - Change the message from a bit-string point of view, but keep the same meaning
+  - Such that $$H(\bar{m_1}) = H(\bar{m_2})$$
+
+- Define $$g_{m_1}: \left\{0, 1\right\}^n \rightarrow \left\{0, 1\right\}^*$$ as follows
+- Fix n positions in $$m_1$$, say $$j_1, j_2, \ldots, j_n$$
+- Then for n-bit string $$r$$, define $$g_{m_1}(r)$$ by adding, for each $$1 \ge i \ge n$$, a space at position $$j_i$$ iff the ith bit of r is 1.
+- **Note** $$g_{m_1}(r)$$ has the same meaning as $$m_1$$.
+- Do the same for $$m_2$$, define $$g_{m_2}$$
+- Define some function f: n-bit -> n-bit
+  - Divide n-bit strings into 2 sets $$S_0, S_1$$ of equal size. (say bitstrings starting with 0 or 1)
+  - Then for bit-string r, define $$f(r)$$
+    - Check if $$r \epsilon S_0$$, compute $$H(g_{m_1}(r))$$
+    - Otherwise, $$r \epsilon S_1$$, compute $$H(g_{m_2}(r))$$
+- If H is a random function, the so is f
+  - Since f applies H, a random Hash value, it must also be random
+- run parallel VW to find a collision for f.
+  - (a, b): collision
+  - $$f(a) = f(b)$$
+  - We hope (with prob 50%) that they are in different sets. Say $$a \epsilon S_0$$ and $$b \epsilon S_1$$
+  - $$\therefore H(g_{m_1}(a)) = f(a) = f(b) = H(g_{m_2}(b))$$
+- Let $$\bar{m_1} = g_{m_1}(a)$$ and $$\bar{m_2} = g_{m_2}(b)$$
+- Finally, $$H(\bar{m_1}) = H(\bar{m_2})$$
+- So we have found a meaningful collision for H.
+
+### How to resist the attack?
+- Don't use a bit-length of 128
+
