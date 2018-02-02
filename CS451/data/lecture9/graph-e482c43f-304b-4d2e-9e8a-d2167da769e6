@@ -1,0 +1,8 @@
+digraph {
+	hdfs
+	mapper
+	hdfs -> mapper
+	reducer
+	mapper -> reducer
+	reducer -> hdfs
+}
