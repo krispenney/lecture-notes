@@ -1,0 +1,11 @@
+digraph {
+	x
+	encoder
+	x -> encoder
+	code
+	encoder -> code
+	decoder
+	code -> decoder
+	x_prime
+	decoder -> x_prime
+}
