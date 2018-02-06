@@ -1,0 +1,10 @@
+digraph {
+	"graph"
+	e
+	"graph" -> e
+	e1
+	e -> e1
+	e2
+	e1 -> e2
+	e2 -> e1
+}
