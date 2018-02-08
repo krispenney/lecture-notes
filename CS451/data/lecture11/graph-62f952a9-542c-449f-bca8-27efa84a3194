@@ -1,0 +1,8 @@
+digraph {
+	useful_services
+	business_intelligence
+	useful_services -> business_intelligence
+	insights_to_action
+	business_intelligence -> insights_to_action
+	insights_to_action -> useful_services
+}
