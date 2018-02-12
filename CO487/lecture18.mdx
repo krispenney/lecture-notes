@@ -1,0 +1,103 @@
+# Lecture 18 - February 12, 2018
+
+## Public Key Crypto
+- Generate a key pair $$(P_A, S_A)$$
+- $$P_A$$: Public Key for Alice
+- $$S_A$$: Secret key for Alice
+
+### Encryption
+- Alice encrypt's her message with $$P_B$$, Bob's public key $$c = E(P_B, m)$$
+- Bob can decrypt the message: $$m = D(S_B, c)$$
+
+### Digital Signatures
+- Alice computes a signing function using her secret key
+- Bob can verify the message using Alice's public key
+- Signatures depend on the messages being sent
+  - Not the same as a physical signature, i.e. the signature is not the same
+  - Can't just cut off the signature and append to a different message
+- Large application: Software updates
+  - Can't use a MAC scheme, Microsoft can't share the same key with Alice and Bob
+  - Instead, Microsoft broadcasts the signed software to everyone
+  - Each user can verify the update using Microsoft's public key.
+
+### Advantages over Symmetric-Ley
+- No need for secret channel
+- Only 1 key pair
+- A signed message can be verified by anyone
+
+### Disadvantages for symmetric-key
+- Public keys are larger than symmetric key
+- Public-key schemes are slower than symmetric key schemes
+- **In practice**: combine both
+
+## Hybrid Scheme
+- Functionalty of public-key and speed of symmetric key
+
+### Encryption
+Alice does the following:
+- Compute a signed message using her secret key
+  - In practice, sign the message
+  - If the hash function is collision resistent, then can't generate collisions, valid signature
+- $$c_1 = E(P_B, k)$$ and $$c_2 = AES_k(m, s)$$
+
+### Decryption
+- Bob first decrypt's $$c_1$$ using his secret key
+- Uses the symmetric secret key to decrypt $$c_2$$
+- Bob can then verify using Alice's public key
+
+## Algorithmic Number theory
+
+### Fundamental Theorem of Arithmetic
+- Every integer $$n >= 2$$ has a unique prime factorization
+- Question: What is the factorization -> how to find it?
+  - Can it be found **efficiently**?
+  - No great algorithm to do this
+- How do we efficiently veify an alleged prime factorization
+  - Need to check if the given factor's are prime
+  - this can be done quickly
+- Given an integer, how do we efficiently decide whether n is prime or composite?
+  - this can be done quickly
+
+### Complexity Theory
+- Measure efficiency in terms of the input size
+- Number of bits: $$\floor{\lg{n}} + 1$$
+- An algorithm is polynomial time: $$O(k^c)$$
+
+#### GCD
+
+##### Naive Method
+- Write $$a = p_1^{a_1} p_2^{a_2} \ldots p_n^{a_n}$$ (prime factorization)
+- $$b = p_1^{b_1} \ldots p_n^{b_n}$$
+- Note that since we don't have an efficient algorithm for prime factorization, so this is not polynomial time
+
+##### Euclid's Method
+- Find the answer without factoring everything
+- Find $$gcd(1547, 560)$$
+- $$\implies \frac{1547}{560} = 2*560 + 427$$
+- $$\impies \frac{560}{427} = 427 + 133$$
+- $$\implies \frac{427}{133} = 3*133 + 28$$
+- $$\implies \frac{133}{28} = 4*28 + 21$$
+- $$\implies \frac{28}{21} = 21 + 7$$
+- $$\implies \frac{21}{7} = 3$$
+- $$\therefore gcd = 7$$
+- k-bit numbers
+- At most $$2k$$ divisions, $$\therefore gcd \epsilon O(k^2)$$
+  - Worst case is sequential fibbonacci numbers
+  - See A4 for another gcd algorithm to analyze.
+
+### Modulous Arithmetic
+- k-bit integer $$n$$, integers $$a, b, m \epsilon \left\[0, n-1\right\]$$
+- $$a mod n$$: the remainder upon deviding a by n.
+
+#### Inverse
+- $$3^{-1} mod 17 = 6$$, note that $$6 * 3 = 18 \implies 18 mod 17 = 1$$
+- Can be efficiently computed using the extended euclidean algorithm
+
+#### Exponentiation
+- to compute $$a^m mod n$$ first compute $$d = a^m$$, then $$d mod n$$
+  - This is not polynomial time, $$O(2^k * k)$$
+- Want: $$17^{73} mod n$$
+  - Write $$73 = 64 + 8 + 1$$
+  - $$\implies 17^{73} = 17^{64} + 17^{8} + 17$$
+  - Then repeatly compute $$17^2 mod n$$
+  - Note: Never increases to more than $$2k$$ bits
