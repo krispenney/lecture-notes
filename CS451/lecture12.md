@@ -1,0 +1,213 @@
+# lecture 12 - February 13, 2018
+
+## Analyzing Relational Data
+
+### Why not just use a database (instead of Hadoop on SQL)?
+- Cost + Scalability
+
+### Dbs are great
+- structured data
+- know what you want
+- data's clean
+
+### Db's are bad
+- unstructured data
+- don't know what you're looking for
+- Messy
+- Behavioural data
+
+### Data Lake
+- Buzzword for HDFS cluster
+
+### Data warehouse
+- Keep a traditional db around for structured data
+
+## SQL on Hadoop
+
+### Selling Point of SQL on Hadoop
+- Trade-off: a little bit of performance, for a lot of flexibility
+- Normal dbs are possessive about your data
+  - You get query optimizers and indexes
+  - But, limited by whatever the database allows you to do
+
+### Structure
+- SQL query interface
+- execution layer
+- HDFS + connectors to other data sources
+
+#### Driver
+- Compiler, optimizer, and executor
+- Coordinates and spawns all of the jobs on the cluster
+
+#### Metastore
+- metadata
+- table schema
+- permissions
+- encoding
+
+#### Hive Data
+- Store in HDFS
+- Tables in directories
+- partitions of tables in sub-directories
+- Actual data in files
+
+##### Feature or Bug?
+- Injesting a table
+  - Insert data into HDFS
+  - Add metadata
+  - overcomes ETL bottle-neck: can transfer as fast as you can copy
+- Allows for many other tools to read and write from HDFS
+  - Can do whatever they want as long as they don't change the structure of the data
+
+### Typical SQL
+- Join with Fact table
+- Filter out
+- Group bys and aggregations
+
+## MapReduce algorithms for processing relational Data
+
+### Selection
+- What's in the `WHERE` clause
+- ![latex-f8171f70-e6c7-4268-931c-67b8e5481107](data/lecture12/latex-f8171f70-e6c7-4268-931c-67b8e5481107.png)
+
+#### MapReduce
+- Mapper, apply criteria, emit only if passes
+- Performance: Limited by how fast you can pipe data through the mappers
+  - Encoding/Decoding tuples
+  - Take advantage of compression
+
+### Projection
+- only Select the fields that we're interested in
+- ![latex-fd6690a1-f0cf-4394-aa02-8e7dc45b89b5](data/lecture12/latex-fd6690a1-f0cf-4394-aa02-8e7dc45b89b5.png)
+
+#### MapReduce
+- Mapper: read tuples, only emit fields that are important
+- Can pipeline with selection
+- Book-keeping: Need to keep track of attribute mappings as projection is performed
+- Performance: Limited by HDFS throughput
+
+### Group by + Aggregations
+- AVG, MAX, MIN, ....
+
+#### MapReduce
+- Map reduce key: The thing you want to group by
+- Let the framework handle the sorting
+- Reduce: Perform the aggregation
+
+### Joins
+Central to the organization of the data warehouse
+- Need to reconstruct the data to the fact table
+
+#### Reduce Side Join
+- AKA: repartition join, shuffle join
+
+##### Basic Idea: Group by join Key
+- map over both data sets
+  - Specify both input directories
+  - Common hack: Look at the file path (via the context) and adjust the reader accordingly
+- emit tuple with join key as intermediate key
+- perform join in reducer
+
+###### 1 to 1
+- Join key as intermediate key
+- Tag the tuple as being from R or S
+- Reducer: The values from each key are R's and S's
+  - No guarantee on which will come first
+  - Check which dataset your reading
+
+###### 1 to Many
+- 1 side "R", many side "S"
+- Emit join key as intermediate key and tag which data set
+- **Problem**: Don't know the order in which everything will come
+  - Ideally want the R to come first
+  - Hold in memory
+  - Join with each S
+  - **Secondary Sorting problem**
+    - Output the dataset as secondary key
+    - Define the sort order such that the R always comes first
+    - Partition correctly
+    - Hold R in memory, preserve state
+    - Keep reading untill new R, repeat
+
+###### Many to Many
+- Make sure all of the R's come before all of the S's
+- Problem: Could Run out of memory when buffering the R's
+
+#### Map-Side Join
+- AKA: Sort merge join
+
+Assume two datasets are sorted by the join key
+- The merge to join: run through
+- CoPartition: Make sure R and S are partitioned in the sameway
+  - Allows for parallelization
+
+##### MapReduce
+- Map over 1 dataset
+- Read from the corresponding partition for R from HDFS (like loading sidedata)
+- No need for a reducer (unless pipelining)
+
+##### Is this realistic
+- Not Naturally
+- But can engineer multiple joins
+- Output the previous job in a way that allows for a map side join
+
+#### Hash Join
+- AKA: Broadcast join, replicated join
+- Great for small dataset, large dataset
+
+##### Basic Idea
+- Load small dataset into memory (as HashMap), key by join key
+  - R needs to fit in memory
+  - i.e. broadcast the HashMap to all of the other mappers
+- Read other dataset, prob for join key
+- No reducers (unless you want to do something else)
+
+##### Co-Partitioned Variant
+- R and S co-partitioned
+- Only need to read co-responding partition of S
+
+##### Striped Variant
+- R is too big to fit into memory
+- Divide R into slices, such that they all fit into memory
+- Perform hash join on each slice, union
+
+##### Global Key value Store
+- Store in Redis/Memcached
+- Probe the key value store
+
+### What join to use
+- In terms of speed:
+  - Hash Join > Map-side > Reduce Side
+  - reduce side join: shuffling data through the mappers
+
+- Limitations:
+  - hash: Memory
+  - Map: Sort order and partitioning requirement
+  - Reduce: General Purpose, but slower
+
+### Putting Everything together
+1. build logical plan
+2. optimize logical plan
+  - Selection and projection push down
+  - Can perform some operations independently (before joining)
+  - Reduce waste
+3. select physical plan
+  - What join algorithm will be used?
+  - Layout in terms of MapReduce Jobs
+
+### Spark SQL
+- Based around DataFrame API
+  - Directly as SQL string
+  - Via method chaining
+- Catalog == MetaStore
+- Almost exactly what happens with Hive
+- Hash join with broadcast variables
+
+## Hadoop Data Warehouse design
+- Joins are relatively expensive
+  - OLAP queries frequently involve joins
+  - Normalizations: Factor out redundency
+    - Denormalization: Pre-join to the Fact table in order to save on later joins
+- Goal of normalization: Recover everything from a join
+  - In datawarehouse, less of a concern due to the ETL process
+  - Nicely design the front-end, ETL can denormalize
