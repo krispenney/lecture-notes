@@ -494,6 +494,7 @@ Products are purchased to enhance one's negative mood
 
 ## Perception
 The process of selecting, organizing, and interpreting our sensations into a meaningful experience or image.
+- Perceptions are committed to memory, where they can later change behaviour (representing learning)
 
 ### Exposure
 When a stimulous is placed within the range of a person's sensory receptors
@@ -536,9 +537,15 @@ Perceptions are biased due to prior beleifs or expectations (top-down)
 ### Cross Modal Sensory Influences
 
 ### Multisensory Congruence
+- When recieving stimuli from multiple senses, congruency between senses can help enhance perception of a product or service
+- Example:
+  - Warm pumpkin spice late
+  - Cold freshing drink
 
 ### Multisensory Marketing
-
-###
+Using multiple senses in order to enhance the customer experience
+- Clothing store, music, smell, ambiance
+- Apple: music, try the products, feel, see
+- bakery: smell, see the food, taste
 
 ## Learning
