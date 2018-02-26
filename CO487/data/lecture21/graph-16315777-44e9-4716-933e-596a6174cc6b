@@ -1,0 +1,7 @@
+digraph {
+	encryption
+	formatted_plaintext
+	encryption -> formatted_plaintext
+	ciphertext
+	formatted_plaintext -> ciphertext
+}

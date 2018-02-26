@@ -1,0 +1,13 @@
+digraph {
+	decrypt
+	formatted_plaintext
+	decrypt -> formatted_plaintext
+	check_formatting
+	formatted_plaintext -> check_formatting
+	reject
+	check_formatting -> reject
+	remove_formatting
+	check_formatting -> remove_formatting
+	plaintext
+	remove_formatting -> plaintext
+}

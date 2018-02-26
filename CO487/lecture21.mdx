@@ -1,0 +1,103 @@
+# Lecture 21 - February 26, 2018
+
+## Chosen-Ciphertext attack on Revised WUP
+
+- k: 128 bits
+- $$c_1 = k^e \text{ mod } n$$: 1024 bits
+- $$K = c^d_1 \text{ mod } n$$: 1024 bits
+  - The rightmost 128-bits should be $$k$$
+  - The rest are all 0's
+- **Flaw:** They don't check the formatting (i.e. they only extract $$k$$)
+
+### Restricted Chosen Ciphertext attack on QQ Browser (6.5.0.2170)
+- **Given**: Target $$(c_1, c_2)$$
+- **Goal**: Compute $$k$$, and then $$m$$
+- **Restricted Oracle**: If you give an improperly formatted ciphertext, then the server will reject the message
+  - You learn the ciphertext / plaintext was not properly formatted.
+- **Attack**: We'll learn the bits of $$k$$, one at a time:
+  - $$k = k_{127} \mid\mid \ldots \mid\mid k_2 \mid\mid k_1
+
+#### To Find k
+
+- Compute $$\bar{c}_1 = c_1 * (2^{127})^e \text{ mod } n$$
+  - i.e. $$e, n$$ are the server's public key
+  - **Note**: $$\bar{c}_1^d = c_1^d * 2^{127})^{ed} \equiv k * 2^{127} \text{ mod } n$$
+  - $$\therefore \bar{c}_1^d \text{ mod } n = k * 2^{127} \text{ mod } n = k * 2^{127}$$
+    - $$k$$ shifted by 127 bits
+    - $$k * 2^{127}$$: 255 bits, n is 1024 bits
+  - first 128 k, 127 are 0's
+- Note that the server decrypts $$\bar{c}_1$$ and obtains $$= \bar{k} = k_0 \mid\mid 0 \mid\mid \ldots \mid\mid 0$$
+- Don't know if $k_0$ is 1 or 0
+  - Guess that $k_0 = 1$$, and set $$k' = 1 \mid\mid 0 \ldots 0$$
+  - Select $$m'$$ and compute $$\bar{c}_2 = AES-ECB_{k'}(m')$$
+- Send $$(\bar{c_1}, \bar{c_2})$$ to the QQ server
+- The server decrypts $$\bar{c}_1$$ to get $$\bar{k}$$
+- Note: If $$k_0 = 1$$, then $$k' = \bar{k}$$, so $$\bar{m}_2 = AES-ECB_k(\bar{c}_2)$$ is properly formatted
+  - If $$k_0 = 0$$, then so $$\bar{m} = AES-ECB_{\bar{k}}^{-1}(\bar{c}_2)$$ is likely garbage. And therefore, the server won't respond
+- You learn $$k_0$$ depending on the response recieved from the server.
+  - If it responds, you guessed correctly: $$k_0 = 1$$
+  - If it doesn't respond, you guessed wrong: $$k_0 = 0$$
+- Proceed similarly for $$k_1, k_2, \ldots, k_{127}$$, shifting k by $$126, 125, \ldots$$ using your previous guesses.
+
+## How to defend against chosen ciphertext attacks in practice
+- **Definition:** A public-key encryption scheme is secure if it is semantically secure against chosen-ciphertext attack by computationally bounded adversaries.
+  - Given access to a decryption oracle
+
+### Approach 1: RSA PKCS 1 V1.5 Encryption
+- **PKCS**: Public Key Cryptographic Standard, 1993
+  - Used in SSL
+
+#### Encryption
+
+---------
+encryption -> formatted_plaintext
+formatted_plaintext -> ciphertext
+--------
+
+#### Decryption
+
+--------
+decrypt -> formatted_plaintext
+formatted_plaintext -> check_formatting
+check_formatting -> reject
+check_formatting -> remove_formatting
+remove_formatting -> plaintext
+-------
+
+#### Formatting
+- Have a formatted plaintext $$m$$ that is t-bytes long
+- $$t = $$ the byte length of n
+- Set $$M$$ (the real plaintext) to the right
+- $$0002 \mid\mid xxxxxxxxxxxxx \ldots xxxxxxx \mid\mid 00 \mid\mid M$$
+- xx's -> The salt: Non zero-bytes random to fill in the space (at least 8 consecutively)
+  - **Why random?**: Prevent a dictionary attack
+
+### Approach 2: RSA-OAEP Encryption (1994)
+- Let $$k$$ be the **bit** length of the modulous, n (ex. $$k = 3072$$)
+- Salt $$r \in \left\{0, 1\right\}^{256}$$
+
+#### Formatting and Encryption
+  - $$0 \mid\mid 0^{256} \mid\mid M \mid\mid r$$
+  - $$l - k - 1 - 256$$: Length of M + 256 0's
+  - $$G_1: \left\{0, 1\right\}^{256} \rightarrow \left\{0, 1\right\}^l$$
+  - $$G_2: \left\{0, 1\right\}^{l} \rightarrow \left\{0, 1\right\}^{256}$$
+  - $$G_1$$ and $$G_2$$ are random functions implemented with hash functions
+  - $$s = G_1(r) \oplus (0^{256} \mid\mid M)$$
+  - $$m = 0 \mid\mid  s \mid\mid G_2(s) \oplus r$$
+    - The point of this is to discuise the salt and plaintext
+    - **Think**: Similar to a 2-step feistel network
+
+#### Decryption (given c)
+- Compute $$m = c^d \text{ mod } n$$
+- Parse m: $$d \mid\mid s \mid\mid t$$
+- Check that $$d = 0$$
+- Go backwards:
+- Compute: $$r = G_2(s) \oplus t$$
+- Compute: $$G_1(r) \oplus s$$ and parse to get $$a \mid\mid b$$
+  - a should be 256 bits long
+- Check that $$a$$ is 256 0's
+- Then the plaintext is $$M = b$$
+
+#### Why is this secure?
+- Provable by theorem.
+- See next class
