@@ -1,0 +1,55 @@
+# Lecture 21 - February 26, 2018
+
+## Midterm
+- Everything upto and including variational autoencoders and Maps
+- pre-reading week
+
+## Assignment 3
+- For dropout, no need to touch `Backprop`.
+- As a result, it only needs to work on 1 hidden layer.
+
+## Hubel and Wiesel Cat
+- Monitor a few neurons in the cat's visual corex
+- See what those neurons encode
+
+## Neural Coding
+- Recall LIF, If input current is fixed and above the threshold
+- neuron encodes a quantity if the neuron's activity changes as the value changes
+  - i.e. manupilating lights on a screen
+
+### Population Coding
+- Neurons react to some external environmental variable
+  - reacting to light, brightness, etc
+- Can build tuning curves of the neurons
+- Then, given states of the neurons, you can reverse-engineer the state on the brain
+  - Read the mind
+  - Where was the cat looking
+
+#### Linear coding
+- Use a linear remapping to approximate all of the intermediate processes
+  - There are many different processes between the input and the neuron
+  - i.e. eye-ball -> a bunch of neurons -> the neuron that we're monitoring
+  - $$J(x) = \alpha * e * x + \beta$$
+  - $$\alpha$$: gain, positive real number
+  - e: The encoder: $$e \in \left\{-1, 1\right\}
+  - $$\beta$$: Bias, real number
+
+$$J(x)$$ is the current entering the neuron for stimulus x, LIF neuron characterised by:
+1. $$J_{th}$$: Threshold (we just set it to 1)
+2. $$\tau_m$$: Membrane time constant
+3. $$\tau_{ref}$$: refactory period
+4. $$\alpha$$: Gain
+5. $$\beta$$: Bias
+6. $$e$$: Encoder
+
+##### Decoding Excersice
+- $$[0, 1]$$: Input must be around $$-2$$Hz
+- [1, 2]: Around 0hz
+- [2, 3]: Around -1hz
+- [3, 4]: Around 2hz
+
+In reality each neuron has a stochastic element, therefore you want to have a higher number of neurons to improve stats.
+
+##### Optimal Linear Decoding
+- $$X \in R^{P x 1}$$ is a column vector containing P x-values (inputs)
+- $$A \in R^{P x N}$$ is a PxN matrix with each row containing the activities (firing rates) of N neurons for the corresponding input value.
