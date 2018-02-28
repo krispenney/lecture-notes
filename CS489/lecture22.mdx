@@ -1,0 +1,33 @@
+# Lecture 22 - February 28, 2018
+
+## Population Coding
+
+### Linear Coding
+
+Goal is to find a set of decoding weights $$D \in R^{n+1}$$, such that $$AD \approx X$$.
+- Or $$\min_D || AD - X ||^2$$
+
+#### Least Squares
+
+##### Method 1: Normal Equations
+- The columns of A have to be linearly independent in order to have a unique solution.
+- This method is efficient to compute, but may not be numerically stable.
+
+$$A^T(AD - X) = 0$$
+$$A^TAD - A^TX = 0$$
+$$A^TAD = A^TX$$: Normal Equations
+$$D = (A^TA)^{-1}A^TX = A^+X$$
+
+##### Method 2: SVD
+- A more computationally expensive method, but more numerically stable
+
+Let $$U \sigma V^T = A$
+- $$U, V^T$$ are orthogonal matricies
+- $$\sigma$$: diagonal matrix
+
+$$AD \approx X \implies U \sigma V^T D \approx X$$
+$$\sigma V^T D = U^T X$$
+$$V^T D = \sigma^{-1} U^T X$$
+$$D = V \sigma^{-1} U^T X$$
+
+
