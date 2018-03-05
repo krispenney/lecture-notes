@@ -47,6 +47,8 @@ Writing this as a bit string, we can see that left bit shifts are applied
 
 ![latex-07022079-2d6f-4a79-b2ea-827947b25554](data/lecture24/latex-07022079-2d6f-4a79-b2ea-827947b25554.png)
 
+![](lecture24.jpg)
+
 ## Key Management
 - Whatever it takes to support the establishment and maintenace of keys for many users
 
@@ -89,8 +91,6 @@ In the real world, public key management is hard.
 - The trust is now concentrated to trusting the CA's public key
   - The CA doesn't need to know the user's private key
   - The CA must be trusted to not create false certificates
-
-![](lecture24.jpg)
 
 ### Public Key Infrastructure (PKI)
 - The supporting services (tech, legal, business) that are needed if public key crypto is to be deployed at scale
