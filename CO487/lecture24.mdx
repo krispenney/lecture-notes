@@ -90,7 +90,7 @@ In the real world, public key management is hard.
   - The CA doesn't need to know the user's private key
   - The CA must be trusted to not create false certificates
 
-![](lesson24.jpg)
+![](lecture24.jpg)
 
 ### Public Key Infrastructure (PKI)
 - The supporting services (tech, legal, business) that are needed if public key crypto is to be deployed at scale
