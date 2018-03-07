@@ -9,12 +9,12 @@
 - 2nd PreImage: Given an input, find a second distinct message whose hash is the same, again feasible amount of time.
 - Collision resistance: Find two distinct inputs that sum to the same hash
 
-The following examples only focus on uniform hash functions (i.e. no contrived examples ![latex-9aee1732-7203-4606-b476-60006f0435ee](data/lecture25/latex-9aee1732-7203-4606-b476-60006f0435ee.png))
+The following examples only focus on uniform hash functions (i.e. no contrived examples ![latex-04768cb0-5648-4bf3-af07-bd70aef907af](data/lecture25/latex-04768cb0-5648-4bf3-af07-bd70aef907af.png))
 - Always prove these with the contra-positive
 - **NEVER SAY "EXISTS"**: they always do, the attack just needs to be feasible
 
 
-![graph-5c77fc85-6c52-4615-943c-c6b7bc97c1a7](data/lecture25/graph-5c77fc85-6c52-4615-943c-c6b7bc97c1a7.svg)
+![graph-ea0c36e2-73f7-4cce-b266-cef742ff4663](data/lecture25/graph-ea0c36e2-73f7-4cce-b266-cef742ff4663.svg)
 
 - Note that PR does not imply 2PR
 - 2PR does not imply CR
@@ -29,8 +29,8 @@ The following examples only focus on uniform hash functions (i.e. no contrived e
 ## Key Derivation Functions (KDF)
 - Sample as many sources as random bits as possible
 - KDF mixes up all of the sources of randomness
-- ![latex-a4612431-70a3-48cd-b443-b95764ab8942](data/lecture25/latex-a4612431-70a3-48cd-b443-b95764ab8942.png)
-- ![latex-36cd711a-aa9c-4148-89a1-5a0feed2102f](data/lecture25/latex-36cd711a-aa9c-4148-89a1-5a0feed2102f.png)
+- ![latex-24f03667-66ed-4fdf-a3cb-18cdbdc0f4b1](data/lecture25/latex-24f03667-66ed-4fdf-a3cb-18cdbdc0f4b1.png)
+- ![latex-b6eca342-5535-4e75-ac5e-30e194b4b94b](data/lecture25/latex-b6eca342-5535-4e75-ac5e-30e194b4b94b.png)
 
 ## Sample MT 1
 
@@ -38,15 +38,15 @@ The following examples only focus on uniform hash functions (i.e. no contrived e
 - Goal of question, show how the modification to DES doesn't help
 
 #### Part a
-- ![latex-e15d4dac-5267-4642-9989-a665613fce7a](data/lecture25/latex-e15d4dac-5267-4642-9989-a665613fce7a.png)
+- ![latex-74f87528-5801-4336-98d4-fd1ffba36936](data/lecture25/latex-74f87528-5801-4336-98d4-fd1ffba36936.png)
 
 #### Part b
-- By exhaustive key search: Can solve in ![latex-4a5e7ae4-6742-40ed-9c75-1f5580aae2ae](data/lecture25/latex-4a5e7ae4-6742-40ed-9c75-1f5580aae2ae.png) steps (infeasible)
-- can compute ![latex-cb97df14-a323-4b62-825e-175012c7919d](data/lecture25/latex-cb97df14-a323-4b62-825e-175012c7919d.png)
-  - Make a guess for ![latex-a40de7cd-5cfc-4a30-9f90-5c4fd62923b4](data/lecture25/latex-a40de7cd-5cfc-4a30-9f90-5c4fd62923b4.png), check that you get the result (check you can get k2).
+- By exhaustive key search: Can solve in ![latex-7b89ea9a-2ea6-4a52-a28a-607d3517a6bd](data/lecture25/latex-7b89ea9a-2ea6-4a52-a28a-607d3517a6bd.png) steps (infeasible)
+- can compute ![latex-905fa07e-6c70-4f3d-a7f3-b955d8e50a93](data/lecture25/latex-905fa07e-6c70-4f3d-a7f3-b955d8e50a93.png)
+  - Make a guess for ![latex-486490ef-8d8f-43e3-8ea1-622ddd30b280](data/lecture25/latex-486490ef-8d8f-43e3-8ea1-622ddd30b280.png), check that you get the result (check you can get k2).
   - If yes, check on the other pairs
 - We want the number of false keys to be close to 0.
-  - The number of foreign keys ![latex-9f18097a-b2ba-4e2a-b31d-f62b39bd980e](data/lecture25/latex-9f18097a-b2ba-4e2a-b31d-f62b39bd980e.png)
+  - The number of foreign keys ![latex-53379875-7838-45d6-8d9f-79cca94a676c](data/lecture25/latex-53379875-7838-45d6-8d9f-79cca94a676c.png)
 
 ### 4b
 - ECB Mode is not semantically secure
@@ -60,9 +60,9 @@ The following examples only focus on uniform hash functions (i.e. no contrived e
 
 ### 1g
 - Polytime: in terms of the input size
-- Iterate from: ![latex-73194631-3cca-4cc9-ad57-5a7b83b1b155](data/lecture25/latex-73194631-3cca-4cc9-ad57-5a7b83b1b155.png),
-  - Bit length of n is ![latex-6f30e80f-9ea3-4adb-b6f5-c0f003609234](data/lecture25/latex-6f30e80f-9ea3-4adb-b6f5-c0f003609234.png)
-  - Algorithm takes ![latex-81697fff-015b-418b-863c-741c5a12e7cc](data/lecture25/latex-81697fff-015b-418b-863c-741c5a12e7cc.png) steps
+- Iterate from: ![latex-064c086c-a745-4f91-81f1-b16dd4accf29](data/lecture25/latex-064c086c-a745-4f91-81f1-b16dd4accf29.png),
+  - Bit length of n is ![latex-d9479385-65e7-4cfb-8a8e-f0254da32b61](data/lecture25/latex-d9479385-65e7-4cfb-8a8e-f0254da32b61.png)
+  - Algorithm takes ![latex-3288c33b-c675-445e-9553-3f8fe5c8ca81](data/lecture25/latex-3288c33b-c675-445e-9553-3f8fe5c8ca81.png) steps
 - Therefore, not polynomial time.
 
 ### 3c
