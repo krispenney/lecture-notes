@@ -1,0 +1,50 @@
+# Lecture 25ish - March 9, 2018
+
+## Neural Decoding Overview
+
+1. behavioural sampling
+  - A bunch of input stimulus are recieved
+  - Brain accepts input and processes it
+  - We can sample these neural activities.
+  - Choose X, use simulation to get A (activities of the neurons)
+
+2. Compute Decoders
+  - Use data from behavioural experiment to solve:
+  - $$D = \argmin_D \mid\mid AD - F(x) \mid\mid^2_2$$
+  - Decoding list is how to interperete neural activities
+3. Decode neural activity
+  - Now you can decode further neural activitty
+  - i.e. given $$A_2$$ you can estimate $$X_2$$
+
+## Neural Transformations
+- In the brains, populations of neurons send their activities to other neurons.
+
+### Encoders and Decoders
+- Given 2 populations A and B can we simply copy the weights from A to B
+  - No, it's unlikely that both A and B are of the same dimension (number of neurons)
+- Can use an autoencoder:
+  - Decode input from A
+  - Re-interpret results into B
+
+1. Encode input x into A
+  - $$A = G(J(x)) = G(X E_A \alpha_A + \beta_A)$$
+    - J input current
+    - G is activation function
+    - X is 1xK vector
+    - $$E_A$$: KxN
+    - $$\alpha_A$$: NxN diagonal matrix
+    - Bias for each neuron (1 x N)
+    - A is a 1xN vector, giving the activity for N vectors
+2. Decode the value from A
+  - $$\hat{X} = A D_A$$
+  - the indentity decoding weights
+  - Recall that the decoding weights are created from solving the least squares problem
+3. RE-encode into B
+  - $$B = G(J(\hat{X})) = G((A D_A) E_B \alpha_B + \beta_B)$$
+  - $$A D_A$$ is 1xk
+  - $$E_B$$: is kxM
+  - $$\alpha_B$$: is MxM diagonal matrix
+  - Rewrite as $$G(A(D_A E_B \alpha_B) + \beta_B)$$
+    - Notice that the product: $$D_A E_B \alpha_B$$ is NxM
+    - Call this product W.
+4. Decode from B if desired
