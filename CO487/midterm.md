@@ -45,15 +45,15 @@ To break a symmetric key encryption scheme, the adversary must accomplish:
 
 ### Desirable Properties
 
-1. Efficient algorithms should be known for computing $$E_k$$ and $$D_k$$
+1. Efficient algorithms should be known for computing ![latex-90c43c8f-274a-4465-be42-dae1796d8029](data/midterm/latex-90c43c8f-274a-4465-be42-dae1796d8029.png) and ![latex-6d0a13fd-b2f7-4a27-a668-f7cfc5b07173](data/midterm/latex-6d0a13fd-b2f7-4a27-a668-f7cfc5b07173.png)
 2. The secret key should be small, but large enough to prevent exhaustive key search.
-  - Note that $$2^{128} >$$ operations is considered infeasible.
+  - Note that ![latex-66ca56e0-968b-4397-b3e9-1edab95f1dac](data/midterm/latex-66ca56e0-968b-4397-b3e9-1edab95f1dac.png) operations is considered infeasible.
 3. The encryption scheme should be secure.
 4. The scheme should be secure against even the designer of the system.
 
 ## Security Levels
 
-A cryptographic scheme is said to have a security level of l bits if the fastest known attack can be performed in $$2^l$$ bits.
+A cryptographic scheme is said to have a security level of l bits if the fastest known attack can be performed in ![latex-1ec86575-20ff-453b-83a4-7647d073d683](data/midterm/latex-1ec86575-20ff-453b-83a4-7647d073d683.png) bits.
 - A security level of at least 128 bits is desired in practice.
 
 ## Stream Ciphers
@@ -70,7 +70,7 @@ Use a pseudorandom bit generator (PRBG) to generate "random" keystream bits.
 
 ### Key Scheduling Algorithm
 
-Given the secret key, generate a random looking permutation of $$0, \ldots 255$$.
+Given the secret key, generate a random looking permutation of ![latex-aaf6c9ee-f231-4bc1-86b3-8db0fe026a26](data/midterm/latex-aaf6c9ee-f231-4bc1-86b3-8db0fe026a26.png).
 
 ### Keystream Generator
 
@@ -96,24 +96,24 @@ Each packet uses a per-packet 24 bit initialization vector, the standard does no
 #### Client side
 
 1. Select 24-bit IV
-2. Compute a 32-bit checksum, $$S = CRC(m)$$
-3. Compute $$c = (m \mid\mid S) \oplus RC4(v \mid\mid k)$$
-4. Send $$(v, c)$$ over the wireless channel.
+2. Compute a 32-bit checksum, ![latex-f51a2319-770f-4716-bd68-da3b83281dc0](data/midterm/latex-f51a2319-770f-4716-bd68-da3b83281dc0.png)
+3. Compute ![latex-6df432b3-8411-4ee2-9c7b-6bd14fdbd6c0](data/midterm/latex-6df432b3-8411-4ee2-9c7b-6bd14fdbd6c0.png)
+4. Send ![latex-0cffa100-cba2-4033-ac0a-548811b2512c](data/midterm/latex-0cffa100-cba2-4033-ac0a-548811b2512c.png) over the wireless channel.
 
 #### Reciever
 
-1. Compute $$(m \mid\mid S) = c \oplus RC4(v \mid\mid k)$$
-2. Compute $$S' = CRC(m)$$, reject packet if $$S' \neq S$$
+1. Compute ![latex-0d6f8e84-e49e-441c-afff-4dcaa6b25d63](data/midterm/latex-0d6f8e84-e49e-441c-afff-4dcaa6b25d63.png)
+2. Compute ![latex-d0655c25-69f8-4958-a263-b01166100e63](data/midterm/latex-d0655c25-69f8-4958-a263-b01166100e63.png), reject packet if ![latex-360d6d71-95bf-4b2f-9eb1-3e4e93b82126](data/midterm/latex-360d6d71-95bf-4b2f-9eb1-3e4e93b82126.png)
 
 #### Problems
 
 ##### IV Collisions
 **WEP doesn't provide a high degree of confidentiality**
 
-There's only $$2^{24}$$ possible IVs, eventually they will be repeated.
-- then all encrypted packets contain $$RC4(v \mid\mid k)$$, can XOR them together, if either plaintext is known the plaintext can be extracted.
+There's only ![latex-7ece7144-0789-4ebc-9b36-fc301758b950](data/midterm/latex-7ece7144-0789-4ebc-9b36-fc301758b950.png) possible IVs, eventually they will be repeated.
+- then all encrypted packets contain ![latex-b72a2cdc-c325-4ad3-8c98-c7f43c17912b](data/midterm/latex-b72a2cdc-c325-4ad3-8c98-c7f43c17912b.png), can XOR them together, if either plaintext is known the plaintext can be extracted.
 
-By the birthday paradox, if IVs are randomly expected then a collision should be expected after $$\sqrt{2^{24}} = 2^{12}$$
+By the birthday paradox, if IVs are randomly expected then a collision should be expected after ![latex-3b5c5656-66e9-4454-ba62-e83815720509](data/midterm/latex-3b5c5656-66e9-4454-ba62-e83815720509.png)
 
 ##### Linear Checksum
 **WEP does not provide data integrity**
@@ -123,8 +123,8 @@ It's possible to make controlled changes to encrypted packets, that are still va
 ##### Integrity function is unkeyed
 **WEP does not provide access control**
 
-If an attacker can obtain the plaintext of some encrypted packet $$(v, c)$$, then they can compute:
-$$RC4(v \mid\mid k) = c \oplus (m \mid\mid CRC(m))$$
+If an attacker can obtain the plaintext of some encrypted packet ![latex-313ff7d3-1a27-41aa-98e9-daeb7fb2c4ee](data/midterm/latex-313ff7d3-1a27-41aa-98e9-daeb7fb2c4ee.png), then they can compute:
+![latex-13d141c2-dbc1-4220-aedf-04b5b3d1d276](data/midterm/latex-13d141c2-dbc1-4220-aedf-04b5b3d1d276.png)
 Therefore, the attacker can compute a valid encrypted packet for any message of their choice.
 
 ## WPA
@@ -160,13 +160,13 @@ A block ciphers is a SKES the breaks of the plaintext into blocks of fixed lengt
 - l: key length
 - M is 2 blocks
 - A key scheduling algorithm is used to determine subkeys for each round.
-- **Encryption**: $$m_{h+1} = m_{h-1} \oplus f_h(m_h)$$
-- **Decryption**: $$m_{h-1} = m_{h+1} \oplus f_h(m_h)$$
+- **Encryption**: ![latex-64d73a79-cf46-4255-868c-585556fa7f37](data/midterm/latex-64d73a79-cf46-4255-868c-585556fa7f37.png)
+- **Decryption**: ![latex-3bc0a1cd-42ee-49a1-8c92-64ad418da79a](data/midterm/latex-3bc0a1cd-42ee-49a1-8c92-64ad418da79a.png)
 
 ### New Data Seal (NDS)
 - n = 64, h = 16
 - key maps 8 bits to 8 bits
-  - $$256^256 = 2^{2048}$$ possible keys
+  - ![latex-aca56a97-b65f-4615-9ce9-f5ad94c3a501](data/midterm/latex-aca56a97-b65f-4615-9ce9-f5ad94c3a501.png) possible keys
   - 256 slots in the array, each with a value of 256
 
 #### Chosen plaintext attack
@@ -179,23 +179,23 @@ A block ciphers is a SKES the breaks of the plaintext into blocks of fixed lengt
 - S-Boxes: Security of DES depends on their choice
 
 #### Problems
-- Exhaustive key search is feasible ($$2^{56}$$ steps) and can be easily parallelized
-- If plaintext blocks are distributed uniform random, then by birthday paradox the expected number of encrypted blocks before a collision occurs is $$\sqrt{2^{64}} = 2^{32}$$
+- Exhaustive key search is feasible (![latex-fa11fb75-6bb5-4ec3-8829-a373c092965f](data/midterm/latex-fa11fb75-6bb5-4ec3-8829-a373c092965f.png) steps) and can be easily parallelized
+- If plaintext blocks are distributed uniform random, then by birthday paradox the expected number of encrypted blocks before a collision occurs is ![latex-49df2739-a34e-4b06-9008-6cdbbdee8718](data/midterm/latex-49df2739-a34e-4b06-9008-6cdbbdee8718.png)
 
 #### Double DES meet in the middle attack
-- foreach possible $$h_2$$, perform 1 round of DES decryption, save results in a table.
-- foreach possible $$h_1$$, encrypt the plaintext see if the result is in the table
+- foreach possible ![latex-54d08ab7-2cf2-4c26-8616-55991e128292](data/midterm/latex-54d08ab7-2cf2-4c26-8616-55991e128292.png), perform 1 round of DES decryption, save results in a table.
+- foreach possible ![latex-489b92be-0126-4455-a09d-890055d3d8d1](data/midterm/latex-489b92be-0126-4455-a09d-890055d3d8d1.png), encrypt the plaintext see if the result is in the table
   - IF it is, check the other 2 plaintext, ciphertext pairs
   - IF not, it's not correct, move on.
 
 ### Electronic Cookbook Mode (ECB)
 - Encrypt blocks independently, one at a time
-- $$c_i = E_k(m_i)$$
+- ![latex-e9973666-f37b-4a40-96c5-0705ca135973](data/midterm/latex-e9973666-f37b-4a40-96c5-0705ca135973.png)
 - **Problem**: IDentical plaintext blocks produce identical ciphertext blocks.
 
 ### Cipher Block Chaining Mode (CBC)
-- $$c_i = E_k(m_i \oplus c_{i-1})$$
-- $$c_0$$ is a random non-secret IV.
+- ![latex-609f2ef5-b83e-4122-997f-e07958136d30](data/midterm/latex-609f2ef5-b83e-4122-997f-e07958136d30.png)
+- ![latex-904302ce-1a1d-4509-a97e-1489beaa8861](data/midterm/latex-904302ce-1a1d-4509-a97e-1489beaa8861.png) is a random non-secret IV.
 - Each ciphertext block feeds into the next.
 
 ## Hash Functions
@@ -205,22 +205,22 @@ A block ciphers is a SKES the breaks of the plaintext into blocks of fixed lengt
 ### Properties of Hash functions
 
 #### Preimage resistance
-- Given a hash value y, it is not computationally feasible to find an x such that $$H(x) = y$$
+- Given a hash value y, it is not computationally feasible to find an x such that ![latex-03d84911-50ce-40f6-9d33-d9f39ee9d01f](data/midterm/latex-03d84911-50ce-40f6-9d33-d9f39ee9d01f.png)
 - x is called a preimage of y
 - **Application**: Password protected systems, store (user id, H(password)) in db.
 
 #### 2nd Preimage Resistance
-- Given an input x (and it's hash value), it is computationally infeasible to find an $$x' \neq x$$ such that $$H(x) = H(x')$$
+- Given an input x (and it's hash value), it is computationally infeasible to find an ![latex-e00dfb62-f579-46fe-9bf2-51c5ba26f4b4](data/midterm/latex-e00dfb62-f579-46fe-9bf2-51c5ba26f4b4.png) such that ![latex-74b545d8-5d81-41a9-a4de-4efc32c1cce2](data/midterm/latex-74b545d8-5d81-41a9-a4de-4efc32c1cce2.png)
 - **Application**: Modification detection codes, prevent a message m from being modified by unauthorized means.
 
 #### Collision Resistance
-- It is computationally infeasible to find two distinct inputs $$x, x'$$ such that $$H(x) = H(x')$$
+- It is computationally infeasible to find two distinct inputs ![latex-32fcd8a8-b0c4-414f-a909-3e4f4fa903a2](data/midterm/latex-32fcd8a8-b0c4-414f-a909-3e4f4fa903a2.png) such that ![latex-5a8e8f7c-7c11-47e9-9379-f829ba567df8](data/midterm/latex-5a8e8f7c-7c11-47e9-9379-f829ba567df8.png)
 - **Application**: Message digests for digital signature schemes, if collisions exist, Alice could sign x but actually send x'.
 
 #### Relationships between properties
 
 Collision resistance implies 2nd preimage resistance
-- Proof: Suppose H is not 2nd preimage resistant. Then, given an input x it is computationally feasible to find a distinct input x' such that $$H(x) = H(x')$$.
+- Proof: Suppose H is not 2nd preimage resistant. Then, given an input x it is computationally feasible to find a distinct input x' such that ![latex-64d889b4-c068-45f8-a764-bafc5726a88f](data/midterm/latex-64d889b4-c068-45f8-a764-bafc5726a88f.png).
   - (x, x') is a collision, meaning H is not Collision resistant.
   - Therefore, if H is collision resistant, then it is 2nd preimage resistant.
 
@@ -239,17 +239,17 @@ Collision Resistance does not guarantee preimage resistance.
 - For analysis purposes, H is viewed as a random function (however this isn't the case in practice)
 
 #### Generic attack to find preimages
-- Given a hash value y, select arbitrary inputs x until $$H(x) = y$$
+- Given a hash value y, select arbitrary inputs x until ![latex-eebd8edb-f346-42a8-ae87-8402c49a928a](data/midterm/latex-eebd8edb-f346-42a8-ae87-8402c49a928a.png)
 - Brute force
-- Expected number of hash evaluations: $$2^n$$
+- Expected number of hash evaluations: ![latex-53f98bf6-0f6a-43d2-b13b-2eefa49ca8c0](data/midterm/latex-53f98bf6-0f6a-43d2-b13b-2eefa49ca8c0.png)
 - **This is the optimal generic attack for finding preimages**
 
 #### Generic Attack to find Collisions
-- Select arbitrary inputs x, insert into a table $$(H(x), x)$$ (sorted by the hash value)
-- Repeat until you find x' such that $$H(x')$$ is in the table, with a distinct x.
-- Expected number of evaluations $$\sqrt{2^n}$$, by birthday paradox.
-  - Expected space requirements is $$\sqrt{2^n}$$
-- This attack is infeasible if $$n \ge 256$$
+- Select arbitrary inputs x, insert into a table ![latex-13fa36e8-090b-4231-aebf-24e50364f6ec](data/midterm/latex-13fa36e8-090b-4231-aebf-24e50364f6ec.png) (sorted by the hash value)
+- Repeat until you find x' such that ![latex-c1a52fba-6f8c-40b7-ba82-2754a6817d34](data/midterm/latex-c1a52fba-6f8c-40b7-ba82-2754a6817d34.png) is in the table, with a distinct x.
+- Expected number of evaluations ![latex-c92dac2f-eef5-4010-ab13-deb50f03f2ab](data/midterm/latex-c92dac2f-eef5-4010-ab13-deb50f03f2ab.png), by birthday paradox.
+  - Expected space requirements is ![latex-77602d3c-1057-4e63-b6d8-4f31c0d197f1](data/midterm/latex-77602d3c-1057-4e63-b6d8-4f31c0d197f1.png)
+- This attack is infeasible if ![latex-9f84cab2-8b2f-4d78-93d4-35a51737f052](data/midterm/latex-9f84cab2-8b2f-4d78-93d4-35a51737f052.png)
 - This attack is optimal in terms of hash function evaluations.
 
 #### VW Parallel Collision Search
@@ -269,24 +269,24 @@ This attack is easily parallizable and can be modified to find meaningful collis
 
 ### Davies-Meyer (Based on Block Ciphers)
 - m-bit block size
-- Break up $$x \mid\mid 1$$ into t m-bit blocks (pad with 0s)
-- $$\bar{x} = x_1 x_2 \ldots x_t$$
-- $$H_0 = IV$$
-- $$H_i = E_{x_i}(H_{i-1}) \oplus H_{i-1}$$
-- $$H(x) = H_t$$
+- Break up ![latex-15166fdc-eded-4c44-9618-5959de1a4cd5](data/midterm/latex-15166fdc-eded-4c44-9618-5959de1a4cd5.png) into t m-bit blocks (pad with 0s)
+- ![latex-a2caa332-f6bf-4556-a2c7-4678309a7451](data/midterm/latex-a2caa332-f6bf-4556-a2c7-4678309a7451.png)
+- ![latex-503e13e9-a332-4cee-bcca-d7e580d9afcb](data/midterm/latex-503e13e9-a332-4cee-bcca-d7e580d9afcb.png)
+- ![latex-7f8afc62-cb5e-4fed-9444-dc6d2dc06f43](data/midterm/latex-7f8afc62-cb5e-4fed-9444-dc6d2dc06f43.png)
+- ![latex-328ab7bc-0bec-441d-884d-4a2d767e4729](data/midterm/latex-328ab7bc-0bec-441d-884d-4a2d767e4729.png)
 
 ### Iterated Hash Function (Merkel Meta-Method)
 - n-bit IV
 - n+r-bit -> n-bit compression function.
 - break up x into t r-bit blocks
-  - $$x_{t+1}$$ is defined to be a length block
-- $$H_0 = IV$$
-- $$H_i = f(H_{i-1}, x_i)$$ for i > 0
-- $$H(x) = H_t$$
+  - ![latex-ccd30490-91ae-4fca-961a-1b6915a507d9](data/midterm/latex-ccd30490-91ae-4fca-961a-1b6915a507d9.png) is defined to be a length block
+- ![latex-82c65f4d-55dd-4b45-a995-8aef7954d777](data/midterm/latex-82c65f4d-55dd-4b45-a995-8aef7954d777.png)
+- ![latex-c3d6db1f-250f-4b41-a069-fd3609415c97](data/midterm/latex-c3d6db1f-250f-4b41-a069-fd3609415c97.png) for i > 0
+- ![latex-bc7fbb8c-186a-4939-8a2b-b07a2af13aa6](data/midterm/latex-bc7fbb8c-186a-4939-8a2b-b07a2af13aa6.png)
 - **Theorem**: If the compression function is collision resistant, then the hash function is collision resistant.
 
 ## Message Authentication Schemes
-MAC schemes are a family of functions $$H_k$$, with an l-bit secret key k.
+MAC schemes are a family of functions ![latex-06a5d0a3-bd89-4da1-8c72-f5a5443cc554](data/midterm/latex-06a5d0a3-bd89-4da1-8c72-f5a5443cc554.png), with an l-bit secret key k.
 - Can be efficiently computed
 - Used for providing data integrity and data origin authenticity
   - Note: May not provide, confidentiality of the message or non-repudiation.
@@ -302,26 +302,26 @@ MAC schemes are a family of functions $$H_k$$, with an l-bit secret key k.
 ### Generic Attacks on MAC Schemes
 
 #### Random Guessing
-- Select a y and guess that $$H_k(x) = y$$
-- If random function, then probability that it's correct is: $$\frac{1}{2^n}$$
+- Select a y and guess that ![latex-559fc941-a9cb-44bc-8ed5-8b1d796c359f](data/midterm/latex-559fc941-a9cb-44bc-8ed5-8b1d796c359f.png)
+- If random function, then probability that it's correct is: ![latex-db1a709e-0b6c-4ca9-affe-62ce9101f706](data/midterm/latex-db1a709e-0b6c-4ca9-affe-62ce9101f706.png)
 
 #### Exhaustive Search on the Key Space
 - Given r known message-tag pairs
-- Can guess values for k, check if $$H_{k'}(x_i) = t_i$$
+- Can guess values for k, check if ![latex-39d6a017-e682-41a5-a849-6470d06bcbb4](data/midterm/latex-39d6a017-e682-41a5-a849-6470d06bcbb4.png)
 
 ### MAC based on Block Ciphers
 
 #### CBC-MAC
 - Divide x into r n-bit blocks
-- $$H_1 = E_k(x_1)$$
-- $$H_i = E_k(H_{i-1} \oplus x_i)$$ for 2 <= i <= r
-- $$H_k(x) = H_r$$
+- ![latex-6186a6a6-018e-4923-a0e4-32a952a4d2a1](data/midterm/latex-6186a6a6-018e-4923-a0e4-32a952a4d2a1.png)
+- ![latex-6912d7db-b054-4759-8ae6-f129837c2d4d](data/midterm/latex-6912d7db-b054-4759-8ae6-f129837c2d4d.png) for 2 <= i <= r
+- ![latex-f3015b24-ca6e-4f66-a1cd-488037a393ef](data/midterm/latex-f3015b24-ca6e-4f66-a1cd-488037a393ef.png)
 - **Theorem**: Sps E is an ideal encryption scheme (each result is "random"), then CBC-MAC with fixed length inputs is secure.
   - If variable length inputs, then chosen message attack is possible.
 
 #### Encrypted CBC-MAC (EMAC)
 - CBC-MAC, but encrypt the last block under a different key.
-- $$H_{k, s}(x) = E_s(H_r)$$
+- ![latex-a3149d21-d42d-44c0-b471-16a78cdae872](data/midterm/latex-a3149d21-d42d-44c0-b471-16a78cdae872.png)
 - If E is an ideal encryption scheme, then it is secure for inputs of any length.
 
 ### MACs based on Hash functions
@@ -330,20 +330,20 @@ MAC schemes are a family of functions $$H_k$$, with an l-bit secret key k.
 - Let the key be padded with 0s (to be bit-length r)
 
 #### Secret Prefix Method
-- $$H_k(x) = H(K, x)$$
-- Possible to perform a length extension attack, can compute the tag of $$x \mid\mid y$$ by retrieving $$H_k(x)$$, then continue to compute the hash function. No knowledge of k required.
+- ![latex-6fc5ff69-f323-4828-a0b9-3a6d6344230a](data/midterm/latex-6fc5ff69-f323-4828-a0b9-3a6d6344230a.png)
+- Possible to perform a length extension attack, can compute the tag of ![latex-4ffc957a-3e07-423f-b44c-799547e3210e](data/midterm/latex-4ffc957a-3e07-423f-b44c-799547e3210e.png) by retrieving ![latex-d4063b21-a1ea-4fb5-bb1f-4ac0a4225eed](data/midterm/latex-d4063b21-a1ea-4fb5-bb1f-4ac0a4225eed.png), then continue to compute the hash function. No knowledge of k required.
 
 #### Secret Suffix Method
-- $$H_k(x) = H(x, K)$$
+- ![latex-b2e23a47-3e34-4b1d-ac9f-20de69c09b3d](data/midterm/latex-b2e23a47-3e34-4b1d-ac9f-20de69c09b3d.png)
 - Secret prefix attack doesn't work here
-- If H is not collision resistant, then it is possible to find a collision $$(x_1, x_2)$$, then $$H_k(x_1) = H_k(x_2)$$
+- If H is not collision resistant, then it is possible to find a collision ![latex-4ceba3f0-848a-42b3-ba07-37cb699c8a8d](data/midterm/latex-4ceba3f0-848a-42b3-ba07-37cb699c8a8d.png), then ![latex-582a69d9-706e-4257-ba28-4d556ed44554](data/midterm/latex-582a69d9-706e-4257-ba28-4d556ed44554.png)
 
 #### Envelope Method
-- $$H_k(x) = H(K, x, K)$$
+- ![latex-e23feeea-d29d-4536-bf02-d75477886146](data/midterm/latex-e23feeea-d29d-4536-bf02-d75477886146.png)
 - Seems to be secure
 
 #### HMAC
-- $$H_k(x) = H(K \oplus opad, H(K \oplus ipad, x))$$
+- ![latex-30a79d9f-52ec-4dae-a886-2c559845518a](data/midterm/latex-30a79d9f-52ec-4dae-a886-2c559845518a.png)
 - Relies on compression function, secret IV to be secure.
 
 ### Authenticated Encryption
@@ -351,12 +351,12 @@ MAC schemes are a family of functions $$H_k$$, with an l-bit secret key k.
 - A MAC scheme provides authentication (data origin authentication and data integrity)
 
 #### Encrypt - AND - MAC
-- Alice sends $$(c, t) = (E_{k_1}(x), H_{k_2}(x))$$ to Bob
+- Alice sends ![latex-74e68f3b-dd78-461f-b505-fe95a61838b1](data/midterm/latex-74e68f3b-dd78-461f-b505-fe95a61838b1.png) to Bob
 - Bob decrypts c and checks that the signature is correct
 - Problem: H may leak information about the plaintext, no confidentiality requirement.
 
 #### Encrypt-Then-MAC
-- Alice sends $$(c, t) = (E_{k_1}(x), H_{k_2}(E_{k_1}(x)))$$ to Bob.
+- Alice sends ![latex-8f5dde23-3d54-4802-99fc-81162aae18b4](data/midterm/latex-8f5dde23-3d54-4802-99fc-81162aae18b4.png) to Bob.
 - Bob first checks the signature of the ciphertext, then decrypts if it matches
 
 #### AES-GCM
@@ -368,4 +368,4 @@ MAC schemes are a family of functions $$H_k$$, with an l-bit secret key k.
   - Bob and Alice must both keep the key safe
 - Key management problem
   - In a network of n users, they must hold n-1 keys
-  - Total number of secret keys: n choose 2 = $$\frac{n^2}{2}$$
+  - Total number of secret keys: n choose 2 = ![latex-6aa45293-cf79-4edd-ae54-13bcdca1c68a](data/midterm/latex-6aa45293-cf79-4edd-ae54-13bcdca1c68a.png)
