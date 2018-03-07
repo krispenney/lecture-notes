@@ -1,0 +1,8 @@
+digraph {
+	CR
+	second_PR
+	CR -> second_PR
+	PR
+	second_PR -> PR
+	CR -> PR
+}
