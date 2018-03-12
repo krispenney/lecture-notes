@@ -1,0 +1,78 @@
+# Lecture 27 - March 12, 2018
+
+## DigiNotar
+- was a CA, root CA embedded in all browsers.
+- Issed hundreds of false certificates (including for `*.google.com`)
+- Directed 300,000 iranian gmail users to a false site.
+
+### Dealing with CA Breaches
+- Browser developers (Apple, Google, Mozilla), want users to trust their browsers, as well as the websites they visit.
+- **Extended Validation:** Root CA's must now meet stricter requirements (doing so gives you the green bar)
+- **Certificate Transperancy**: CA's publish all of the certificates that they publish
+  - Append only, they can't remove past certs
+
+## Methods of Establishing Shared Secrets
+- Use of RSA is decreasing
+- Now being replaced with Eliptical Curve Diffie-Helmen
+
+## Ellpitic Curve Cryptograhy (ECC)
+- Public-key crypto scheme
+- alternative to RSA
+- Developed in 1985
+- **Definition**: Let $$F = R$$ or $$F = Z_p$$ (integers modulo p $$<= p-1$$
+  - If $$p = 13$$
+  - $$7 + 11 = 18 = 5$$
+  - $$\frac{1}{3} = 3^{-1} = 9 \implies 3*9 = 27 \equiv 1 \mod 13$$
+- An **elliptic curve** E over F is defined by:
+  - $$E_F = Y^2 = X^3 + aX + b$$
+  - $$a, b \in F$$
+  - $$4a^3 + 27b^2 \neq 0$$
+- In practical applications, we typically work with the integers mod p (it's hard to work with infinite sets!)
+  - Elliptical curves over the reals give better geometric intuition.
+  - Map this geometric intuition (over the reals), to algebra (over ints mod p)
+- The set of **F-rational points on E**:
+  - $$E(F) = \left\{(x, y) \in F x F: y^2 = x^3 + ax + b \right\} \union \left\{\inf\right\}$$
+  - Where $$\inf$$ is the point of **infinity**
+  - $$E_Z_{13} = Y^2 = X^3 + X + 6$$
+  - $$E(Z_{13}) = \left\{\inf, (2, 4), (2, 7), \ldots\right\}$$
+    - Always have $$\inf$$, find the others by trial and error.
+    - Example: No solution for $$x=1$$
+    - Note that this is a finite set, there are only so many possible x values.
+  - **Note**: Let $$E_Z_p$$
+    - Then $$1 \le \mid E(Z_p) \mid \le 2p + 1$$
+      - Always have the infinite point
+      - At most, every x value has a solution, meaning 2 points + inf point.
+      - **Hasse's Theorem**: Gives $$(\sqrt{p} - 1)^2 \le \mid E(Z_p) \mid \le (\sqrt{p} + 1)^2$$
+        - Notice that when p is very large, the size of the set is $$\approx p$$
+    - The size of this set is what will determine the security of the system
+
+### Addition Rule
+- Given two points $$P, Q \in E(F)$$, define a point $$P+Q \in E(F)$$
+
+#### Chord Case
+- Geometrically (in the reals): Draw a straight line through the points, the line will intersect the curve at a third point. The negation of that point is the addition.
+
+#### Tangent Rule: Add a point to it's self
+- Draw the tangent line of the point P
+- Reflect the point of intersection
+
+#### Vertical Case
+- Drawing a vertical line, doesn't intersect the curve
+- Define this case to $$\inf$$
+
+#### Algebraic Definitions
+Given $$E_F$$ over a general field
+
+1. $$P + \inf = \inf + P = P \rightarrow \forall P \in E(F)$$
+2. If $$P = (x, y) \in E(F)$$ and $$Q = (x, -y) \in E(F)$$, then $$P + Q = \inf$$
+  - We write $$Q = -P$$
+  - $$\implies P + Q = P + (-P) = P - P = \inf$$
+  - Sideeffect: $$\inf = -\inf$$
+3. If $$P = (x_1, y_1) \in E(F)$$ and $$Q = (x_2, y_2) \in E(F)$$
+  - Chord case
+  - Want $$P \neq Q$$ and $$P \neq \pmP$$
+  - $$P + Q = (x_3, y_3)$$
+    - $$x_3 = \lambda - x_1 - x_2$$
+    - $$y_3 = \lambda(x_1 - x_3) - y_1$$
+    - $$\implies \lambda = \frac{y_2 - y_1}{x_2 - x_1}$$
+  - Note that this is always defined (not equal cases)
