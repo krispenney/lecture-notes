@@ -1,0 +1,16 @@
+digraph {
+	writes
+	memstore
+	writes -> memstore
+	merge
+	memstore -> merge
+	reads
+	merge -> reads
+	sort
+	memstore -> sort
+	flush
+	sort -> flush
+	disk
+	flush -> disk
+	disk -> merge
+}
