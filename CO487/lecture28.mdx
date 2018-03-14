@@ -1,0 +1,78 @@
+# Lecture 28 - March 14, 2018
+
+## Elliptic Curves
+- Recall: $$E(F) = \left\{(x, y) \in F x F; y^2 = x^3 + ax + b \right\} \union \left\{\inf\right\}$$
+- Addition rules
+  1. $$P + \inf = \inf + P = P$$
+  2. If $$P = (x_1, y_1) \in E(F)$$, $$-P = (x_1, -y_1)$$, then $$P + (-P) = \inf$$
+  3. If $$P = (x_1, y_1) \in E(F)$$ and $$Q = (x_2, y_2) \in E(F)$$, $$P \neq \pm Q$$.
+    - $$P + Q = (x_3, y_3) \implies x_3 = \lambda^2 - x_1 - x_2; y_3 = -y_1 + \lambda(x_1 - x_3)$$
+  4. If $$P = (x_1, y_1) \in E(F), P \neq -P$$ (<- case 2), then $$P + P = (x_3, y_3)$$, where:
+    - $$x_3 = \lambda^2 - 2x_1$$, $$y_3 = -y_1 + \lambda(x_1 - x_3)$$, $$\lambda = \frac{3x_1^2 + a}{2y_1}$$
+    - Note that $$y_1 \neq 0$$, if it did then $$P = -P$$, which is covered by case 2.
+
+### Proof of 3
+
+The equation of $$l$$ is $$y = y_1 + \lambda(x - x_1)$$, where $$\lambda = \frac{y_2 - y_1}{x_2 - x_1}$$:
+- $$(y_1 + \lambda(x - x_1))^2 = x^3 + ax + b$$
+- $$x^3 - (y_1 + \lambda(x - x_1))^2 + ax + b = 0$$
+- We know $$x_1, x_2$$ are solutions to this cubic equation. Let $$x_3 \in F$$ be the third solution.
+- $$\therefore x_3 - (y_1 + \lambda(x - x_1))^2 + ax + b = (x - x_1)(x - x_2)(x - x_3)$$
+- Equate coefficients of $$x_2$$
+- $$-\lambda^2 = -(x_1 + x_2 + x_3)$$, solve for $$x_3$$
+- $$\therefore x_3 = \lambda^2 - x_1 - x^2$$
+- Note that there can only be one point of intersection ($$x_^3$$)
+
+- $$-y_3 = y_1 + \lambda(x_3 - x_1)$$
+- $$\therefore y_3 = -y_1 + \lambda(x_1 - x_3)$$
+
+### Some Facts
+
+The addition satisfies pleasing properties:
+1. $$P + \inf = \inf + P = P \forall P \in E(F)$$
+  - Implies $$\inf$$ is the 0 point, as per the definition (no proof required)
+2. $$\forall P \in E(F), \exists -P \in E(F)$$ such that $$P + (-P) = \inf$$
+3. $$P + Q = Q + P \forall P, Q \in E(F)$$
+  - Commutative
+  - Recall the rule geometrically, a line through P and Q is the same through a line through Q and P.
+4. $$P + (Q + R) = (P + Q) + R \forall P, Q, R \in E(F)$$
+  - We'll skip the proof
+
+### Elliptic Curve Descrete Logarithm Problem (ECDLP)
+
+Let $$p$$ be a prime, $$p \ge 5$$, let $$E_{Z_p}$$, let n be the number of points (n is prime, if not try again until it is)
+- Fact: Let $$P \in E(Z_p), P \neq \inf$$, then $$\left\{P, 2P, 3P, \ldots, (n-1)P, nP \right\}$$ is pairwise distinct is equal to $$E(Z_P)$$ (all of the points on the curve).
+- Lastly, $$nP = \inf$$, note $$nP + P = \inf + P = P$$, therefore a cycle.
+- P is called a generator of the set of all points ($$E(Z_p)$$)
+
+**Problem Definition**: Given $$p, E_{Z_p}$$, $$P \in E(Z_p), P \neq \inf$$ and $$Q \in E(Z_p)$$. Find $$l \in \left\[0, n-1\right\]$$ such that $$lP = Q$$.
+- We say that $$l = \log_P{Q}$$
+- When n is very large, this is a hard problem.
+
+#### Input Size
+- $$\lg{p}$$ bits
+- Everything is mod p, so all are $$\lg{p}$$ bits.
+- $$O(\lg{p})$$ bits
+
+#### Known Attacks
+1. **Brute Force**: Add P to itself until you get Q.
+  - You will eventually get Q as P generates all points
+  - Run time is $$O(n)$$ point additions. Since n is roughly p (recall rounds), $$O(p)$$ additions, which is not polynomial time.
+2. **Shanks' Attack**: Write $$l = sm + t$$ $$m = ceil(\sqrt{n})$$, where $$0 \le s, t < m$$
+  - Then $$l - sm = t$$
+  - $$lP - smP = tP$$
+  - $$Q - s(mP) = tP$$
+  - **Meet in the middle attack**
+  - $$smP, tP$$ are on opposite sides of the curve
+  - Each have $$O(\sqrt{n})$$ possible values
+  - **Algorithm**
+    1. For a table of points $$(tP, t) \forall 0 \le t < m$$ (sorted by first entry)
+    2. Compute all possible $$Q - s(mP) \forall 0 \le s < m$$ and look it up in the table.
+    3. If $$Q - s(mP) = tP$$, then output $$\lg_P{Q} = sm+t$$
+    - $$\sqrt{n} + \sqrt{n} \implies O(\sqrt{n}) = O(\sqrt{p})$$ (elliptic curve operations)
+    - Again not polynomial, but better than brute force.
+    - **Drawback**: High space requirements, $$O(\sqrt{p})$$
+      - Similar to Double-DES Attack, there's a trade-off (see next class).
+  - How to compute $$kP$$?
+    - Add P to itself k times, efficiently
+    - "Repeated square and add" (see A5), analogus to $$P^m$$
