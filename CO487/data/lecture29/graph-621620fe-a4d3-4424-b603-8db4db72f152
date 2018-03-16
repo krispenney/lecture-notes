@@ -1,0 +1,9 @@
+digraph {
+	Alice
+	Intruder
+	Alice -> Intruder
+	Intruder -> Alice
+	Bob
+	Bob -> Intruder
+	Intruder -> Bob
+}
