@@ -1,0 +1,108 @@
+# Lecture 30 - March 19, 2018
+
+## ECDH
+- Scheme for key agreement
+
+Public Params:
+- A prime $$p$$
+- $$E(Z_p)$$
+- n (number of points)
+- $$P \in E(Z_p), P \neq \inf$$
+
+### Unauthenticated
+- Alice: $$x \in \left\[1, n-1\right\]$$
+  - Public: $$X = xP$$
+  - Send this to Bob
+  - $$K = xY$$
+- Bob: $$y \in \left\[1, n-1\right\]$$
+  - Public: $$Y = yP$$
+  - Send this to Bob
+  - $$K = yX$$
+- **Problem**: This is open to an intruder in the middle attack
+
+### Authenticated
+- Each party signs the points they exchange (ex. with their RSA private key)
+- The reciever verifies the point user the senders public key
+- $$X$$ is signed by Alice
+  - In practice this is typically only one way, you can't expect users to manage certificates.
+  - So Alice would verify the point recieved by Bob.
+- $$Y$$ is signed by Bob
+
+## RSA Key Transport
+- Alice select session key k, Alice encrypts k with Bob's RSA public key.
+- Why use ECDH over this?
+  - Google example
+  - ECDH provides **forward secrecy**:
+    - If an attacker obtains a ciphertext, then later gains access to Bob's private key, they can decrypt the ciphertexts
+    - Uncover the session key k, get the plaintexts that were encrypted with k
+    - Giving up a private key (which is in use for a fairly long period of time, +1 year), allows for the decryption of a long term of data. Getting this out would be bad.
+    - Using unique RSA keys is expensive, it is easy to pick a random point on the curve.
+  - Once the keys are exchanged, at the end of the session both parties should delete their points (y and x) and the shared secret K.
+    - This provides forward secrecy
+    - If the NSA comes to Google, demanding the private key, they don't have it, meaning any captured ciphertexts can't be decrypted.
+
+## ECDSA: Elliptic Curve Digital Signature Algorithm
+- Same EC public params as before
+
+### Key generation:
+
+Each user does the following
+1. Select $$a \in \left\[1, n-1\right\]$$
+2. Compute $$A = aP$$
+3. a is Alice's private key, A is Alice's public key
+  - Recall the security of this relies on the ECDLP
+
+### Signature Generation
+
+To sign a message of any length
+1. Compute $$m = SHA-256(M)$$
+2. Selects a random secret k (**per-message secret**), $$k \in \left\[1, n-1\right\]$$
+  - **THIS IS VERY IMPORTANT**
+3. Compute the corresponding point $$R = kP$$
+  - You want to extract a number from this point
+  - $$r = x(R) \mod{n}$$. Take the x coordinate mod n of R.
+  - If $$r = 0$$ then go back to step 2
+4. Compute the ECDSA signing equation: $$s = k^{-1}(m + ar) \mod{n}$$
+  - Goal is to compute a number that can only be generated using the message key and the private key
+  - Recall that n is prime, $$k^{-1}$$ must exist because it is non-zero.
+  - If $$s = 0$$, go back to 2.
+5. Alice's signature on M is $$(r, s)$$
+
+We want $$r, s \in \left\[1, n-1\right\]$$
+
+### Signature Verification
+
+To verify $$(M, r, s)$$, Bob does the following:
+1. Obtain an authenticate copy of Alice's public key
+  - Through a CA, etc
+2. Check that $$r, s \neq 0$$
+  - If r was 0 then, the signature would not depend on the private key.
+  - If not then **reject**
+3. Compute $$m = SHA-256(M)$$
+- $$s \equiv k^{-1} (m + ar) \mod{n}$$
+  - Bob can't check this directly, he doesn't know k or a.
+  - $$\iff k \equiv s^{-1} (m + ar) \mod{n}$$
+    - This is why $$s \neq 0$$, otherwise $$s^{-1}$$ would not exist
+  - $$\iff kP \equiv s^{-1}(m + ar)P$$, this is because $$x \equiv y \mod{n} \iff xP = yP$$
+  - $$\iff kP \equiv s^{-1}mP + s^{-1}arP$$
+  - $$\iff kP \equiv s^{-1}mP + s^{-1}rA$$
+    - Bob can compute the right hand side of the equation using the information he knows.
+    - Recall $$R = kP$$
+  - $$\implies x(kP) \mod{n} = x(s^{-1}mP + s^{-1}rA) \mod{n}$$
+  - $$\implies r = x(R) \mod{n} = x(s^{-1}mP + s^{-1}rA) \mod{n}$$
+4. Compute $$u_1 = s^{-1}m \mod{n}$$ and $$u_2 = s^{-1}r \mod{n}$$
+5. Compute $$V = u_1P + u_2A$$ and $$v = x(V) \mod{n}$$
+6. Check that $$r = v$$
+  - If so, accept
+  - If not, reject
+
+#### Notes
+1. ECDSA is believed to be secure (existentially unforgable against chosen message attacks)
+  - As long as the ECDLP in $$E(Z_p)$$ is hard
+  - And SHA-256 is a secure hash function.
+2. If p is 256-bits (as is the case with P-256), then a signature is 512-bits long
+  - Recall that n is roughly p
+  - In comparision, an RSA signature with a 3072-bit modulous.
+3. Recall RSA signature generation is slower than ECDAS signature generation
+  - Since $$H(M)^d \mod{n}$$ is with a 3072-bit d and n.
+  - In contrast, in computing $$kP$$, k is a 256-bit number, as are the coordinates of $$P$$. So the arithmetic is with 256 bit numbers.
