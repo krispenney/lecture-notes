@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #will need packages: plyr, twitteR, tm, wordcloud
 # and my clean text functions
-```{r warning=FALSE}
+```r
 #install.packages(c("plyr","twitteR","tm","wordcloud","SnowballC"))
 library(plyr)
 library(twitteR)
@@ -24,7 +24,7 @@ source("cleanText.R")
 
 ## Interface with Twitter
 
-```{r eval=FALSE}
+```r
 #login (replace quoted words with actual login information)
 setup_twitter_oauth("APIkey","APIsecret","Accesstoken","Accesssecret")
 #retrieve relevant tweets
@@ -37,7 +37,7 @@ day3_tweets <- searchTwitter("#TheDress", n=2000, lang="en", since="2015-03-01",
 
 * Any source of documents will have some idiosyncracies
 * Twitter has retweets which don't give us a lot of the information and should be removed
-```{r eval=FALSE}
+```r
 d1_twts_str <- strip_retweets(day1_tweets,strip_manual=TRUE,strip_mt=TRUE)
 d2_twts_str <- strip_retweets(day2_tweets,strip_manual=TRUE,strip_mt=TRUE)
 d3_twts_str <- strip_retweets(day3_tweets,strip_manual=TRUE,strip_mt=TRUE)
@@ -52,14 +52,14 @@ d3_twts_str <- strip_retweets(day3_tweets,strip_manual=TRUE,strip_mt=TRUE)
     + lapply(data, function) in particular is very useful
 * We will use this to extract text
     + Note that I am creating a new function on the fly
-```{r eval=FALSE}
+```r
 d1_df <-lapply(d1_twts_str,function(t) t$getText())
 d2_df <-lapply(d2_twts_str,function(t) t$getText())
 d3_df <-lapply(d3_twts_str,function(t) t$getText())
 ```
 
 * Alternatively, you can load the prepared file that has the tweets ready to go...
-```{r}
+```r
 d1_df <- read.csv("the_dress_day_1.csv")
 d2_df <- read.csv("the_dress_day_2.csv")
 d3_df <- read.csv("the_dress_day_3.csv")
@@ -69,7 +69,7 @@ d3_df <- read.csv("the_dress_day_3.csv")
 
 *  We turn the text tweets into a corpus using the corpus package
 *  This can be done for any set of text files or lists of strings (like this one)
-```{r}
+```r
 d1_corpus <- VCorpus(VectorSource(d1_df[,2]))
 d2_corpus <- VCorpus(VectorSource(d2_df[,2]))
 d3_corpus <- VCorpus(VectorSource(d3_df[,2]))
@@ -81,7 +81,7 @@ d3_corpus <- VCorpus(VectorSource(d3_df[,2]))
     +  remove stopwords
 *  Stopwords are words that are not useful for the analyses WE are preforming
 *  I have provided a function in cleanText.R to perform these and other tasks
-```{r}
+```r
 d1_clean <- clean_corpus(d1_corpus)
 d2_clean <- clean_corpus(d2_corpus)
 d3_clean <- clean_corpus(d3_corpus)
@@ -89,7 +89,7 @@ d3_clean <- clean_corpus(d3_corpus)
 
 * The returned corpus are in the "corpus" datastructure which is not trivial to use
 * if you want to export cleaned text to a dataframe
-```{r}
+```r
 d1_clean_df <- sapply(d1_clean,function(t) t$content)
 ```
 
@@ -97,14 +97,14 @@ d1_clean_df <- sapply(d1_clean,function(t) t$content)
 
 *  Does the reaction to thedress change in the days following the discovery of this magical dress jpeg
 * Exploration method 1 - examine the word matrix which represents the bag of words
-```{r}
+```r
 d1_terms <- TermDocumentMatrix(d1_clean)
 d2_terms <- TermDocumentMatrix(d2_clean)
 d3_terms <- TermDocumentMatrix(d3_clean)
 ```
 
 * Find frequent terms
-```{r}
+```r
 findFreqTerms(d1_terms,lowfreq=20)
 findFreqTerms(d2_terms,lowfreq=20)
 findFreqTerms(d3_terms,lowfreq=20)
@@ -112,12 +112,12 @@ findFreqTerms(d3_terms,lowfreq=20)
 
 * Find associated terms
 * Similar to association rule mining
-```{r}
+```r
 findAssocs(x=d1_terms,term="blue",corlimit=0.2)
 ```
 
 * Generate a wordcloud!
-```{r}
+```r
 wordcloud(d1_clean,max.words=50)
 wordcloud(d2_clean,max.words=50)
 wordcloud(d3_clean,max.words=50)
@@ -125,14 +125,14 @@ wordcloud(d3_clean,max.words=50)
 
 ## Cluster analysis
 * remove sparse terms to generate more meaningful clustering and classification models
-```{r}
+```r
 d1_sparse <- removeSparseTerms(d1_terms, sparse=0.9)
 d2_sparse <- removeSparseTerms(d2_terms, sparse=0.9)
 d3_sparse <- removeSparseTerms(d3_terms, sparse=0.9)
 ```
 
 * find closely associated words using clustering
-```{r}
+```r
 dist1 <- dist(d1_sparse)
 hfit1 <- hclust(dist1)
 plot(hfit1)
@@ -142,6 +142,6 @@ plot(hfit3)
 ```
 
 * cluster to find similar tweets
-```{r}
+```r
 fit1 <- kmeans(t(d1_sparse),5)
 ```
