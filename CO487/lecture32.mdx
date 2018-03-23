@@ -1,0 +1,75 @@
+# Lecture 32 - March 23, 2018
+
+## Quantum Computers
+- We know algorithms (Shor) to solve the following public schemes
+  - RSA
+  - DL
+  - ECC
+- For symmetric keys, the best is only $$2^{\frac{n}{2}}$$
+  - Pick 256-bits, then your good
+
+No one knows when quantum computers will become viable to be a true threat.
+- How soon do you start to deploy solutions?
+  - NSA transition to quantum resistant algorithms (no specified timeline).
+    - Current Algorithms
+      - Suite B: Unclassified data, sensitive but unclassified data, classified data
+        - 2005
+          - Public key: ECC, ECDH, ECDSA
+          - Security Level: P-256: 128, P-384: 192
+          - Hash Functions: SHA-256, SHA-384
+          - Symmetric Key: AES-128, AES-256
+        - 2010
+          - RSA was added: Bit length $$n \ge 2048$$
+            - Smaller n picked for efficiency
+          - But ECC is preferred
+        - 2015
+          - RSA -> ECC -> Quantum Safe
+          - They recommended waiting to switch to Quantum Safe when they became available (if your on RSA)
+            - They likely did this to prepare for Quantum computers (whenever they happen)
+          - Drop P-256
+          - Increased the RSA n bitlength to $$n \ge 3072$$
+      - Suite A: Top Secret Data
+
+### Quantum Safe Candidates
+
+#### Hash Based Signature Schemes: Lamport-Diffie One time Signature Scheme
+- 1979
+
+Ingredients:
+- $$H: \left\{0, 1\right\}^* \rightarrow \left\{0, 1\right\}^{256}$$ CR Hash function
+- $$G: \left\{0, 1\right\}^{256} \rightarrow \left\{0, 1\right\}^{256}$$ PR Hash function
+
+Key generation: Alices does
+1. Select $$x_{0, i}, x_{1, i} \in \left\{0, 1\right\}^{256}$$, $$1 \le i \le 256$$
+2. Compute $$y_{0, i} = G(x_{0, i}), y_{1, i} = G(x_{1, i})$$, $$1 \le i \le 256$$
+3. Public Key: $$\left\{(y_{0, i}, y_{1, i}): 1 \le i \le 256\right\}$$, Private Key: $$\left\{(x_{0, i}, x_{1, i}): 1 \le i \le 256\right\}$$
+
+Signature Generation: To sign a message $$M \in \left\{0, 1\right\}^*$$
+1. Compute $$h = H(M)$$, call the bits of h: $$h_1, h_2, \ldots, h_{256}$$
+2. Let $$s_i = x_{h_i, i}$$, $$1 \le i \le 256$$
+3. Then the signature on the message M is, $$(s_1, s_2, \ldots, s_{256})$$
+
+Signature Verification: Given $$(M, S)$$ Bob does:
+1. Bob obtains an authenticated copy of Bob's public key (recall: A vector of the y string pairs)
+2. Compute $$h = H(M)$$, As before call the bits of h: $$h_0, h_1, \ldots, h_{256}$$
+3. Compute $$G(s_i) = y_{h_i, i}$$, for each i in $$1, 2, \ldots, 256$$
+
+In order to forge the signature, you would have to compute pre-images of G, which is in feasible as it is Preimage Resistance.
+
+##### Notes
+1. Each signature reveals half of the private key, therefore given enough captured signatures, an attacker can obtain the entire private key
+  - Implication: Ideally you only use the key once.
+  - **This is a one-time signature scheme**
+  - Not Ideal
+  - Can be alivieated using Merkel Trees
+2. The signature is long
+  - It is made up of 256 256-bit strings
+3. Need lots of random bits (when generating the private key)
+  - If it is not random, then problems
+4. Public Keys are also large (256 256-bit strings), $$2^{19}$$
+5. Private keys are large, $$2^{19}$$
+
+##### Why is it secure (Classically)?
+- You have a signed message, thus half of the private key is revealed
+- Recall that G is preimage resistant, therefore it is infeasible to find the keys
+- Recall that H is collision resistant, therefore it is infeasible to find hash values that are the same
