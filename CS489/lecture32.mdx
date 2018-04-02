@@ -1,0 +1,33 @@
+# Lecture 32ish - April 2, 2018
+
+## Word2Vec
+- embedding words, one-hot encoding ignores the semantic relationships between words
+- Word2Vec: Autoencoder type structure, compress to a smaller space, reproject to predict nearby words. Co-occuring words.
+  - hidden layer -> embedding space
+
+- Similar to Self-Organizing Map (SOM)
+  - Similar words organize themselves into a closer topological space
+  - Words with similar meaning likely will occur with the same set of words, so the network should produce similar output. Therefore, the embedding (hidden) representation should also be similar.
+  - We care about the embedding activations (i.e. throw away the output layer), use the embeddings as features in some other model (instead of the actual words)
+
+Typical loss function: cosine proximity, the angle between two vectors
+
+## Equilibrium Propogation
+- Biologically realistic way of doing backprop
+- way of doing backprop without knowing the gradients themselves
+- Internal Energy: $$E(u) = \text{penalty} - \text{coactivation} - \text{bias}$$
+  - coactivation: When both nodes are active at the same time
+  - W is symmetric
+- $$\frac{\partial E}{\partial W_{ij}} = \alpha - p(u_i)p(u_j)$$
+  - similar to RBMs
+- Output Loss: $$C(u) = \frac{1}{2} MSE(y, d)$$
+- Total Energy: $$F(u) = E(u) + \beta C(u)$$
+  - if $$\beta = 0$$: energy ignores the targets
+  - if $$\beta > 0$$: energy includes the output loss
+- Network behaviour governed by: $$\frac{\partial d_i}{\partial t} = -\frac{\partial F}{\partial s_i}$$, where $$s_i \in \left\{y, h\right}$$
+- Rewrite F: $$\frac{\partial s_i}{\partial t} = -\frac{\partial E}{\partial s_i} - \beta\frac{\partial C}{\partial s_i}$$
+  - $$-\frac{\partial E}{\partial s_i} = p'(s_i)[\sum_{i \neq j} W_{i,j} p(u_i) + b_i] - s_i$$
+    - similar to a leaky integrator node
+  - $$-\beta\frac{\partial C}{\partial h_i} = 0$$
+  - $$-\beta\frac{\partial C}{\partial y_i} = \beta(d_i - y_i)$$
+- $$\frac{\partial h_1}{\partial t} = p'(h_1)[\sum_{j \neq i} W_{ij}p(u_i) + b_i]$$
