@@ -1,0 +1,10 @@
+- Mostly focus on the assignments.
+- Can bring any form on paper.
+- anything is fair game.
+  - no gotcha questions
+- format, combo of:
+  - short answer
+  - multiple choice questions
+  - short coding questions
+  - reason about trade-offs
+    - designing systems in various ways
