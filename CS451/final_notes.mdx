@@ -1,0 +1,172 @@
+# Final Notes
+
+## MapReduce Algorithm Design
+
+### Common Theme
+
+Parallelization challenges come from (sharing state):
+- Need to communicate partial results
+- Need to access shared resources
+- **Layer of abstraction**: The datacenter is the computer
+  - Allow the developer to avoid system level details.
+  - dev specifies the computation that needs to be performed
+  - framework handles the actual execution
+- Scale out, not up
+- assume that components will break
+- move processing to the data, code is much smaller
+- process data in sequential order, avoid random access (which is expensive)
+
+### MapReduce Runtime
+- handle scheduling: assign workers to map and reduce tasks
+- move processes to data
+  - Start up worker on nodes that hold the data.
+- handles synchronization
+- handling errors and faults
+- gotchas
+  - avoid object creation (expensive)
+  - get data to maps and reducers
+    - via job config params
+    - Side data: distributed cache, read from HDFS in setup.
+
+### Business Intelligence
+Organizations should retain data resulting from carrying out it's mission. Exploit those insights to benefit the organization.
+
+#### Virtuous product cycle: Generate revenue
+1. a useful service
+2. analyze user behaviour to extract insights (data science)
+3. transform insights into actions (data products)
+4. feedback
+
+### Cloud Computing
+- Utility computing: computing resources as a metered service, pay as you go
+- cloud makes it easier to start companies that generate big data, avoid ownership of the data
+- everything as a service
+
+### Namenode Responsibilities
+- managing the file system namespace
+- coordinating file operations
+- maintaining overall health
+
+files are divided into many splits, RecordReaders act as a cursor, passed to the Mappers.
+- the splits can be arbitrary, down the middle of a record
+- RecordReaders always start reading from a complete block, may keep reading over the edge of a split to capture the last record.
+
+### Distributed GroupBy in MapReduce
+
+#### Map side
+- map outputs are in memory in a circular buffer
+- when buffer reaches threshold, contents spilled to disk
+- spills are merged into a single partitioned file (sorted by partition)
+- combiners run during merges
+
+#### Reduce Side
+- map outputs are copied over to reducers
+- sort is a multi-pass merge of map outputs (in memory, on disk)
+- combiner runs during the merges
+- final merge pass goes directly into reducer
+
+#### Design Patterns
+- all algs must be expressed in m, r, c, p
+- no idea when things run, what order, which input a worker is processing
+- avoid: object creation, buffering
+- local aggregation: synchronization kills communication, kills performance, reduce the number of intermediate pairs that need to be processed.
+  - in-mapper combining: fold combiner into the mapper, preserve state across multiple map calls.
+    - pros: speed
+    - cons: need to explicitly manage memory, order-dependent bugs
+- combiners are optional optimizations, may br run 0, 1, or multiple times
+  - should not impact correctness
+
+##### Pairs vs. Stripes
+- **Pairs:** Utilize the key as a pair, secondary sorting
+  - pros: easy to implement + understand
+  - cons: lots of intermediate pairs, combiners dont really work
+  - may need custom sort order, have certain pairs show-up first `(a, *)`
+    - pull values as part of the key for proper sorting
+- **Stripes:** Group pairs into associative array
+  - pros: less sorting and shuffling, can use combiners (element-wise operations)
+  - cons: harder to implement, more complicated object, data structure manipulations,
+
+tradeoffs:
+- developer code vs. framework (sorting, grouping)
+- number of kv pairs
+- size + complexity of each kv pair: de/serialization overhead
+
+| Pairs | Stripes |
+|-|-|
+| more kv pairs | less |
+| less combining | more combining |
+| more sorting | less sorting + shuffling |
+| simple reduce aggs | complex (slower) aggs |
+
+### Pig
+- write in a higher level language, run a series of MapReduce jobs.
+
+Common model:
+
+``` pig
+LOAD # load from HDFS
+FOREACH ... GENERATE # per tuple processing
+FILTER # discard unwanted tuples: (map)
+GROUP / COGROUP # group tuples
+join # relational join (reduce)
+STORE # write back to HDFS
+```
+
+- extend PIG via user defined functions (UDFs) in any language
+
+### Problems with MapReduce
+- always have to go back to HDFS
+- slow
+- Dryad: Graph processing framework
+  - abstractions for vertex-to-vertex communication
+
+## Spark
+- based on **Resilient Distributed Datasets (RDD)**
+  - immutable, partitioned
+  - perform transformations, lazy
+  - actions, trigger the execution
+- RDDs don't have to be written back to HDFS, can chain operations
+- fault tolerance: RDDs can be regenerated from the operations
+
+- why does it work
+  - associativity: group operations in any way: `1 + 3 + 2 = (1 + 3) + 2`
+  - commutativity: swap order of operands however you want: `(2 + 1) + 3 = 3 + (2 + 1)`
+
+### Monoids
+- semigroup: (M, operator)
+  - $$(m_1 \oplus m_2) \oplus m_3 = m_1 \oplus (m_2 \oplus m_3)$$
+- monoid: Semigroup + identity operation
+  - $$\epsilon \oplus m = m \oplus \epsilon = m \forall m \in M$$
+- commutative Monoid: monoid + commutativity
+  - $$\forall m_1, m_2 \in M, m_1 \oplus m_2 = m_2 \oplus m_1$$
+- when you can't utilize monoids: sequence computations by sorting
+
+## Analyzing Text
+
+- Language Models: $$P(w_1, w_2, \ldots, w_T) = P(w_1)P(w_2 \mid w_1) \ldots P(w_T \mid w_1, \ldots, w_{T-1})$$_
+- Use Markov Assumption to limit history to a fixed number of words: $$P(w_k \mid w_1, \ldots, w_{k-1}) \approx P(w_k \mid w_{k - N+1}, \ldots, w_{k-1})$$
+- $$N=1$$ unigram language model, $$N=2$$: bigrams
+- Compute **Maximum likelihood estimates (MLE)** (count + divide)
+  - $$P(w_j \mid w_i) = \frac{P(w_i, w_j)}{P(w_i)}$$
+- **Smoothing**: Want to avoid zero probabilities
+  - Laplace: add 1 to all counts
+  - Jelinek-Mercer smoothing: weighted linear combination of lower-order models.
+  - Kneser-Ney: discounted model with special continuouation n-gram model. Number of different contexts $$w_i$$ has appeared in.
+  - Stupid backoff: use the higher order language model if greater than zero, otherwise fallback to lower order models.
+    - Solve the problem by throwing lots of data at it.
+- Bayes rule: $$P(e \mid f) = \frac{P(e) * P(f \mid e)}{P(f)}$$
+
+## Document Retreival
+- **ranked retrieval**: Order documents by how likely they are to be relevant.
+- Partitioning: Scalability
+- Replication: Redundancy
+- Caching: Speed
+- Routing: Load Balancing
+
+### TF.IDF Term Weighting
+- term weights consist of 2 parts: document and collection
+- high weights for terms that appear many times in a document, terms that appear in many documents should get low weights.
+
+$$w_{i, j} = tf_{i, j} * \log{\frac{N}{n_i}}$$
+
+###
