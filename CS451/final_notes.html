@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css" />
 <div class="markdown-body">
-<h1>Final Notes</h1>
 <h2>MapReduce Algorithm Design</h2>
 <h3>Common Theme</h3>
 <p>Parallelization challenges come from (sharing state):</p>
@@ -208,36 +207,36 @@ STORE # write back to HDFS
 <ul>
 <li>semigroup: (M, operator)
 <ul>
-<li><img src="data/final_notes/latex-59267102-e735-4833-acf7-81c6f5ce04ae.png" alt="latex-59267102-e735-4833-acf7-81c6f5ce04ae"></li>
+<li><img src="data/final_notes/latex-34fca2d8-393d-4166-867f-83cd26873e22.png" alt="latex-34fca2d8-393d-4166-867f-83cd26873e22"></li>
 </ul>
 </li>
 <li>monoid: Semigroup + identity operation
 <ul>
-<li><img src="data/final_notes/latex-a52425e5-7fc0-44e4-b72d-6e641c61b452.png" alt="latex-a52425e5-7fc0-44e4-b72d-6e641c61b452"></li>
+<li><img src="data/final_notes/latex-559b83d5-42d9-4e59-9a62-ea31038db25e.png" alt="latex-559b83d5-42d9-4e59-9a62-ea31038db25e"></li>
 </ul>
 </li>
 <li>commutative Monoid: monoid + commutativity
 <ul>
-<li><img src="data/final_notes/latex-0715c96e-cbe7-46c0-8331-7f98b9e73a9b.png" alt="latex-0715c96e-cbe7-46c0-8331-7f98b9e73a9b"></li>
+<li><img src="data/final_notes/latex-7f472451-acdb-4b90-8c52-10c265ed56c8.png" alt="latex-7f472451-acdb-4b90-8c52-10c265ed56c8"></li>
 </ul>
 </li>
 <li>when you can't utilize monoids: sequence computations by sorting</li>
 </ul>
 <h2>Analyzing Text</h2>
 <ul>
-<li>Language Models: <img src="data/final_notes/latex-7c16207a-fe5c-4b87-84bf-f121734bbd01.png" alt="latex-7c16207a-fe5c-4b87-84bf-f121734bbd01">_</li>
-<li>Use Markov Assumption to limit history to a fixed number of words: <img src="data/final_notes/latex-a2d8accd-53b4-4afb-bd4c-d6be9064e44a.png" alt="latex-a2d8accd-53b4-4afb-bd4c-d6be9064e44a"></li>
-<li><img src="data/final_notes/latex-0d72a8cb-f85f-45c3-abad-e8cc4f2a2a51.png" alt="latex-0d72a8cb-f85f-45c3-abad-e8cc4f2a2a51"> unigram language model, <img src="data/final_notes/latex-e3a76a33-8713-4fe3-8998-452737079b0a.png" alt="latex-e3a76a33-8713-4fe3-8998-452737079b0a">: bigrams</li>
+<li>Language Models: <img src="data/final_notes/latex-735078f5-097a-4032-bfcd-b4f828c2c217.png" alt="latex-735078f5-097a-4032-bfcd-b4f828c2c217">_</li>
+<li>Use Markov Assumption to limit history to a fixed number of words: <img src="data/final_notes/latex-ab22e185-09bc-4ed0-a296-150ea2b88457.png" alt="latex-ab22e185-09bc-4ed0-a296-150ea2b88457"></li>
+<li><img src="data/final_notes/latex-1c46113f-0e25-49a0-99c4-925355ec2220.png" alt="latex-1c46113f-0e25-49a0-99c4-925355ec2220"> unigram language model, <img src="data/final_notes/latex-9a0eb6c6-9a85-42c2-98d5-15b0f2211143.png" alt="latex-9a0eb6c6-9a85-42c2-98d5-15b0f2211143">: bigrams</li>
 <li>Compute <strong>Maximum likelihood estimates (MLE)</strong> (count + divide)
 <ul>
-<li><img src="data/final_notes/latex-435e345d-bd50-4702-a5c0-544349b3576f.png" alt="latex-435e345d-bd50-4702-a5c0-544349b3576f"></li>
+<li><img src="data/final_notes/latex-709ae8fd-92cf-4398-bab8-b7e30afbaaee.png" alt="latex-709ae8fd-92cf-4398-bab8-b7e30afbaaee"></li>
 </ul>
 </li>
 <li><strong>Smoothing</strong>: Want to avoid zero probabilities
 <ul>
 <li>Laplace: add 1 to all counts</li>
 <li>Jelinek-Mercer smoothing: weighted linear combination of lower-order models.</li>
-<li>Kneser-Ney: discounted model with special continuouation n-gram model. Number of different contexts <img src="data/final_notes/latex-4cb665ab-0a1b-4d1a-af07-4476d40a9fb8.png" alt="latex-4cb665ab-0a1b-4d1a-af07-4476d40a9fb8"> has appeared in.</li>
+<li>Kneser-Ney: discounted model with special continuouation n-gram model. Number of different contexts <img src="data/final_notes/latex-5fb45f19-fd3f-4dc7-98e1-a73eda02a714.png" alt="latex-5fb45f19-fd3f-4dc7-98e1-a73eda02a714"> has appeared in.</li>
 <li>Stupid backoff: use the higher order language model if greater than zero, otherwise fallback to lower order models.
 <ul>
 <li>Solve the problem by throwing lots of data at it.</li>
@@ -245,7 +244,7 @@ STORE # write back to HDFS
 </li>
 </ul>
 </li>
-<li>Bayes rule: <img src="data/final_notes/latex-042a1eff-605e-4889-86bc-ad4988601c96.png" alt="latex-042a1eff-605e-4889-86bc-ad4988601c96"></li>
+<li>Bayes rule: <img src="data/final_notes/latex-ed93c9b6-523f-417d-8ff5-3c3e5fdcb8e1.png" alt="latex-ed93c9b6-523f-417d-8ff5-3c3e5fdcb8e1"></li>
 </ul>
 <h2>Document Retreival</h2>
 <ul>
@@ -260,7 +259,7 @@ STORE # write back to HDFS
 <li>term weights consist of 2 parts: document and collection</li>
 <li>high weights for terms that appear many times in a document, terms that appear in many documents should get low weights.</li>
 </ul>
-<p><img src="data/final_notes/latex-9af68197-14b2-4f93-91df-1d0ff824aa78.png" alt="latex-9af68197-14b2-4f93-91df-1d0ff824aa78"></p>
+<p><img src="data/final_notes/latex-8f87cc09-bf35-4ec2-a516-6a58bfd21a0a.png" alt="latex-8f87cc09-bf35-4ec2-a516-6a58bfd21a0a"></p>
 <h2>Graphs</h2>
 <ul>
 <li>hard: irregular structure, irregular access patterns</li>
@@ -268,7 +267,7 @@ STORE # write back to HDFS
 </ul>
 <p>Representations:</p>
 <ul>
-<li><strong>Adjacency Matrix:</strong> nxn square matrix, n=number of verticies, <img src="data/final_notes/latex-2167e5f4-e623-48bf-864c-0dcbf7fbe057.png" alt="latex-2167e5f4-e623-48bf-864c-0dcbf7fbe057">_ iff there is an edge from i to j.
+<li><strong>Adjacency Matrix:</strong> nxn square matrix, n=number of verticies, <img src="data/final_notes/latex-b5be0b31-ae4d-4e68-b545-25b4741a1327.png" alt="latex-b5be0b31-ae4d-4e68-b545-25b4741a1327">_ iff there is an edge from i to j.
 <ul>
 <li>intuitive to iterate over rows and columns</li>
 <li>lots of wasted space, for sparse graphs. easy to write, hard to run computations</li>
@@ -311,7 +310,7 @@ STORE # write back to HDFS
 </ul>
 <p>Parallel BFS</p>
 <ul>
-<li>For all nodes except the start, <img src="data/final_notes/latex-f747f1b9-0bf2-4427-9a20-d22c0eec91b8.png" alt="latex-f747f1b9-0bf2-4427-9a20-d22c0eec91b8"></li>
+<li>For all nodes except the start, <img src="data/final_notes/latex-c30be04d-6257-4514-b73f-e5a564abcaf2.png" alt="latex-c30be04d-6257-4514-b73f-e5a564abcaf2"></li>
 <li><strong>Mapper</strong>: For each m in adjacency list, emit <code>(m, d+1)</code>, emit the distance to yourself</li>
 <li><strong>Sort/Shuffle</strong>: group distances by reachable nodes</li>
 <li><strong>Reducer</strong>: Select the minimum distance path for each reachable node, additional book-keeping needed to keep track of the actual path.</li>
@@ -374,14 +373,14 @@ class Reducer {
 <li>
 <p>Given page x with n inlinks</p>
 <ul>
-<li><img src="data/final_notes/latex-28925682-0abd-4b2b-b2e7-697b63605862.png" alt="latex-28925682-0abd-4b2b-b2e7-697b63605862"> is out-degree of t</li>
-<li><img src="data/final_notes/latex-331ccd78-73c0-46d9-bbc2-c0a14960e56f.png" alt="latex-331ccd78-73c0-46d9-bbc2-c0a14960e56f"> is the prob of a random jump</li>
-<li><img src="data/final_notes/latex-9885251a-83c8-403b-9c32-692941c0246e.png" alt="latex-9885251a-83c8-403b-9c32-692941c0246e"> total number of nodes in the graph</li>
-<li><img src="data/final_notes/latex-36a397eb-f8a2-4de5-b096-ab7f2917b0c8.png" alt="latex-36a397eb-f8a2-4de5-b096-ab7f2917b0c8"></li>
-<li>Second pass for dangling nodes: <img src="data/final_notes/latex-fe7a4646-a055-4165-99ad-4fe272d1c8e6.png" alt="latex-fe7a4646-a055-4165-99ad-4fe272d1c8e6">
+<li><img src="data/final_notes/latex-80600f86-fce6-4c8d-94e6-99a0af0bfd6b.png" alt="latex-80600f86-fce6-4c8d-94e6-99a0af0bfd6b"> is out-degree of t</li>
+<li><img src="data/final_notes/latex-999919b0-264d-4296-bbb3-e992713571a7.png" alt="latex-999919b0-264d-4296-bbb3-e992713571a7"> is the prob of a random jump</li>
+<li><img src="data/final_notes/latex-08f2bd90-1ffc-468f-a9ca-28f8a2a63255.png" alt="latex-08f2bd90-1ffc-468f-a9ca-28f8a2a63255"> total number of nodes in the graph</li>
+<li><img src="data/final_notes/latex-7b5fd9a7-d48d-47a7-b738-56920e53c093.png" alt="latex-7b5fd9a7-d48d-47a7-b738-56920e53c093"></li>
+<li>Second pass for dangling nodes: <img src="data/final_notes/latex-7291d964-2b89-489c-8f11-895ded90a938.png" alt="latex-7291d964-2b89-489c-8f11-895ded90a938">
 <ul>
-<li><img src="data/final_notes/latex-53845c53-282e-423b-91ca-5cd4402c5295.png" alt="latex-53845c53-282e-423b-91ca-5cd4402c5295"> is previous pagerank mass</li>
-<li><img src="data/final_notes/latex-561b5b24-0620-46b3-a1df-3efa4aa0a35b.png" alt="latex-561b5b24-0620-46b3-a1df-3efa4aa0a35b"> is the missing PageRank mass</li>
+<li><img src="data/final_notes/latex-30731539-3557-4c08-9e17-358465252e8a.png" alt="latex-30731539-3557-4c08-9e17-358465252e8a"> is previous pagerank mass</li>
+<li><img src="data/final_notes/latex-779440ed-8801-4793-8487-865b81ea65ce.png" alt="latex-779440ed-8801-4793-8487-865b81ea65ce"> is the missing PageRank mass</li>
 </ul>
 </li>
 </ul>
@@ -537,13 +536,13 @@ class Reducer {
 </ul>
 <h3>MapReduce algorithms for relational data</h3>
 <ul>
-<li>Projection (<img src="data/final_notes/latex-cb67c2cf-5053-4c3c-aecd-881d63a2c4ba.png" alt="latex-cb67c2cf-5053-4c3c-aecd-881d63a2c4ba">)
+<li>Projection (<img src="data/final_notes/latex-a21ed13c-8f49-4d80-b06d-e4af9af0900c.png" alt="latex-a21ed13c-8f49-4d80-b06d-e4af9af0900c">)
 <ul>
 <li>Select particular fields for each tuple</li>
 <li>Need to keep track of field positions after projections</li>
 </ul>
 </li>
-<li>Selection (<img src="data/final_notes/latex-2bbc5cfa-f1fa-4bfe-9f0f-f26e168ceb69.png" alt="latex-2bbc5cfa-f1fa-4bfe-9f0f-f26e168ceb69">)
+<li>Selection (<img src="data/final_notes/latex-a387220f-89d4-4121-a0a1-e9594897b6aa.png" alt="latex-a387220f-89d4-4121-a0a1-e9594897b6aa">)
 <ul>
 <li>Process each tuple, emit those that meet some criteria</li>
 <li>Pipeline with projections</li>
@@ -709,15 +708,15 @@ class Reducer {
 </li>
 <li><strong>Logistic Regression</strong>:
 <ul>
-<li>Set equal to one: <img src="data/final_notes/latex-bc327dae-28de-4d64-aaa0-1ca0c8d4ad31.png" alt="latex-bc327dae-28de-4d64-aaa0-1ca0c8d4ad31"></li>
-<li><img src="data/final_notes/latex-c8600452-1129-407b-8d64-a04c90a29b87.png" alt="latex-c8600452-1129-407b-8d64-a04c90a29b87"></li>
-<li><img src="data/final_notes/latex-b3ba0531-cdf8-43e5-89ea-0e2d4089c850.png" alt="latex-b3ba0531-cdf8-43e5-89ea-0e2d4089c850"></li>
-<li><img src="data/final_notes/latex-dc753f49-f634-48f3-947b-0b865ea29946.png" alt="latex-dc753f49-f634-48f3-947b-0b865ea29946">
+<li>Set equal to one: <img src="data/final_notes/latex-a3da373b-fc85-4da9-9ff2-0338aa28075a.png" alt="latex-a3da373b-fc85-4da9-9ff2-0338aa28075a"></li>
+<li><img src="data/final_notes/latex-aa4a28f9-6184-4267-b206-4c2d7d2fd4d2.png" alt="latex-aa4a28f9-6184-4267-b206-4c2d7d2fd4d2"></li>
+<li><img src="data/final_notes/latex-9ab69383-42c4-48f2-bfaa-b39afcbec0b2.png" alt="latex-9ab69383-42c4-48f2-bfaa-b39afcbec0b2"></li>
+<li><img src="data/final_notes/latex-48c502a2-24f9-4029-a31c-4070c50e689b.png" alt="latex-48c502a2-24f9-4029-a31c-4070c50e689b">
 <ul>
 <li>Minimize the log likelihood</li>
 </ul>
 </li>
-<li><img src="data/final_notes/latex-dc8e4dd7-a681-49fa-be44-01a6d4f82bc0.png" alt="latex-dc8e4dd7-a681-49fa-be44-01a6d4f82bc0">
+<li><img src="data/final_notes/latex-352c8847-6bd2-4ede-8c1b-33eaba229d53.png" alt="latex-352c8847-6bd2-4ede-8c1b-33eaba229d53">
 <ul>
 <li>Utilize the gradient to update weights</li>
 </ul>
@@ -753,5 +752,277 @@ Online Learning: Update the model after considering each randomly selected train
 </ul>
 </li>
 <li>This works as long as the models are independent. If the errors are uncorrelated then the chances of multiple classifiers being wrong is less likely.</li>
+</ul>
+<p>Metrics</p>
+<table>
+<thead>
+<tr>
+<th>Actual</th>
+<th>Predicted</th>
+<th>Error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Positive</td>
+<td>Positive</td>
+<td>True Positive</td>
+</tr>
+<tr>
+<td>Negative</td>
+<td>Positive</td>
+<td>False Positive (Type 1 Error)</td>
+</tr>
+<tr>
+<td>Positive</td>
+<td>Negative</td>
+<td>False Negative (Type 2 Error)</td>
+</tr>
+<tr>
+<td>Negative</td>
+<td>Negative</td>
+<td>True Negative</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Cross-Validation: Train / Test Split, validation set to test the model during training.</li>
+</ul>
+<p>Similarity:</p>
+<ul>
+<li>Offline variant: extract all similar pairs of objects from a large collection</li>
+<li>Online variant: is this object similar to something I’ve seen before?</li>
+<li><strong>Steps:</strong> Specify distance metric -&gt; compute representation -&gt; Project -&gt; extract</li>
+</ul>
+<p>Minhash</p>
+<ul>
+<li>near duplicate detection of webpages, HTML represented as shingles (n-grams)</li>
+<li>For all elements, binary vector if in each document, M00 = both 0, M11 = both 1, M01, M10. Jaccard: <img src="data/final_notes/latex-94bcac99-08a4-4ec1-9528-4c4434d781c5.png" alt="latex-94bcac99-08a4-4ec1-9528-4c4434d781c5"></li>
+<li>Randomly permute the rows of the matrix, minhash is then the first row with a 1. Then <img src="data/final_notes/latex-44616da8-c28c-4d6b-a83a-d36689d4b705.png" alt="latex-44616da8-c28c-4d6b-a83a-d36689d4b705"></li>
+<li><strong>Task</strong>: Discover all pairs with similarity greater than s, <strong>FP</strong>: discovered pairs that have a similarity less than s, <strong>FN</strong>: pairs with similarity greater than s not discovered.</li>
+<li><strong>Alg</strong>: Foreach object, compute minhash value, group objects by their hash value, output all pairs within each group. Threshold controls the amount of FPs and FNs.</li>
+<li>Use k hash functions, probability of detection is <img src="data/final_notes/latex-8a72882f-67b1-47ff-a840-d2906af20beb.png" alt="latex-8a72882f-67b1-47ff-a840-d2906af20beb">.</li>
+<li>n sets k: for each object, compute n sets k minhash, for each set concat k minhash values together, in each set group objects by signature (k minhash values), output all pairs in each group, de-dup pairs. If J(A, B) = s; P(none of the values collide) = <img src="data/final_notes/latex-73edc8db-4371-4a12-9c4e-14581e8470d8.png" alt="latex-73edc8db-4371-4a12-9c4e-14581e8470d8">, P(Detection) = 1 - P(none collide).</li>
+</ul>
+<p>Batch formulation: Discover all pairs with similarity greater than s.
+Online formulation: Given a new page, is it similar to one that we've seen before.
+Minhash problems: good for near-duplicate detection, jaccard only, no way to assign weights to features,</p>
+<p>Arrange Similar Items into Clusters</p>
+<ul>
+<li>Offline variant: entire static collection available at once</li>
+<li>Online variant: objects incrementally available</li>
+<li>forming clusters: high similarity between items in the same cluster, low similarity between items in different clusters.</li>
+<li><strong>HOW</strong>: Distance metric (jaccard, euclid) -&gt; compute representation (shingling, tf.idf) -&gt; apply clustering alg</li>
+<li>Distance = 1 - similarity</li>
+<li>Hierarchical Agglomerative Clustering: start with each item in it's own cluster, until there is only 1 cluster, find the two most similar clusters, merge. The history of merges form the heirarchy.</li>
+<li>What is the similarity between two clusters:
+<ul>
+<li>single link: similarity of 2 most similar members
+<ul>
+<li>Can result in long and thin clusters</li>
+</ul>
+</li>
+<li>complete link: similarity of 2 least similar members
+<ul>
+<li>can result in round clusters</li>
+</ul>
+</li>
+<li>Group average: average similarity between members</li>
+</ul>
+</li>
+<li>K-MEANS: Select k random instances as centroids
+<ul>
+<li>iterate: assign each instance to it's closest centroid, update centroid based on assigned instance.</li>
+</ul>
+</li>
+</ul>
+<h3>Mutable State</h3>
+<p>We want to keep track of mutable state in a scalable mannar. state organized in terms of logical records, state is unlikely to fit on a single machine, distributed.</p>
+<p>Why not use RDBMS:</p>
+<ul>
+<li>Everything must be designed up front, annoying to change</li>
+<li>ACID properties can be expensive:
+<ul>
+<li>Atomic: Transactions are all or nothing</li>
+<li>consistent: A transaction will bring the database from one valid state to another.</li>
+<li>isolated: Ensures that transactions executed concurrently would yield the same results had they been executed sequentially.</li>
+<li>Durability: Once a transaction has been committed, it will remain so.</li>
+</ul>
+</li>
+<li>potentially High cost</li>
+</ul>
+<p>Can gain extra features by trading away other properties (NoSQL)</p>
+<ul>
+<li>Types: Key-value store, column ordiented database, document stores, graph database.</li>
+<li>Ideas:
+<ul>
+<li>Partitioning (Sharding): Need to keep track of the partitions
+<ul>
+<li>increase scalability, decrease latency</li>
+</ul>
+</li>
+<li>Replication: Need to remain consistent
+<ul>
+<li>To incrase robustness (availability), increase throughput</li>
+</ul>
+</li>
+<li>Caching: Consistency
+<ul>
+<li>reduce latency</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Key-value stores</strong>: store associations between keys and values. primitive keys, values are blobs. Ops: <code>get</code>: value for key, <code>put</code>: set value for key. <strong>Consistency Model</strong>: Atomic puts, no cross-key operations
+<ul>
+<li>Non-persistent: just a big in-memory hash table (Redis, Memcached)</li>
+<li>Persistent: wrapper around a traditional RDBMS</li>
+<li>Doesn't fit on a single machine: <strong>Partition</strong>. Hash the keys and hash the machines. Machines hold pointers the next and prev, finger tables (+2, +4, ..). Route requests in <img src="data/final_notes/latex-b14cb4cb-c211-40fc-acdf-1f95473ffa6a.png" alt="latex-b14cb4cb-c211-40fc-acdf-1f95473ffa6a"></li>
+</ul>
+</li>
+</ul>
+<p>BigTable (HBase)</p>
+<ul>
+<li>Table is sparse, distributed, persistent, multi-dimensinoal sorted map. Indexed by <code>(row:string, column:string, time:int64) -&gt; uniterpreted byte array</code></li>
+<li>Lookup, inserts, deletes: single row transactions only</li>
+<li>rows: sorted lexicographically, efficient row scans. columns grouped into families <code>family:qualifier</code>, provide locality hints, unbounded number of columns. All just key value pairs.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>In Memory</th>
+<th>On Disk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mutability</td>
+<td>Easy</td>
+<td>Hard</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>Small</td>
+<td>Big</td>
+</tr>
+</tbody>
+</table>
+<p>Log-structured Merge Trees</p>
+<ul>
+<li>In memory store, when full: flush to disk</li>
+<li>On disk Stores are immutable, indexed, persistent k-v pairs.</li>
+<li>Write Ahead Log for persistance</li>
+</ul>
+<p>Distributed Version: Use HDFS</p>
+<ul>
+<li>Replication for free</li>
+<li>Persistent, ordered immutable map from keys to values</li>
+<li><strong>operations</strong>: Look-up value for key, iterate over key/value pairs in range.</li>
+</ul>
+<p>Trade-offs
+Partitioning: Need distributed transactions</p>
+<ul>
+<li>Use a two-phase commit (coordinator, subordinates), use WAL at each node, <strong>cons</strong>: blocking and slow, problems if coordinator dies.
+Replication: Need replica coherence protocol
+Caching: Need caching coherence protocol</li>
+</ul>
+<p><strong>CAP Theorem</strong></p>
+<ul>
+<li>Consistency, Availability, Partition Tolerence.</li>
+<li>Pick 2.</li>
+<li>CA: Constistency + Availability. Parallel databases that use 2PC.</li>
+<li>Availiability + Partition Tolerence, Web CAching, DNS</li>
+</ul>
+<p><strong>PACELC</strong></p>
+<ul>
+<li>PAC: If there's a partition, choose A or C.</li>
+<li>ELC: Otherwise, do we choose LAtency or Consistency</li>
+<li>The choice the application dependent.</li>
+</ul>
+<h3>Graphs Redux</h3>
+<ul>
+<li>Can be smarter about partitioning graphs, use underlying graph structure
+<ul>
+<li>webpages on the same domain are likely to be connected, domain reversed urls <code>cnn.com -&gt; com.cnn</code>. In social networks, domain characteristics</li>
+</ul>
+</li>
+</ul>
+<h3>Real-Time Analytics</h3>
+<p>Recall: Data scientists typically are working with old data.</p>
+<ul>
+<li>implication: Results an be hours behind reality, when things move fast this can be bad (delayed query recommendations)</li>
+<li>Real-time: low-latency</li>
+<li>Online: Contrasted with batch processing</li>
+<li>Stream: Nature of the data that arrives
+<ul>
+<li>Data stream: an ordered, continuously arriving sequence of tuples. May not be possible to store everything, may not be possible to examine everything.</li>
+</ul>
+</li>
+</ul>
+<p>Windowing:</p>
+<ul>
+<li>restrict the processing scope</li>
+<li>based on ordering (time), item counts, explicit markers (punctuations)</li>
+<li>Sliding window: increment by amount. Tumbling Window: Each window is descrete (no overlap)</li>
+<li>Punctuations: Application inserted end of processing, Pro: Application controlled window semantics, cons: unpredictable window size (too big / small).</li>
+</ul>
+<p>Stream Processing Challenges</p>
+<ul>
+<li>Inherent Challenges: LAtency requirements, space bounds</li>
+<li>System Challenges:
+<ul>
+<li>Bursty behaviour and load balancing:</li>
+<li>Out of order message delivery, non-determinism</li>
+<li>Consistency semantics (at most once, exactly once, at least once)</li>
+</ul>
+</li>
+</ul>
+<p>Producer / Consumer</p>
+<ul>
+<li>Producers push data to consumers (via callbacks)</li>
+<li>Consumer pulls data from producer (via polling)</li>
+<li>Insert a broker (Kafka) in the middle, Producers send to broker, Consumers get data from broker</li>
+</ul>
+<p>Storm / Heron</p>
+<ul>
+<li>A job topology is a computational graph, directed edges indicate communication between edges</li>
+<li>Processing semantics: At most once (without acknowledgments), at least once (with acks)</li>
+<li>Spouts: emit tuples. Bolts: Processing tuples.</li>
+</ul>
+<p>Spark Streaming: Descretized RDDs</p>
+<ul>
+<li>Problem: no differentiation between the event-time and processing time, when the event actually occurred and when the tuple is processed</li>
+</ul>
+<p><strong>Watermark</strong>: System's notion when all data in a window is expected to arrive. Default trigger fires at the watermark.</p>
+<p>Dealing with Streaming Problems</p>
+<ul>
+<li>Throw away data: <strong>Sampling</strong>
+<ul>
+<li>Reservoir Sampling: Select s elements from a stream of size n with uniform probability. Store the first s elements, for every k-th element: keep with probability <img src="data/final_notes/latex-3d0996ff-4cba-49d3-b067-5609f6e981a9.png" alt="latex-3d0996ff-4cba-49d3-b067-5609f6e981a9">, randomly discard an existing sample.</li>
+</ul>
+</li>
+<li>Approximations (hashing)
+<ul>
+<li>Set Cardinality: HashSet, HyperLogLog Counter
+<ul>
+<li>hash each item and examine the hash code, keep track of some unique pattern (number of leading zeros). Use multiple hash functions and do it lots of times.</li>
+</ul>
+</li>
+<li>Set Membership: HashSet, Bloom Filter
+<ul>
+<li><code>put(x)</code>: insert x into set, <code>contains(x)</code>: yes if x is a member of a set.</li>
+<li>m-bit vector, k hash functions. put(x): run x through each hash function, set the corresponding bit to 1.</li>
+<li>contains: run the item through the hash functions, check if all of the bits are 1. False positives possible, no false negatives.</li>
+</ul>
+</li>
+<li>Frequency Estimation: HashMap, Count Min Sketches
+<ul>
+<li><code>put(x)</code>: increment the count of x by 1. <code>get(x)</code> return the frequency of x.</li>
+<li><code>m x k</code> array of counters, k hash functions. put run item though each hash function, increment the corresponding count. get: run item through each hash function, return the minimum count.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>

@@ -1,5 +1,3 @@
-# Final Notes
-
 ## MapReduce Algorithm Design
 
 ### Common Theme
@@ -134,27 +132,27 @@ STORE # write back to HDFS
 
 ### Monoids
 - semigroup: (M, operator)
-  - ![latex-59267102-e735-4833-acf7-81c6f5ce04ae](data/final_notes/latex-59267102-e735-4833-acf7-81c6f5ce04ae.png)
+  - ![latex-34fca2d8-393d-4166-867f-83cd26873e22](data/final_notes/latex-34fca2d8-393d-4166-867f-83cd26873e22.png)
 - monoid: Semigroup + identity operation
-  - ![latex-a52425e5-7fc0-44e4-b72d-6e641c61b452](data/final_notes/latex-a52425e5-7fc0-44e4-b72d-6e641c61b452.png)
+  - ![latex-559b83d5-42d9-4e59-9a62-ea31038db25e](data/final_notes/latex-559b83d5-42d9-4e59-9a62-ea31038db25e.png)
 - commutative Monoid: monoid + commutativity
-  - ![latex-0715c96e-cbe7-46c0-8331-7f98b9e73a9b](data/final_notes/latex-0715c96e-cbe7-46c0-8331-7f98b9e73a9b.png)
+  - ![latex-7f472451-acdb-4b90-8c52-10c265ed56c8](data/final_notes/latex-7f472451-acdb-4b90-8c52-10c265ed56c8.png)
 - when you can't utilize monoids: sequence computations by sorting
 
 ## Analyzing Text
 
-- Language Models: ![latex-7c16207a-fe5c-4b87-84bf-f121734bbd01](data/final_notes/latex-7c16207a-fe5c-4b87-84bf-f121734bbd01.png)_
-- Use Markov Assumption to limit history to a fixed number of words: ![latex-a2d8accd-53b4-4afb-bd4c-d6be9064e44a](data/final_notes/latex-a2d8accd-53b4-4afb-bd4c-d6be9064e44a.png)
-- ![latex-0d72a8cb-f85f-45c3-abad-e8cc4f2a2a51](data/final_notes/latex-0d72a8cb-f85f-45c3-abad-e8cc4f2a2a51.png) unigram language model, ![latex-e3a76a33-8713-4fe3-8998-452737079b0a](data/final_notes/latex-e3a76a33-8713-4fe3-8998-452737079b0a.png): bigrams
+- Language Models: ![latex-735078f5-097a-4032-bfcd-b4f828c2c217](data/final_notes/latex-735078f5-097a-4032-bfcd-b4f828c2c217.png)_
+- Use Markov Assumption to limit history to a fixed number of words: ![latex-ab22e185-09bc-4ed0-a296-150ea2b88457](data/final_notes/latex-ab22e185-09bc-4ed0-a296-150ea2b88457.png)
+- ![latex-1c46113f-0e25-49a0-99c4-925355ec2220](data/final_notes/latex-1c46113f-0e25-49a0-99c4-925355ec2220.png) unigram language model, ![latex-9a0eb6c6-9a85-42c2-98d5-15b0f2211143](data/final_notes/latex-9a0eb6c6-9a85-42c2-98d5-15b0f2211143.png): bigrams
 - Compute **Maximum likelihood estimates (MLE)** (count + divide)
-  - ![latex-435e345d-bd50-4702-a5c0-544349b3576f](data/final_notes/latex-435e345d-bd50-4702-a5c0-544349b3576f.png)
+  - ![latex-709ae8fd-92cf-4398-bab8-b7e30afbaaee](data/final_notes/latex-709ae8fd-92cf-4398-bab8-b7e30afbaaee.png)
 - **Smoothing**: Want to avoid zero probabilities
   - Laplace: add 1 to all counts
   - Jelinek-Mercer smoothing: weighted linear combination of lower-order models.
-  - Kneser-Ney: discounted model with special continuouation n-gram model. Number of different contexts ![latex-4cb665ab-0a1b-4d1a-af07-4476d40a9fb8](data/final_notes/latex-4cb665ab-0a1b-4d1a-af07-4476d40a9fb8.png) has appeared in.
+  - Kneser-Ney: discounted model with special continuouation n-gram model. Number of different contexts ![latex-5fb45f19-fd3f-4dc7-98e1-a73eda02a714](data/final_notes/latex-5fb45f19-fd3f-4dc7-98e1-a73eda02a714.png) has appeared in.
   - Stupid backoff: use the higher order language model if greater than zero, otherwise fallback to lower order models.
     - Solve the problem by throwing lots of data at it.
-- Bayes rule: ![latex-042a1eff-605e-4889-86bc-ad4988601c96](data/final_notes/latex-042a1eff-605e-4889-86bc-ad4988601c96.png)
+- Bayes rule: ![latex-ed93c9b6-523f-417d-8ff5-3c3e5fdcb8e1](data/final_notes/latex-ed93c9b6-523f-417d-8ff5-3c3e5fdcb8e1.png)
 
 ## Document Retreival
 - **ranked retrieval**: Order documents by how likely they are to be relevant.
@@ -167,14 +165,14 @@ STORE # write back to HDFS
 - term weights consist of 2 parts: document and collection
 - high weights for terms that appear many times in a document, terms that appear in many documents should get low weights.
 
-![latex-9af68197-14b2-4f93-91df-1d0ff824aa78](data/final_notes/latex-9af68197-14b2-4f93-91df-1d0ff824aa78.png)
+![latex-8f87cc09-bf35-4ec2-a516-6a58bfd21a0a](data/final_notes/latex-8f87cc09-bf35-4ec2-a516-6a58bfd21a0a.png)
 
 ## Graphs
 - hard: irregular structure, irregular access patterns
 - typical alg: local computations at each node, propogate results along the edges
 
 Representations:
-- **Adjacency Matrix:** nxn square matrix, n=number of verticies, ![latex-2167e5f4-e623-48bf-864c-0dcbf7fbe057](data/final_notes/latex-2167e5f4-e623-48bf-864c-0dcbf7fbe057.png)_ iff there is an edge from i to j.
+- **Adjacency Matrix:** nxn square matrix, n=number of verticies, ![latex-b5be0b31-ae4d-4e68-b545-25b4741a1327](data/final_notes/latex-b5be0b31-ae4d-4e68-b545-25b4741a1327.png)_ iff there is an edge from i to j.
   - intuitive to iterate over rows and columns
   - lots of wasted space, for sparse graphs. easy to write, hard to run computations
 - **Adjacency List:**
@@ -201,7 +199,7 @@ Single Source Shortest Path
   - `DistanceTo(n) = 1 + min(DistanceTo(m), for m in M)`: For all nodes n reachable from some other set of nodes M
 
 Parallel BFS
-- For all nodes except the start, ![latex-f747f1b9-0bf2-4427-9a20-d22c0eec91b8](data/final_notes/latex-f747f1b9-0bf2-4427-9a20-d22c0eec91b8.png)
+- For all nodes except the start, ![latex-c30be04d-6257-4514-b73f-e5a564abcaf2](data/final_notes/latex-c30be04d-6257-4514-b73f-e5a564abcaf2.png)
 - **Mapper**: For each m in adjacency list, emit `(m, d+1)`, emit the distance to yourself
 - **Sort/Shuffle**: group distances by reachable nodes
 - **Reducer**: Select the minimum distance path for each reachable node, additional book-keeping needed to keep track of the actual path.
@@ -256,13 +254,13 @@ Generic Recipie:
 PageRank
 - Based off of random walks around the web
 - Given page x with n inlinks
-  - ![latex-28925682-0abd-4b2b-b2e7-697b63605862](data/final_notes/latex-28925682-0abd-4b2b-b2e7-697b63605862.png) is out-degree of t
-  - ![latex-331ccd78-73c0-46d9-bbc2-c0a14960e56f](data/final_notes/latex-331ccd78-73c0-46d9-bbc2-c0a14960e56f.png) is the prob of a random jump
-  - ![latex-9885251a-83c8-403b-9c32-692941c0246e](data/final_notes/latex-9885251a-83c8-403b-9c32-692941c0246e.png) total number of nodes in the graph
-  - ![latex-36a397eb-f8a2-4de5-b096-ab7f2917b0c8](data/final_notes/latex-36a397eb-f8a2-4de5-b096-ab7f2917b0c8.png)
-  - Second pass for dangling nodes: ![latex-fe7a4646-a055-4165-99ad-4fe272d1c8e6](data/final_notes/latex-fe7a4646-a055-4165-99ad-4fe272d1c8e6.png)
-    - ![latex-53845c53-282e-423b-91ca-5cd4402c5295](data/final_notes/latex-53845c53-282e-423b-91ca-5cd4402c5295.png) is previous pagerank mass
-    - ![latex-561b5b24-0620-46b3-a1df-3efa4aa0a35b](data/final_notes/latex-561b5b24-0620-46b3-a1df-3efa4aa0a35b.png) is the missing PageRank mass
+  - ![latex-80600f86-fce6-4c8d-94e6-99a0af0bfd6b](data/final_notes/latex-80600f86-fce6-4c8d-94e6-99a0af0bfd6b.png) is out-degree of t
+  - ![latex-999919b0-264d-4296-bbb3-e992713571a7](data/final_notes/latex-999919b0-264d-4296-bbb3-e992713571a7.png) is the prob of a random jump
+  - ![latex-08f2bd90-1ffc-468f-a9ca-28f8a2a63255](data/final_notes/latex-08f2bd90-1ffc-468f-a9ca-28f8a2a63255.png) total number of nodes in the graph
+  - ![latex-7b5fd9a7-d48d-47a7-b738-56920e53c093](data/final_notes/latex-7b5fd9a7-d48d-47a7-b738-56920e53c093.png)
+  - Second pass for dangling nodes: ![latex-7291d964-2b89-489c-8f11-895ded90a938](data/final_notes/latex-7291d964-2b89-489c-8f11-895ded90a938.png)
+    - ![latex-30731539-3557-4c08-9e17-358465252e8a](data/final_notes/latex-30731539-3557-4c08-9e17-358465252e8a.png) is previous pagerank mass
+    - ![latex-779440ed-8801-4793-8487-865b81ea65ce](data/final_notes/latex-779440ed-8801-4793-8487-865b81ea65ce.png) is the missing PageRank mass
 - Convergence criteria
   - iterate until PageRank values don't change
   - Iterate until PageRank rankings don't change
@@ -361,10 +359,10 @@ Future: **HTAP**: Hybrid Transactional Analytical Processing
 
 ### MapReduce algorithms for relational data
 
-- Projection (![latex-cb67c2cf-5053-4c3c-aecd-881d63a2c4ba](data/final_notes/latex-cb67c2cf-5053-4c3c-aecd-881d63a2c4ba.png))
+- Projection (![latex-a21ed13c-8f49-4d80-b06d-e4af9af0900c](data/final_notes/latex-a21ed13c-8f49-4d80-b06d-e4af9af0900c.png))
   - Select particular fields for each tuple
   - Need to keep track of field positions after projections
-- Selection (![latex-2bbc5cfa-f1fa-4bfe-9f0f-f26e168ceb69](data/final_notes/latex-2bbc5cfa-f1fa-4bfe-9f0f-f26e168ceb69.png))
+- Selection (![latex-a387220f-89d4-4121-a0a1-e9594897b6aa](data/final_notes/latex-a387220f-89d4-4121-a0a1-e9594897b6aa.png))
   - Process each tuple, emit those that meet some criteria
   - Pipeline with projections
   - Performance limited by HDFS throughput
@@ -454,12 +452,12 @@ Features
 - Minimize some loss function, gradient descent, lower loss over time
   - Gradient descent is first order techniques, use higher order derivatives
 - **Logistic Regression**:
-  - Set equal to one: ![latex-bc327dae-28de-4d64-aaa0-1ca0c8d4ad31](data/final_notes/latex-bc327dae-28de-4d64-aaa0-1ca0c8d4ad31.png)
-  - ![latex-c8600452-1129-407b-8d64-a04c90a29b87](data/final_notes/latex-c8600452-1129-407b-8d64-a04c90a29b87.png)
-  - ![latex-b3ba0531-cdf8-43e5-89ea-0e2d4089c850](data/final_notes/latex-b3ba0531-cdf8-43e5-89ea-0e2d4089c850.png)
-  - ![latex-dc753f49-f634-48f3-947b-0b865ea29946](data/final_notes/latex-dc753f49-f634-48f3-947b-0b865ea29946.png)
+  - Set equal to one: ![latex-a3da373b-fc85-4da9-9ff2-0338aa28075a](data/final_notes/latex-a3da373b-fc85-4da9-9ff2-0338aa28075a.png)
+  - ![latex-aa4a28f9-6184-4267-b206-4c2d7d2fd4d2](data/final_notes/latex-aa4a28f9-6184-4267-b206-4c2d7d2fd4d2.png)
+  - ![latex-9ab69383-42c4-48f2-bfaa-b39afcbec0b2](data/final_notes/latex-9ab69383-42c4-48f2-bfaa-b39afcbec0b2.png)
+  - ![latex-48c502a2-24f9-4029-a31c-4070c50e689b](data/final_notes/latex-48c502a2-24f9-4029-a31c-4070c50e689b.png)
     - Minimize the log likelihood
-  - ![latex-dc8e4dd7-a681-49fa-be44-01a6d4f82bc0](data/final_notes/latex-dc8e4dd7-a681-49fa-be44-01a6d4f82bc0.png)
+  - ![latex-352c8847-6bd2-4ede-8c1b-33eaba229d53](data/final_notes/latex-352c8847-6bd2-4ede-8c1b-33eaba229d53.png)
     - Utilize the gradient to update weights
 
 ![Gradient Descent](gradient.png)
@@ -488,3 +486,164 @@ Ensemble Learning: Use multiple independent models to make a prediction
   - Simple Weighted Voting: Apply some weights to each prediction
   - Model Averaging
 - This works as long as the models are independent. If the errors are uncorrelated then the chances of multiple classifiers being wrong is less likely.
+
+Metrics
+| Actual | Predicted | Error |
+|-|-|-|
+| Positive | Positive | True Positive |
+| Negative | Positive | False Positive (Type 1 Error) |
+| Positive | Negative | False Negative (Type 2 Error) |
+| Negative | Negative | True Negative |
+
+- Cross-Validation: Train / Test Split, validation set to test the model during training.
+
+Similarity:
+- Offline variant: extract all similar pairs of objects from a large collection
+- Online variant: is this object similar to something I’ve seen before?
+- **Steps:** Specify distance metric -> compute representation -> Project -> extract
+
+Minhash
+- near duplicate detection of webpages, HTML represented as shingles (n-grams)
+- For all elements, binary vector if in each document, M00 = both 0, M11 = both 1, M01, M10. Jaccard: ![latex-94bcac99-08a4-4ec1-9528-4c4434d781c5](data/final_notes/latex-94bcac99-08a4-4ec1-9528-4c4434d781c5.png)
+- Randomly permute the rows of the matrix, minhash is then the first row with a 1. Then ![latex-44616da8-c28c-4d6b-a83a-d36689d4b705](data/final_notes/latex-44616da8-c28c-4d6b-a83a-d36689d4b705.png)
+- **Task**: Discover all pairs with similarity greater than s, **FP**: discovered pairs that have a similarity less than s, **FN**: pairs with similarity greater than s not discovered.
+- **Alg**: Foreach object, compute minhash value, group objects by their hash value, output all pairs within each group. Threshold controls the amount of FPs and FNs.
+- Use k hash functions, probability of detection is ![latex-8a72882f-67b1-47ff-a840-d2906af20beb](data/final_notes/latex-8a72882f-67b1-47ff-a840-d2906af20beb.png).
+- n sets k: for each object, compute n sets k minhash, for each set concat k minhash values together, in each set group objects by signature (k minhash values), output all pairs in each group, de-dup pairs. If J(A, B) = s; P(none of the values collide) = ![latex-73edc8db-4371-4a12-9c4e-14581e8470d8](data/final_notes/latex-73edc8db-4371-4a12-9c4e-14581e8470d8.png), P(Detection) = 1 - P(none collide).
+
+Batch formulation: Discover all pairs with similarity greater than s.
+Online formulation: Given a new page, is it similar to one that we've seen before.
+Minhash problems: good for near-duplicate detection, jaccard only, no way to assign weights to features,
+
+Arrange Similar Items into Clusters
+- Offline variant: entire static collection available at once
+- Online variant: objects incrementally available
+- forming clusters: high similarity between items in the same cluster, low similarity between items in different clusters.
+- **HOW**: Distance metric (jaccard, euclid) -> compute representation (shingling, tf.idf) -> apply clustering alg
+- Distance = 1 - similarity
+- Hierarchical Agglomerative Clustering: start with each item in it's own cluster, until there is only 1 cluster, find the two most similar clusters, merge. The history of merges form the heirarchy.
+- What is the similarity between two clusters:
+  - single link: similarity of 2 most similar members
+    - Can result in long and thin clusters
+  - complete link: similarity of 2 least similar members
+    - can result in round clusters
+  - Group average: average similarity between members
+- K-MEANS: Select k random instances as centroids
+  - iterate: assign each instance to it's closest centroid, update centroid based on assigned instance.
+
+### Mutable State
+We want to keep track of mutable state in a scalable mannar. state organized in terms of logical records, state is unlikely to fit on a single machine, distributed.
+
+Why not use RDBMS:
+- Everything must be designed up front, annoying to change
+- ACID properties can be expensive:
+  - Atomic: Transactions are all or nothing
+  - consistent: A transaction will bring the database from one valid state to another.
+  - isolated: Ensures that transactions executed concurrently would yield the same results had they been executed sequentially.
+  - Durability: Once a transaction has been committed, it will remain so.
+- potentially High cost
+
+Can gain extra features by trading away other properties (NoSQL)
+- Types: Key-value store, column ordiented database, document stores, graph database.
+- Ideas:
+  - Partitioning (Sharding): Need to keep track of the partitions
+    - increase scalability, decrease latency
+  - Replication: Need to remain consistent
+    - To incrase robustness (availability), increase throughput
+  - Caching: Consistency
+    - reduce latency
+- **Key-value stores**: store associations between keys and values. primitive keys, values are blobs. Ops: `get`: value for key, `put`: set value for key. **Consistency Model**: Atomic puts, no cross-key operations
+  - Non-persistent: just a big in-memory hash table (Redis, Memcached)
+  - Persistent: wrapper around a traditional RDBMS
+  - Doesn't fit on a single machine: **Partition**. Hash the keys and hash the machines. Machines hold pointers the next and prev, finger tables (+2, +4, ..). Route requests in ![latex-b14cb4cb-c211-40fc-acdf-1f95473ffa6a](data/final_notes/latex-b14cb4cb-c211-40fc-acdf-1f95473ffa6a.png)
+
+BigTable (HBase)
+- Table is sparse, distributed, persistent, multi-dimensinoal sorted map. Indexed by `(row:string, column:string, time:int64) -> uniterpreted byte array`
+- Lookup, inserts, deletes: single row transactions only
+- rows: sorted lexicographically, efficient row scans. columns grouped into families `family:qualifier`, provide locality hints, unbounded number of columns. All just key value pairs.
+
+| | In Memory | On Disk |
+|-|-|-|
+| Mutability | Easy | Hard |
+| Size | Small | Big |
+
+Log-structured Merge Trees
+- In memory store, when full: flush to disk
+- On disk Stores are immutable, indexed, persistent k-v pairs.
+- Write Ahead Log for persistance
+
+Distributed Version: Use HDFS
+- Replication for free
+- Persistent, ordered immutable map from keys to values
+- **operations**: Look-up value for key, iterate over key/value pairs in range.
+
+Trade-offs
+Partitioning: Need distributed transactions
+  - Use a two-phase commit (coordinator, subordinates), use WAL at each node, **cons**: blocking and slow, problems if coordinator dies.
+Replication: Need replica coherence protocol
+Caching: Need caching coherence protocol
+
+**CAP Theorem**
+- Consistency, Availability, Partition Tolerence.
+- Pick 2.
+- CA: Constistency + Availability. Parallel databases that use 2PC.
+- Availiability + Partition Tolerence, Web CAching, DNS
+
+**PACELC**
+- PAC: If there's a partition, choose A or C.
+- ELC: Otherwise, do we choose LAtency or Consistency
+- The choice the application dependent.
+
+### Graphs Redux
+- Can be smarter about partitioning graphs, use underlying graph structure
+  - webpages on the same domain are likely to be connected, domain reversed urls `cnn.com -> com.cnn`. In social networks, domain characteristics
+
+### Real-Time Analytics
+Recall: Data scientists typically are working with old data.
+- implication: Results an be hours behind reality, when things move fast this can be bad (delayed query recommendations)
+- Real-time: low-latency
+- Online: Contrasted with batch processing
+- Stream: Nature of the data that arrives
+  - Data stream: an ordered, continuously arriving sequence of tuples. May not be possible to store everything, may not be possible to examine everything.
+
+Windowing:
+- restrict the processing scope
+- based on ordering (time), item counts, explicit markers (punctuations)
+- Sliding window: increment by amount. Tumbling Window: Each window is descrete (no overlap)
+- Punctuations: Application inserted end of processing, Pro: Application controlled window semantics, cons: unpredictable window size (too big / small).
+
+Stream Processing Challenges
+- Inherent Challenges: LAtency requirements, space bounds
+- System Challenges:
+  - Bursty behaviour and load balancing:
+  - Out of order message delivery, non-determinism
+  - Consistency semantics (at most once, exactly once, at least once)
+
+Producer / Consumer
+- Producers push data to consumers (via callbacks)
+- Consumer pulls data from producer (via polling)
+- Insert a broker (Kafka) in the middle, Producers send to broker, Consumers get data from broker
+
+Storm / Heron
+- A job topology is a computational graph, directed edges indicate communication between edges
+- Processing semantics: At most once (without acknowledgments), at least once (with acks)
+- Spouts: emit tuples. Bolts: Processing tuples.
+
+Spark Streaming: Descretized RDDs
+- Problem: no differentiation between the event-time and processing time, when the event actually occurred and when the tuple is processed
+
+**Watermark**: System's notion when all data in a window is expected to arrive. Default trigger fires at the watermark.
+
+Dealing with Streaming Problems
+- Throw away data: **Sampling**
+  - Reservoir Sampling: Select s elements from a stream of size n with uniform probability. Store the first s elements, for every k-th element: keep with probability ![latex-3d0996ff-4cba-49d3-b067-5609f6e981a9](data/final_notes/latex-3d0996ff-4cba-49d3-b067-5609f6e981a9.png), randomly discard an existing sample.
+- Approximations (hashing)
+  - Set Cardinality: HashSet, HyperLogLog Counter
+    - hash each item and examine the hash code, keep track of some unique pattern (number of leading zeros). Use multiple hash functions and do it lots of times.
+  - Set Membership: HashSet, Bloom Filter
+    - `put(x)`: insert x into set, `contains(x)`: yes if x is a member of a set.
+    - m-bit vector, k hash functions. put(x): run x through each hash function, set the corresponding bit to 1.
+    - contains: run the item through the hash functions, check if all of the bits are 1. False positives possible, no false negatives.
+  - Frequency Estimation: HashMap, Count Min Sketches
+    - `put(x)`: increment the count of x by 1. `get(x)` return the frequency of x.
+    - `m x k` array of counters, k hash functions. put run item though each hash function, increment the corresponding count. get: run item through each hash function, return the minimum count.
