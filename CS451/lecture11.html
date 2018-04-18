@@ -1,0 +1,301 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css" />
+  </head>
+  <body class='markdown-body'>
+<h1>Lecture 11 - February 8, 2018</h1>
+<h2>Evolution</h2>
+<ul>
+<li>Monoliths</li>
+<li>Front-end / Back-end</li>
+<li>Database
+<ul>
+<li>Why?: Separation of concerns</li>
+<li>Before: Some data in memory, some in files, painful</li>
+<li>Ted Cod: relational Database</li>
+</ul>
+</li>
+</ul>
+<h3>Business Intelligence</h3>
+<ul>
+<li>Organization can exploit it's data as an advantage in the market</li>
+<li>analysis, planning, etc</li>
+</ul>
+<h3>Database Worloads</h3>
+<ul>
+<li>Very different</li>
+<li>way more customers than data scientists</li>
+</ul>
+<h4>Frontend: Online Transaction Processing</h4>
+<ul>
+<li>OLTP</li>
+<li>high concurrency, fast, realtime</li>
+<li>Buying tickets, products, etc.</li>
+<li>Relatively small number of transactional queries</li>
+<li>random access (read, update, writes)
+<ul>
+<li>Each query will modify small numbers of data</li>
+</ul>
+</li>
+</ul>
+<h4>Analysts: Online Analytical Processing</h4>
+<ul>
+<li>Data processing, data mining, business intelligence</li>
+<li>less strict latency requirements, batch processing</li>
+<li>High number of reads
+<ul>
+<li>full table scans</li>
+</ul>
+</li>
+</ul>
+<h4>Do Both Together?</h4>
+<ul>
+<li><strong>Bad Idea</strong></li>
+<li>variable latency
+<ul>
+<li>Analyist launches big query, OLTP queries effected</li>
+</ul>
+</li>
+<li>Poor memory management
+<ul>
+<li>Full table scans will kick very thing out of the cache</li>
+</ul>
+</li>
+<li>conflicting data access patterns
+<ul>
+<li>Large reads vs. small writes</li>
+</ul>
+</li>
+</ul>
+<h4>Solution: Data Warehouse</h4>
+<ul>
+<li>Have multiple databases</li>
+<li>Separate datastore to optimize for each workload</li>
+</ul>
+<h5>ETL</h5>
+<ul>
+<li>Extract, Transform, Load</li>
+<li>Pipeline OLTP data to data warehouse</li>
+</ul>
+<h5>OLAP Schema: Star Structure</h5>
+<ul>
+<li>Organize data around a central <strong>Facts Tables</strong>
+<ul>
+<li>think sales</li>
+</ul>
+</li>
+<li>Link dimensions to the facts table
+<ul>
+<li>Customers, products</li>
+</ul>
+</li>
+<li><strong>snowflake</strong>
+<ul>
+<li>Can denormalize the dimension tables</li>
+</ul>
+</li>
+</ul>
+<h5>Transformation</h5>
+<ul>
+<li>Data cleaning
+<ul>
+<li>Duplicate data</li>
+</ul>
+</li>
+<li>integrity checking
+<ul>
+<li>Do sales match inventory?</li>
+</ul>
+</li>
+<li>Schema Conversion
+<ul>
+<li>Convert to stars and snowflakes</li>
+</ul>
+</li>
+<li>Field transformation
+<ul>
+<li>OLTP: Dates recorded in local time</li>
+<li>OLAP: Transform to UTC</li>
+<li>Add new columns</li>
+</ul>
+</li>
+</ul>
+<h5>When does ETL happen?</h5>
+<ul>
+<li>periodically</li>
+<li>i.e. every night</li>
+<li><strong>Implication</strong>: Analysts are roughly a day behind</li>
+</ul>
+<h3>What do analyists actually do?</h3>
+<ul>
+<li>report generation
+<ul>
+<li>summaries, insights into organizations</li>
+<li>for business people, faciliate decision making</li>
+</ul>
+</li>
+<li>dashboards
+<ul>
+<li>extension of reports</li>
+<li>realtime reports</li>
+</ul>
+</li>
+<li>ad-hoc analyses
+<ul>
+<li>Specific analysis, not included in reports / dashboard</li>
+<li>on-demand</li>
+</ul>
+</li>
+</ul>
+<h3>OLAP Cubes</h3>
+<ul>
+<li>Represent operations on OLAP data in some n-dimensional hypercube</li>
+</ul>
+<h4>Operations</h4>
+<ul>
+<li><strong>Slice and Dice</strong>
+<ul>
+<li>Slice the cube into areas that your interested in</li>
+<li>Take a time slice: Only care about last month</li>
+</ul>
+</li>
+<li><strong>Roll up / drill down</strong>
+<ul>
+<li>Dimensions often have heirarichal structure
+<ul>
+<li>Time is composed of hours, days, years</li>
+<li>Products: specific categories, sports equipment</li>
+</ul>
+</li>
+<li>Going up and down heirarchies</li>
+<li>Roll-up: Group the stores by region</li>
+<li>Drill-Down: Stores in Ontario -&gt; Stores in South-western ontario -&gt; Stores in Kitchener</li>
+</ul>
+</li>
+<li><strong>Pivot</strong>
+<ul>
+<li>Rotate the cube</li>
+<li>Sales figures for products and stores, rotate to see changes by month</li>
+<li>Perform aggregation along some different aggregations</li>
+</ul>
+</li>
+</ul>
+<h5>In SQL</h5>
+<ul>
+<li>Lots of joins, group-bys and aggregations</li>
+<li>Joins: Build the cube</li>
+<li>group-bys: roll-ups</li>
+<li>aggregation to find what you actually want</li>
+</ul>
+<h5>Challenges</h5>
+<ul>
+<li>It's alot of work to have to materialize the cube everytime</li>
+<li>Can we precompute parts of the cube?</li>
+<li>Trade-off time vs. space</li>
+</ul>
+<h3>Fast-Forward</h3>
+<ul>
+<li>Data got bigger, ETL process took longer.</li>
+</ul>
+<h4>Facebook</h4>
+<ul>
+<li>Transitioned from Oracle data warehouse to hadoop</li>
+</ul>
+<h5>ETL -&gt; ELT</h5>
+<ul>
+<li>Extract Load Transform</li>
+<li>If the data is too big, it doesn't make sense to transform</li>
+<li>Do the transformation in Hadoop!</li>
+</ul>
+<h6>Why?</h6>
+<ul>
+<li>Dropping costs of disks
+<ul>
+<li>Cheaper to store everything, then deciding what to store</li>
+<li>You have to pay employees to decide what information to store</li>
+</ul>
+</li>
+<li>Types of data collected
+<ul>
+<li>don't only store the obviously valuable information</li>
+<li>Also behavioural data: What people are doing, where do they go, what do they see?
+<ul>
+<li>Makes up the vast bulk of data</li>
+<li>Raw HTTP logs</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Rise of Social media -&gt; User generated content
+<ul>
+<li>Instead of a few publishers producing content, <strong>everyone is</strong></li>
+</ul>
+</li>
+<li>Increasing Maturity of data mining techniques
+<ul>
+<li>Better ways of learning from data</li>
+<li>More cool things to do with the data</li>
+<li>Creates value</li>
+</ul>
+</li>
+</ul>
+<h3>Virtuous Product Cycle</h3>
+<p><img src="data/lecture11/graph-62f952a9-542c-449f-bca8-27efa84a3194.svg" alt="graph-62f952a9-542c-449f-bca8-27efa84a3194"></p>
+<ul>
+<li><em>hopefully</em> make money.</li>
+</ul>
+<h3>Analytics</h3>
+<ul>
+<li>Descriptive analytics
+<ul>
+<li>OLAP type operations</li>
+<li>Create some kind of summaries</li>
+<li>Given all the data, tell me about it</li>
+</ul>
+</li>
+<li>Predictive analytics
+<ul>
+<li>Given all of this data, what will people buy next?</li>
+<li>Forecasting</li>
+</ul>
+</li>
+</ul>
+<h4>Data Science: Analyze user behaviour</h4>
+<ul>
+<li>Demographic Profiling</li>
+</ul>
+<h4>Data Products: Transform insights into actions</h4>
+<ul>
+<li>Recomendation system</li>
+</ul>
+<h3>Why Presto / HIVE?</h3>
+<ul>
+<li>SQL implemented in MapReduce jobs</li>
+<li>Scalability: No data warehouse could meet their needs</li>
+<li>Cost: Probably would be very expensive</li>
+</ul>
+<h4>Why Databases</h4>
+<ul>
+<li>when data has structure</li>
+<li>Data isn't noisey</li>
+<li>You know the queries you're going to run ahead of time</li>
+<li><strong>Known Unknowns</strong>: Don't know the answer, but know the question to ask</li>
+</ul>
+<p><strong>Therefore</strong>: Not great for behavioural data</p>
+<ul>
+<li>No idea what you could be looking for, given behavioural data, lots of things</li>
+<li><strong>Unknown unknown</strong>: Don't know the questions to ask, if there's even anything useful
+<ul>
+<li>data products</li>
+<li>predictive analytics</li>
+</ul>
+</li>
+<li>Hadoop is great for this!</li>
+<li>When you don't know what your looking for, indexes don't help</li>
+</ul>
+<h3>Data Lake</h3>
+<ul>
+<li>HDFS</li>
+</ul>
+  </body>
+</html>

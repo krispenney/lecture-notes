@@ -169,4 +169,322 @@ STORE # write back to HDFS
 
 $$w_{i, j} = tf_{i, j} * \log{\frac{N}{n_i}}$$
 
-###
+## Graphs
+- hard: irregular structure, irregular access patterns
+- typical alg: local computations at each node, propogate results along the edges
+
+Representations:
+- **Adjacency Matrix:** nxn square matrix, n=number of verticies, $$M_{i,j} = 1$$_ iff there is an edge from i to j.
+  - intuitive to iterate over rows and columns
+  - lots of wasted space, for sparse graphs. easy to write, hard to run computations
+- **Adjacency List:**
+  - Less wasted space, possible to compress. Easy to compute using outlinks (just iterate over the list foreach edge)
+  - hard to compute over inlinks
+- **Edge List:** Explicitly enumerate all of the edge pairs
+  - easy to add new edges, just add a pair to the list
+  - waste alot of space.
+
+Store undirected graphs, do one of:
+1. store both edges, make sure the algorithm de-dups
+2. store as one edge, alg needs to recognize it goes in both directions.
+
+Manipulations
+- Invert: `flatMap` and `regroup`
+- Adjacency list -> edge list: `flatMap` over adjacency list and emit tuples
+- Edge list -> adjacency list: `groupby`
+
+Single Source Shortest Path
+- Recall: **Dijkstra**, start at source node, expand the field until the destination is reached.
+- Define inductivly
+  - `DistanceTo(s) = 0` b is reachable from a if b is on adjacency list of a
+  - `DistanceTo(p) = 1` For all nodes p reachable from s
+  - `DistanceTo(n) = 1 + min(DistanceTo(m), for m in M)`: For all nodes n reachable from some other set of nodes M
+
+Parallel BFS
+- For all nodes except the start, $$d = \infty$$
+- **Mapper**: For each m in adjacency list, emit `(m, d+1)`, emit the distance to yourself
+- **Sort/Shuffle**: group distances by reachable nodes
+- **Reducer**: Select the minimum distance path for each reachable node, additional book-keeping needed to keep track of the actual path.
+- Multiple Iterations: each MapReduce job expands the frontier by one step
+
+```scala
+class Mapper {
+  def map(id: Long, n: Node) = {
+    emit(id, n)
+    val d = n.distance
+    emit(id, d)
+    for (m <- n.adjacenyList) {
+      emit(m, d+1)
+    }
+  }
+}
+
+class Reducer {
+  def reduce(id: Long, objects: Iterable[Object]) = {
+    var min = infinity
+    var n = null
+    for (d <- objects) {
+      if (isNode(d)) n = d
+      else if (d < min) min = d
+    }
+    n.distance = min
+    emit(id, n)
+  }
+}
+```
+- run job, check for convergence, try again
+- MapReduce explores all possible paths in parallel, lots of wasted space, we only do useful work at the frontier.
+
+Single Source with weighted edges
+- add weight w for each edge in adjacency list
+- in mapper emit `(m, d+w)` instead of `(m, d+1)`
+- need to go through the entire graph
+
+Multiple Source shortest Path
+- have an array of sources
+- Mapper emits an array of distances wrt each source
+- Reducer finds the minimum for each element in the array
+
+Generic Recipie:
+- represent graph as adjacency list
+- perform local computations in the mapper
+- pass along partial results via outlinks, use the desination node as the key
+- perform aggregation in the reducer on inlinks to a node
+- iterate until convergence, external driver
+- pass the graph structure between iterations
+
+PageRank
+- Based off of random walks around the web
+- Given page x with n inlinks
+  - $$C(t)$$ is out-degree of t
+  - $$\alpha$$ is the prob of a random jump
+  - $$N$$ total number of nodes in the graph
+  - $$PR(x) = \alpha (\frac{1}{N}) + (1-\alpha) \sum_{i=1}^N \frac{PR(t_i}{C(ti)}$$
+  - Second pass for dangling nodes: $$p' = \alpha \frac{1}{N} + (1 - \alpha) (\frac{m}{N} + p)$$
+    - $$p$$ is previous pagerank mass
+    - $$m$$ is the missing PageRank mass
+- Convergence criteria
+  - iterate until PageRank values don't change
+  - Iterate until PageRank rankings don't change
+  - Fixed number of iterations
+- Use log probabilities to avoid small values
+
+- weighted PageRank
+- Personalized PageRank
+- Spark: `join`, `flatMap`, `reduceByKey`
+  - cache the adjacency list
+  - Join with PageRank vector
+
+## Analyzing Relational Data
+
+
+
+Database Workloads
+- **OLTP**: Online Transaction Processing
+  - user facing, real-time, low-latency
+  - Application users want fast applications
+    - Typical access patterns
+    - random access
+    - writes on small amounts of data
+    - small amounts of data per query
+- **OLAP**: Online Analytical Processing
+  - Business intelligence, data mining
+  - batch workloads, less concurrency
+  - Analysts want to be able to analyze large amounts of data
+    - Full table scans
+    - lots of joins
+    - large amounts of data per query
+- Hard for OLTP and OLAP to exist together
+  - poor memory management
+  - conflicting data accessing patterns
+  - variable latency
+  - **solution** Build a separate data warehouse
+  - OTLP -> ETL -> OLAP
+    - Run ETL on some frequency (ex. every night)
+    - **Implication**: Analysts are working on old data
+    - Extract
+    - Transform
+      - Data cleaning and integrity checking
+      - schema conversion
+      - field transformations
+    - Load
+- **OLAP cubes**: Join tables together, perform operations
+  - slice and dice
+    - slice the cube into areas that your interested in
+    - ex. take a time slice, only care about the last month
+  - roll-up /down
+    - Dimensions have heirarchial structure: time is composed of hours / days / years
+    - Specific products categories / sub-categories
+    - drill down: Stores in Ontario -> Stores in Southern-Ontario -> Stores in Waterloo
+  - pivot
+    - Rotate the cube
+    - Sales figures for products and stores, rotate to see changes by month
+    - Perform aggregation along some different axis
+  - Cube materialization
+    - lots of joins, group-bys and aggregations
+    - pre-compute parts of the cube
+    - trade-off between time and space
+
+What do you do with the data?
+- Report Generation
+- Dashboards
+- Ad-hoc analyses
+  - Descriptive: What happened / what is happening
+  - Predictive: predict future, unknown events
+- Data products
+
+Why databases (known unknowns)
+- great for structured data, can use schemas!
+- data is clean
+- know what queries you want to run on it
+
+Why Not databases (unknown unknowns)
+- little to no structure in data
+- data is messy and noisy
+- don't know what your looking for
+- behavioural data
+
+Advantages of Hadoop (dataflow language)
+- don't need to know a schema ahead of time
+- raw scans are the most common operations
+- many analyses are better formatted imperitevely
+- much faster data injest rate
+
+
+Utilize both to gain the most benefits and flexibility:
+**Data Lake**: Store of raw data
+**Data Warehouse**: Structured data
+
+Future: **HTAP**: Hybrid Transactional Analytical Processing
+- avoid the ETL process
+- Let's analysts work with realtime data
+
+### MapReduce algorithms for relational data
+
+- Projection ($$\pi$$)
+  - Select particular fields for each tuple
+  - Need to keep track of field positions after projections
+- Selection ($$\sigma$$)
+  - Process each tuple, emit those that meet some criteria
+  - Pipeline with projections
+  - Performance limited by HDFS throughput
+    - speed of encoding/decoding tuples is important
+    - take advantage of compression
+- Groupby ... Aggregation
+  - Some aggregation function
+  - Map over dataset, emit tuples, key by the group by attribute. **Framework handles the actual grouping**
+  - Compute the aggregation function in the reducer
+  - Optimize with combiners, IMC
+- Joins
+  - Reduce side (repartition, shuffle join)
+    - map over both datasets
+    - emit tuple value with join key as the intermediate key
+    - framework brings together
+    - perform join in reducer
+  - Map Side (sort-merge)
+    - both datasets must be copartitioned (partitioned in the same way), allows for parallelization
+    - Map over one dataset, read from the other corresponding partition
+    - no reducer needed
+  - Hash (broadcast, replicated)
+    - Load one dataset into memory, keyed by the join key
+    - Read the other dataset, probe for the join key
+      - Store R in DistributedCache, progate to all workers
+      - no reducers necessary
+    - Need `R << S` and R must fit into memory
+    - variants
+      - R and S are co-partitioned: only need to build hash maps for the corresponding partition
+      - striped: If R doesn't fit into memory
+        - Divide R into n groups, such that each fit into memory
+        - Perform a hash join for all n
+        - Union the results together
+      - Use a global key-value store (Memcached), prob the key-value store
+  - Preferences (Most, ... ,Least): Hash > Map > Reduce
+
+Limitations of Joining
+| Hash | Map | Reduce |
+|-|-|-|
+| Memory | Sort order and partitioning | General purpose |
+
+Running SQL-on-Hadoop
+1. Build logical plan
+2. optimize logical plan
+3. select physical plan
+
+Hadoop Dataware house designs
+- Joins are expensive
+- Ultimately a time-space trade-off
+  - Have more redundant data around in order to save on later joins (save time, waste space)
+- normalization: factor out redundancy
+- denormalizations: pre-join to the Facts table in order to save the cost of later joins
+  - Denormalize can occur during the ETL process
+
+Row vs. column Stores
+- Row store: `(a, b, c), (a, b, c), ....`
+  - Easy to modify a record, in place updates
+  - May need to read un-necessary data during processing
+- Column store: `(a, a, a, a..., ), (b, b, b, ...), (c, c, c, ...)`
+  - only read the necessary data when processing
+  - tuple writes require multiple operations
+  - tuple updates are complex
+  - better compression, read efficiency, vectorized execution, compiled queries
+
+Physical Representation
+- Use binary representations (parqueet, protobuf)
+- define schemas for binary
+- Use an index to speed up hadoop, InputSplits on contain blocks that match selection crtieria. Instead of processing everything and thowing away most. Implement at the RecordReader level.
+
+### Predictive Analytics
+- Descriptive Analytics: Describe what is currently happening
+- Predictive Analytics: Predict future values
+- Classification: output draw from labels
+- Data -> Features -> Model -> Optimization
+
+Features
+- Dense: most samples contain the features
+- Sparse: messages that contain specific terms
+- Gathering labelled data can be a bottleneck
+  - crowdsource
+  - Bootstrapping, semi-supervised techniques
+  - Exploiting user behaviour logs: emojis for sentiments
+- Supervised Binary Classification: restrict output label to binary
+  - Extend to multi-class with multiple classifiers
+    - 1 vs. rest: A or not, B or not, ...
+    - Classifier Cascading: A or Not -> B or Not -> ...
+      - Keep going until success
+- Minimize some loss function, gradient descent, lower loss over time
+  - Gradient descent is first order techniques, use higher order derivatives
+- **Logistic Regression**:
+  - Set equal to one: $$w * x \ge t$$
+  - $$\ln{\frac{Pr(y = 1 \mid x)}{Pr(y = 0 \mid x)}} = w * x$$
+  - $$Pr(y = 1 \mid x) = \frac{e^{w * x}}{1 + e^{w * x}}$$
+  - $$L(w) = \sum_{i=1}^n y_i \ln{ Pr(y_i = 1 \mid x_i, w) } + (1 - y_i) \ln{ Pr(y_i = 0 \mid x_i, w) }$$
+    - Minimize the log likelihood
+  - $$\frac{\partial L(w)}{\partial w} = \sum_{i = 0}{n} x_i (y_i - Pr(y_i = 1 \mid x_i, w)$$
+    - Utilize the gradient to update weights
+
+![Gradient Descent](gradient.png)
+
+```scala
+val points = spark.textFile(...).map(parsePoint).persist()
+var w = // random initial vector
+for (i <- 1 to ITERATIONS) {
+  val gradient = points.map{ p =>
+    p.x * (1/(1+exp(-p.y*(w dot p.x)))-1)*p.y
+  }.reduce((a,b) => a+b)
+  w -= gradient
+}
+```
+
+Batch Learning: Update the model after considering all training instances
+Online Learning: Update the model after considering each randomly selected training example.
+  - stocastic gradient descent
+- Randomly shuffle the training samples
+- Mini-batching as a middle ground
+
+Ensemble Learning: Use multiple independent models to make a prediction
+- Train classifiers on distinct partitions of the data
+- Combining Predictions
+  - Majority Voting: Take the class that most models pick
+  - Simple Weighted Voting: Apply some weights to each prediction
+  - Model Averaging
+- This works as long as the models are independent. If the errors are uncorrelated then the chances of multiple classifiers being wrong is less likely.
