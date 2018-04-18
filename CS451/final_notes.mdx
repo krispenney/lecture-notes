@@ -1,5 +1,3 @@
-# Final Notes
-
 ## MapReduce Algorithm Design
 
 ### Common Theme
@@ -488,3 +486,164 @@ Ensemble Learning: Use multiple independent models to make a prediction
   - Simple Weighted Voting: Apply some weights to each prediction
   - Model Averaging
 - This works as long as the models are independent. If the errors are uncorrelated then the chances of multiple classifiers being wrong is less likely.
+
+Metrics
+| Actual | Predicted | Error |
+|-|-|-|
+| Positive | Positive | True Positive |
+| Negative | Positive | False Positive (Type 1 Error) |
+| Positive | Negative | False Negative (Type 2 Error) |
+| Negative | Negative | True Negative |
+
+- Cross-Validation: Train / Test Split, validation set to test the model during training.
+
+Similarity:
+- Offline variant: extract all similar pairs of objects from a large collection
+- Online variant: is this object similar to something I’ve seen before?
+- **Steps:** Specify distance metric -> compute representation -> Project -> extract
+
+Minhash
+- near duplicate detection of webpages, HTML represented as shingles (n-grams)
+- For all elements, binary vector if in each document, M00 = both 0, M11 = both 1, M01, M10. Jaccard: $$J(A, B) = \frac{M11}{M01 + M10 + M11}$$
+- Randomly permute the rows of the matrix, minhash is then the first row with a 1. Then $$P(h(A) = h(B)) = J(A, B)$$
+- **Task**: Discover all pairs with similarity greater than s, **FP**: discovered pairs that have a similarity less than s, **FN**: pairs with similarity greater than s not discovered.
+- **Alg**: Foreach object, compute minhash value, group objects by their hash value, output all pairs within each group. Threshold controls the amount of FPs and FNs.
+- Use k hash functions, probability of detection is $$s^k$$.
+- n sets k: for each object, compute n sets k minhash, for each set concat k minhash values together, in each set group objects by signature (k minhash values), output all pairs in each group, de-dup pairs. If J(A, B) = s; P(none of the values collide) = $$(1 - s^k)^n$$, P(Detection) = 1 - P(none collide).
+
+Batch formulation: Discover all pairs with similarity greater than s.
+Online formulation: Given a new page, is it similar to one that we've seen before.
+Minhash problems: good for near-duplicate detection, jaccard only, no way to assign weights to features,
+
+Arrange Similar Items into Clusters
+- Offline variant: entire static collection available at once
+- Online variant: objects incrementally available
+- forming clusters: high similarity between items in the same cluster, low similarity between items in different clusters.
+- **HOW**: Distance metric (jaccard, euclid) -> compute representation (shingling, tf.idf) -> apply clustering alg
+- Distance = 1 - similarity
+- Hierarchical Agglomerative Clustering: start with each item in it's own cluster, until there is only 1 cluster, find the two most similar clusters, merge. The history of merges form the heirarchy.
+- What is the similarity between two clusters:
+  - single link: similarity of 2 most similar members
+    - Can result in long and thin clusters
+  - complete link: similarity of 2 least similar members
+    - can result in round clusters
+  - Group average: average similarity between members
+- K-MEANS: Select k random instances as centroids
+  - iterate: assign each instance to it's closest centroid, update centroid based on assigned instance.
+
+### Mutable State
+We want to keep track of mutable state in a scalable mannar. state organized in terms of logical records, state is unlikely to fit on a single machine, distributed.
+
+Why not use RDBMS:
+- Everything must be designed up front, annoying to change
+- ACID properties can be expensive:
+  - Atomic: Transactions are all or nothing
+  - consistent: A transaction will bring the database from one valid state to another.
+  - isolated: Ensures that transactions executed concurrently would yield the same results had they been executed sequentially.
+  - Durability: Once a transaction has been committed, it will remain so.
+- potentially High cost
+
+Can gain extra features by trading away other properties (NoSQL)
+- Types: Key-value store, column ordiented database, document stores, graph database.
+- Ideas:
+  - Partitioning (Sharding): Need to keep track of the partitions
+    - increase scalability, decrease latency
+  - Replication: Need to remain consistent
+    - To incrase robustness (availability), increase throughput
+  - Caching: Consistency
+    - reduce latency
+- **Key-value stores**: store associations between keys and values. primitive keys, values are blobs. Ops: `get`: value for key, `put`: set value for key. **Consistency Model**: Atomic puts, no cross-key operations
+  - Non-persistent: just a big in-memory hash table (Redis, Memcached)
+  - Persistent: wrapper around a traditional RDBMS
+  - Doesn't fit on a single machine: **Partition**. Hash the keys and hash the machines. Machines hold pointers the next and prev, finger tables (+2, +4, ..). Route requests in $$\log{n}$$
+
+BigTable (HBase)
+- Table is sparse, distributed, persistent, multi-dimensinoal sorted map. Indexed by `(row:string, column:string, time:int64) -> uniterpreted byte array`
+- Lookup, inserts, deletes: single row transactions only
+- rows: sorted lexicographically, efficient row scans. columns grouped into families `family:qualifier`, provide locality hints, unbounded number of columns. All just key value pairs.
+
+| | In Memory | On Disk |
+|-|-|-|
+| Mutability | Easy | Hard |
+| Size | Small | Big |
+
+Log-structured Merge Trees
+- In memory store, when full: flush to disk
+- On disk Stores are immutable, indexed, persistent k-v pairs.
+- Write Ahead Log for persistance
+
+Distributed Version: Use HDFS
+- Replication for free
+- Persistent, ordered immutable map from keys to values
+- **operations**: Look-up value for key, iterate over key/value pairs in range.
+
+Trade-offs
+Partitioning: Need distributed transactions
+  - Use a two-phase commit (coordinator, subordinates), use WAL at each node, **cons**: blocking and slow, problems if coordinator dies.
+Replication: Need replica coherence protocol
+Caching: Need caching coherence protocol
+
+**CAP Theorem**
+- Consistency, Availability, Partition Tolerence.
+- Pick 2.
+- CA: Constistency + Availability. Parallel databases that use 2PC.
+- Availiability + Partition Tolerence, Web CAching, DNS
+
+**PACELC**
+- PAC: If there's a partition, choose A or C.
+- ELC: Otherwise, do we choose LAtency or Consistency
+- The choice the application dependent.
+
+### Graphs Redux
+- Can be smarter about partitioning graphs, use underlying graph structure
+  - webpages on the same domain are likely to be connected, domain reversed urls `cnn.com -> com.cnn`. In social networks, domain characteristics
+
+### Real-Time Analytics
+Recall: Data scientists typically are working with old data.
+- implication: Results an be hours behind reality, when things move fast this can be bad (delayed query recommendations)
+- Real-time: low-latency
+- Online: Contrasted with batch processing
+- Stream: Nature of the data that arrives
+  - Data stream: an ordered, continuously arriving sequence of tuples. May not be possible to store everything, may not be possible to examine everything.
+
+Windowing:
+- restrict the processing scope
+- based on ordering (time), item counts, explicit markers (punctuations)
+- Sliding window: increment by amount. Tumbling Window: Each window is descrete (no overlap)
+- Punctuations: Application inserted end of processing, Pro: Application controlled window semantics, cons: unpredictable window size (too big / small).
+
+Stream Processing Challenges
+- Inherent Challenges: LAtency requirements, space bounds
+- System Challenges:
+  - Bursty behaviour and load balancing:
+  - Out of order message delivery, non-determinism
+  - Consistency semantics (at most once, exactly once, at least once)
+
+Producer / Consumer
+- Producers push data to consumers (via callbacks)
+- Consumer pulls data from producer (via polling)
+- Insert a broker (Kafka) in the middle, Producers send to broker, Consumers get data from broker
+
+Storm / Heron
+- A job topology is a computational graph, directed edges indicate communication between edges
+- Processing semantics: At most once (without acknowledgments), at least once (with acks)
+- Spouts: emit tuples. Bolts: Processing tuples.
+
+Spark Streaming: Descretized RDDs
+- Problem: no differentiation between the event-time and processing time, when the event actually occurred and when the tuple is processed
+
+**Watermark**: System's notion when all data in a window is expected to arrive. Default trigger fires at the watermark.
+
+Dealing with Streaming Problems
+- Throw away data: **Sampling**
+  - Reservoir Sampling: Select s elements from a stream of size n with uniform probability. Store the first s elements, for every k-th element: keep with probability $$\frac{s}{k}$$, randomly discard an existing sample.
+- Approximations (hashing)
+  - Set Cardinality: HashSet, HyperLogLog Counter
+    - hash each item and examine the hash code, keep track of some unique pattern (number of leading zeros). Use multiple hash functions and do it lots of times.
+  - Set Membership: HashSet, Bloom Filter
+    - `put(x)`: insert x into set, `contains(x)`: yes if x is a member of a set.
+    - m-bit vector, k hash functions. put(x): run x through each hash function, set the corresponding bit to 1.
+    - contains: run the item through the hash functions, check if all of the bits are 1. False positives possible, no false negatives.
+  - Frequency Estimation: HashMap, Count Min Sketches
+    - `put(x)`: increment the count of x by 1. `get(x)` return the frequency of x.
+    - `m x k` array of counters, k hash functions. put run item though each hash function, increment the corresponding count. get: run item through each hash function, return the minimum count.
