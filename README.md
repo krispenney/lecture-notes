@@ -3,7 +3,8 @@
 This is a collection of my Lecture Notes from the [University of Waterloo](https://uwaterloo.ca) and [Wilfrid Laurier University](wlu.ca) going back to ~2016. Check out a tool I created to help generate my more recent notes - [Extended Markdown](https://github.com/krispenney/markdown-extended).
 
 ## Spring 2018
-- [BU 432 (Options, Futures, and Swaps)](/BU432)
+
+- [BU 423 (Options, Futures, and Swaps)](/BU432)
 - [CS 458 (Computer Security and Privacy)](/CS458)
 - [CS 480 (Introduction to Machine Learning)](/CS480)
 - [CS 492 (The Social Implications of Computing)](/CS492)
