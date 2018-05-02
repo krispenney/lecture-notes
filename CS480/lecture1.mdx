@@ -25,12 +25,12 @@
 
 ##### Formally
 - Given a training set of input features and output labels, return some function which is capable of producing a new label given a feature set.
-- ![latex-f3f0241b-7251-4eb1-a88f-45457ef4de57](data/lecture1/latex-f3f0241b-7251-4eb1-a88f-45457ef4de57.png)
+- $$h: X \rightarrow Y$$
   - h: hypothesis
 
-Define some loss (error) function to train the model. This function determines the error from the predicted labels (![latex-a9ad79f3-b5c2-4d32-923d-67a72e22f7b2](data/lecture1/latex-a9ad79f3-b5c2-4d32-923d-67a72e22f7b2.png)), from the true training labels (![latex-e383ba9b-0575-434f-9a31-4e3cb43bd5e1](data/lecture1/latex-e383ba9b-0575-434f-9a31-4e3cb43bd5e1.png))
+Define some loss (error) function to train the model. This function determines the error from the predicted labels ($$\hat{y}$$), from the true training labels ($$y$$)
 - Goal is to minimize the loss function, without overfitting to the training data.
-- Mean Squared Error: ![latex-aefcc533-1ed9-43da-a48d-dfed7cdbc6cd](data/lecture1/latex-aefcc533-1ed9-43da-a48d-dfed7cdbc6cd.png)_
+- Mean Squared Error: $$\frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)$$_
 
 #### Unsupervised Learning
 
@@ -55,7 +55,7 @@ No labels for the dataset, goal is to learn some arbitrary patterns.
 - Decode: project back into the original higher dimensional space
 - Can be used to generate novel samples
 - Perform **Dimensionality Reduction**
-  - Example: MNIST ![latex-5619c7cb-665e-4e8e-bb46-514b7993c259](data/lecture1/latex-5619c7cb-665e-4e8e-bb46-514b7993c259.png), can project into a 25-dimensional space
+  - Example: MNIST $$28 * 28 = 784$$, can project into a 25-dimensional space
 
 #### Reinforcement Learning
 - "Semi-supervised"
