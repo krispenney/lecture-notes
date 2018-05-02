@@ -1,0 +1,34 @@
+# Lecture 2 - May 7, 2018
+
+## Smashing the Stack for Fun and Profit
+
+### Buffer Overflow Attacks
+- Corrupt the execution stack by writing past the end of some buffer. Thereby, corrupting later parts of the stack in potentially harmful ways.
+- Example: Jump to a different return address then expected.
+
+A buffer is a contiguous allocation of memory. Dynamic buffers are typically allocated on the stack at run-time.
+
+### Process Memory Organization
+
+Recall the 3 parts of a program:
+1. Text
+  - Includes the instructions (code) and any read-only data.
+2. Data
+  - Initialized and uninitialized
+  - static variables
+3. Stack
+
+#### Recall: Stacks
+- Designed with functions / Procedure calls in mind
+- Dynamically allocate local variables of a function onto the stack
+- Used when calling a function to pass parameters to a new function, recieve a return value from a function, and contains the return address at the base
+- Stack Pointer (SP): Points to the top of the stack, points to the last address of the stack.
+  - The Lowest numerical address of the stack
+- Frame Pointer (FP): Points to a fixed location within a stack frame.
+- The stack typically grows down, towards lower memory addresses.
+- Local variables can be referenced by offsets from SP or FP
+  - Local variables have negative offsets from FP
+  - Function Parameters have positive offsets from FP
+
+#### Calling a Function
+-
