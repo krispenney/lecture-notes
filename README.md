@@ -6,7 +6,7 @@ This is a collection of my Lecture Notes from the [University of Waterloo](https
 
 - [BU 423 (Options, Futures, and Swaps)](/BU432)
 - [CS 458 (Computer Security and Privacy)](/CS458)
-- [CS 480 (Introduction to Machine Learning)](/CS480)
+- [CS 480 (Machine Learning)](/CS480)
 - [CS 492 (The Social Implications of Computing)](/CS492)
 
 ## Winter 2018
