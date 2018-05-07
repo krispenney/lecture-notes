@@ -92,15 +92,8 @@ Fix faults
   - Non-Malicious: Backdoor with the intention of debugging
 - Unitentional
 
--------
-security_flaws -> intentional
-intentional -> malicious
-malicious -> general
-malicious -> targetted
-intentional -> non-malicious
-security_flaws -> unintentional
-unintentional -> intel_bugs
-------
+
+![graph-144af039-5598-482c-9a7e-31be104e63f4](data/lecture2/graph-144af039-5598-482c-9a7e-31be104e63f4.svg)
 
 ### Unintentional Security Flaws
 
@@ -157,6 +150,7 @@ void authenticate() {
 - Typically this would cause the program to crash, but if your smart you can overwrite the return address to point to some payload.
 
 | Stack |
+|-|
 | X - return address |
 | 4 bytes: Base Pointer |
 | 1024 bytes: Buffer |
@@ -209,6 +203,7 @@ Problems to protect against:
 - `%n` will write to a memory address on the stack
 
 | Stack |
+|-|
 | ... |
 | Return |
 | `buffer = "%s%s"` |

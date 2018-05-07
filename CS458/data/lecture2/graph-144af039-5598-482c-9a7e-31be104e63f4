@@ -1,0 +1,17 @@
+digraph {
+	securityFlaws
+	intentional
+	securityFlaws -> intentional
+	malicious
+	intentional -> malicious
+	general
+	malicious -> general
+	targetted
+	malicious -> targetted
+	nonMalicious
+	intentional -> nonMalicious
+	unintentional
+	securityFlaws -> unintentional
+	intelBugs
+	unintentional -> intelBugs
+}
