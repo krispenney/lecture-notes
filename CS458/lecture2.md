@@ -157,6 +157,7 @@ void authenticate() {
 - Typically this would cause the program to crash, but if your smart you can overwrite the return address to point to some payload.
 
 | Stack |
+|-|
 | X - return address |
 | 4 bytes: Base Pointer |
 | 1024 bytes: Buffer |
@@ -209,6 +210,7 @@ Problems to protect against:
 - `%n` will write to a memory address on the stack
 
 | Stack |
+|-|
 | ... |
 | Return |
 | `buffer = "%s%s"` |
