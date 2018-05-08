@@ -62,7 +62,7 @@ Suppose that we have a **convex** function $$f$$, and is **differentiable**. A n
 #### Example: Gaussian Distribution
 - Estimate u and $$\sigma^2$$ using ML
 1. Likelihood Function
-  - $$\Pi_{i=1}^N \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x_i - u)^2}{2\sigma^2}$$
+  - $$\Pi_{i=1}^N \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x_i - u)^2}{2\sigma^2}}$$
 2. Log-likelihood
   - See the slides
 - Solve for u and $$sigma^2$$ by taking partial derivatives
@@ -77,15 +77,15 @@ Suppose that we have a **convex** function $$f$$, and is **differentiable**. A n
 - Bayesian Perspective: treat parameter $$\theta$$ as random with prior distribution $$g(\theta)$$ (ex. uniform, gaussian)
   - Therefore, it's not fixed
 - Given data x, maximize posterior distribution to get $$\theta$$
-  - $$f(\theta \mid x) = \frac{f(\theta, x)}{f(x)} = \frac{f(x \mid \theta) g(\theta)}{\integral f(x \mid \theta) g(\theta) d\theta}$$
+  - $$f(\theta \mid x) = \frac{f(\theta, x)}{f(x)} = \frac{f(x \mid \theta) g(\theta)}{\int f(x \mid \theta) g(\theta) d\theta}$$
   - The dinominator is independent of $$\theta$$, only relies on x.
 - Difference to ML: multiply by the prior
 
 ### Fully Bayesian Approach
 - Include all possible values of $$\theta$$
 - Typically generalize better with limited training data, high computational cost, usually intractable.
-- $$P(x_{N+1} \mid x_1, \ldots, x_N) = \integral P(x_1, \ldots, x_{N+1}, \theta) d \theta$$_
-- $$\integral P(\theta \mid x_1, \ldots, x_N) P(x_{N+1} \mid \theta) d \theta$$_
+- $$P(x_{N+1} \mid x_1, \ldots, x_N) = \int P(x_1, \ldots, x_{N+1}, \theta) d \theta$$_
+- $$\int P(\theta \mid x_1, \ldots, x_N) P(x_{N+1} \mid \theta) d \theta$$_
 
 ## Bias-Variance Tradeoff
 - Recall that we would like a small bias and small variance, but there are some tradeoffs...
