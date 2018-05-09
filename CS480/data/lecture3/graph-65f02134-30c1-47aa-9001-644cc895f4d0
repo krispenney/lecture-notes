@@ -1,0 +1,11 @@
+digraph {
+	trainingSet
+	learningAlg
+	trainingSet -> learningAlg
+	hLinHypothesis
+	learningAlg -> hLinHypothesis
+	input
+	input -> hLinHypothesis
+	predictedOutput
+	hLinHypothesis -> predictedOutput
+}

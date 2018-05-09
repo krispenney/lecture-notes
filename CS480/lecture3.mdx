@@ -1,0 +1,132 @@
+# Lecture 3 - May 9, 2018: Linear Regression
+
+## Regression
+
+Given a pair $$(X, Y)$$, find a function f such that: $$f(X) \approx Y$$
+- X: d-dim real vector, feature vector
+- Y: Continuous response, 1-dim real value
+
+Problems:
+1. (X, Y) is uncertain: training samples are from some unknown distribution
+  - pulled from some unknown function
+  - typically noisy in some aspect
+2. Measure the error using a loss function
+  - Which one should we use?
+
+### Risk Minimization
+- Minimize the expected loss: $$min E_{X, Y}\[L(f(X), Y)\]$$_
+- Note that f(x) and Y are in the Y range.
+- $$L(y, y) = 0$$
+- Least Squares: $$min E\[(f(X) - Y)^2\]$$
+  - minimize the squared difference between our prediction and the true output
+
+### Regression Function
+- We can compose the expectation over 2 steps
+  - $$E_X E_{X \mid Y} \[(f(X) - Y)^2 \ \mid X]$$_
+  - Note that if we minimize the inner objective ($$X \mid Y$$), then it's the same as minimzing the entire
+  - $$min_C E_{Y \mid X} \[(C - Y)^2 \mid X\] = min_C E_{Y \mid X} \[c^2 - 2Yc + Y^2\]$$_
+  - $$\frac{d J(c)}{dc} = 2c - 2 * E(Y \mid X) = 0 \implies c = E\[Y \mid X\]$$
+
+### linear hypothesis
+
+--------
+trainingSet -> learningAlg
+learningAlg -> hLinHypothesis
+input -> hLinHypothesis
+hLinHypothesis -> predictedOutput
+-------
+
+### Example Housing Prices
+
+| Size (square feet) - $$X_1$$ | # bedrooms $$X_2$$ | Number of floor s$$X_3$$ | Age of Home $$X_4$$ | Price ($1000s) $$Y$$ |
+|-|-|-|-|-|
+| 2104 | 5 | 1 | 45 | 460 |
+| 1416 | 3 | 2 | 40 | 232 |
+| 1534 | 3 | 2 | 30 | 315 |
+| 852 | 2 | 1 | 36 | 178 |
+
+- First 4 columns are the input features
+- Last column is the output
+- $$y = w_1x_1 + w_2x_2 + w_3x_3 + w_4x_4 + b$$
+
+#### Formally
+
+Assumptions
+- Linear in w
+  - this is more important, we can replace x with something non-linear
+- Linear in x
+
+$$E\[y \mid x\] = w^Tx + b$$
+- w and x are both column vectors, this is an inner product.
+- Note: $$w^Tx = \sum_{i=1}^d w_ix_i$$
+- Loss function: Mean Squared Error
+  - $$min_{w, b} \frac{1}{N} \sum_{i=1}^N (w^Tx_i + b - y_i)^2$$
+- Empirical Risk (mean)
+  - Ideally we would want to use the true distribution, but we don't know what this is.
+
+### Simplification Again (Slide 11)
+- $$x \in R^{N, d+1}$$: Just add 1 to the top of x
+- add the bias to the top of w, is a d+1 vector
+- Last one is L2 Norm
+
+### Connection to ML (slide 13)
+1. Likelihood function
+  - Recall that this is just the pdf of the underlying distribution
+  - For this example it's just the PDF of the normal distribution
+Recall that the constant coeifficents can be ignored as they don't effect the optimization of the objective function.
+- Maximizing the negative is the same as minimizing the positive
+
+### Normal Equation
+- Recall that the squared L2-Norm can be written as $$X^TX \implies (Xw - y)^T(Xw-y)$$
+- To simplify remember
+  - $$f(x) = x^TAx + x^Tb + c$$
+  - $$\frac{d f(x)}{dx} = (A + A^T)x + b$$
+- Using the facts we get: $$\frac{d J(w)}{d w} = 2X^TXw - 2X^TY = 0$$
+  - solve and divide by 2 to get the Normal equation
+- Normal Equation: $$X^TXw = X^Ty$$
+  - Solve this using the system of linear equations
+    - Easier / more efficient to implement: $$O(d^3)$$, instead of $$O(N^3)$$
+  - Analytical solution is $$w = (X^TX)^{-1}X^Ty$$
+
+#### When it is non-invertable
+- Redundent features (linearly dependent)
+  - Can get around this by deleting the redundent features
+- Can also occur if there are too many features $$(d > N)$$
+  - Delete features or use regularization
+
+### Gradient Descent
+- $$w = w - \alpha \frac{d J(w)}{dw}$$
+  - iterate until convergence
+  - If the learning rate is too low, the algorithm will take a very long time
+  - If the learning rate is too high, it will fail to converge
+  - See chapter 9 in Convex Optimization to choose learning rate.
+- $$\frac{d J(w)}{dw} = 2X^TXw - 2X^Ty$$
+- Need to make sure that the features are on the same scale
+  - We can do standardization: $$x_{i, j} = \frac{x_{i, j} - \bar{x}_j}{\sigma_j}$$
+  - Example: In the housing example the features are not on the same scale
+
+### Gradient vs. Normal Equation Trade-offs
+
+Gradient
+- need to choose learning rate
+- many iterations
+- works well for many features
+
+Normal Equation
+- No learning rate
+- No iterations
+- Slow if the number of features is large
+  - Recall that $$O(d^3)$$
+
+### Non-Linear Regression
+- We can do it by constructing a different features space and doing linear regression in that space
+
+#### Example
+- Suppose we have a quadratic model: $$y = w_1x + w_2x^2 + b$$
+- Construct a vector $$x' = \[x, x^2\]^T$$, then $$y = w^Tx + b$$
+
+#### Quadratic Fitting
+- underlying function is quadratic
+- $$\phi_0(x) = 0, \phi_1(x) = x, \phi_2(x) = x^2$$
+- Polynomial Regression: $$\phi_j(x) = x^j$$
+  - Use the linear regression framework as usual.
