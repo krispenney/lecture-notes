@@ -2,7 +2,7 @@
 
 ## Regression
 
-Given a pair ![latex-73f862e6-6ac1-4513-b844-23aff01bab5a](data/lecture3/latex-73f862e6-6ac1-4513-b844-23aff01bab5a.png), find a function f such that: ![latex-52812dcb-c7e9-4a82-8874-4f0c774ed172](data/lecture3/latex-52812dcb-c7e9-4a82-8874-4f0c774ed172.png)
+Given a pair ![latex-ee862413-fe8d-4004-9ce7-0ccd48cdb9fb](data/lecture3/latex-ee862413-fe8d-4004-9ce7-0ccd48cdb9fb.png), find a function f such that: ![latex-ce1fb138-ea1f-4e9c-92e7-961b84388f35](data/lecture3/latex-ce1fb138-ea1f-4e9c-92e7-961b84388f35.png)
 - X: d-dim real vector, feature vector
 - Y: Continuous response, 1-dim real value
 
@@ -14,27 +14,27 @@ Problems:
   - Which one should we use?
 
 ### Risk Minimization
-- Minimize the expected loss: ![latex-05e644a8-d66c-46c8-b2c9-c24785c402ec](data/lecture3/latex-05e644a8-d66c-46c8-b2c9-c24785c402ec.png)_
+- Minimize the expected loss: ![latex-66e94cee-e7f6-411c-847c-82e254b8136e](data/lecture3/latex-66e94cee-e7f6-411c-847c-82e254b8136e.png)_
 - Note that f(x) and Y are in the Y range.
-- ![latex-213c1e92-cf6b-4f49-9d8f-677091bc6476](data/lecture3/latex-213c1e92-cf6b-4f49-9d8f-677091bc6476.png)
-- Least Squares: ![latex-1fbc7384-cdf4-49b6-8ede-8590db05eb82](data/lecture3/latex-1fbc7384-cdf4-49b6-8ede-8590db05eb82.png)
+- ![latex-5927c129-4df9-4611-8855-c1d55ced8a58](data/lecture3/latex-5927c129-4df9-4611-8855-c1d55ced8a58.png)
+- Least Squares: ![latex-2e80456e-6614-426e-a705-226580d5904c](data/lecture3/latex-2e80456e-6614-426e-a705-226580d5904c.png)
   - minimize the squared difference between our prediction and the true output
 
 ### Regression Function
 - We can compose the expectation over 2 steps
-  - ![latex-7db39268-9398-4fad-b259-4e55fd72342e](data/lecture3/latex-7db39268-9398-4fad-b259-4e55fd72342e.png)_
-  - Note that if we minimize the inner objective (![latex-4d143dc4-1c23-4716-aec7-46561d8a0920](data/lecture3/latex-4d143dc4-1c23-4716-aec7-46561d8a0920.png)), then it's the same as minimzing the entire
-  - ![latex-5acbdba1-c17d-4615-b75e-ec100f254ba0](data/lecture3/latex-5acbdba1-c17d-4615-b75e-ec100f254ba0.png)_
-  - ![latex-655c6029-f648-450a-9ea4-9cb3c75be6ab](data/lecture3/latex-655c6029-f648-450a-9ea4-9cb3c75be6ab.png)
+  - ![latex-8374a896-1cf6-4204-9aef-129d8a6ba64d](data/lecture3/latex-8374a896-1cf6-4204-9aef-129d8a6ba64d.png)_
+  - Note that if we minimize the inner objective (![latex-ddce66a7-c8f9-4fae-9be9-f09143a70be0](data/lecture3/latex-ddce66a7-c8f9-4fae-9be9-f09143a70be0.png)), then it's the same as minimzing the entire
+  - ![latex-6a2bf1f4-4043-4e73-aa5c-dadb66b0cec1](data/lecture3/latex-6a2bf1f4-4043-4e73-aa5c-dadb66b0cec1.png)_
+  - ![latex-651a74b1-c1ad-490c-aaf9-14f415f7aceb](data/lecture3/latex-651a74b1-c1ad-490c-aaf9-14f415f7aceb.png)
 
 ### linear hypothesis
 
 
-![graph-65f02134-30c1-47aa-9001-644cc895f4d0](data/lecture3/graph-65f02134-30c1-47aa-9001-644cc895f4d0.svg)
+![graph-043d242e-fccc-4d12-87ca-3a80f1e21754](data/lecture3/graph-043d242e-fccc-4d12-87ca-3a80f1e21754.svg)
 
 ### Example Housing Prices
 
-| Size (square feet) - ![latex-6e5a7dfa-2cef-4fec-b764-26fbab8a3958](data/lecture3/latex-6e5a7dfa-2cef-4fec-b764-26fbab8a3958.png) | # bedrooms ![latex-45ce1c22-b328-4053-a9ae-b071651d9f5a](data/lecture3/latex-45ce1c22-b328-4053-a9ae-b071651d9f5a.png) | Number of floor s![latex-e43bd680-7a0e-4277-add9-5454058e0d49](data/lecture3/latex-e43bd680-7a0e-4277-add9-5454058e0d49.png) | Age of Home ![latex-86bb691a-3f8b-4ef6-b31f-4cfe29e9798f](data/lecture3/latex-86bb691a-3f8b-4ef6-b31f-4cfe29e9798f.png) | Price ($1000s) ![latex-b2f14138-5461-4d64-8ff9-82664a17cf3a](data/lecture3/latex-b2f14138-5461-4d64-8ff9-82664a17cf3a.png) |
+| Size (square feet) - ![latex-daef3b56-ad5f-4ac9-99c0-fc482146a014](data/lecture3/latex-daef3b56-ad5f-4ac9-99c0-fc482146a014.png) | # bedrooms ![latex-bbf44f1d-513d-475c-906e-b1b152fcf9e2](data/lecture3/latex-bbf44f1d-513d-475c-906e-b1b152fcf9e2.png) | Number of floor s![latex-4eca0322-2aaf-43e3-bd2a-4dc1e71c9c66](data/lecture3/latex-4eca0322-2aaf-43e3-bd2a-4dc1e71c9c66.png) | Age of Home ![latex-8da25691-ef47-43a5-b92b-35570dc0f047](data/lecture3/latex-8da25691-ef47-43a5-b92b-35570dc0f047.png) | Price ($1000s) ![latex-ed1c8da3-e7d0-43b1-bdd5-1d9de377380c](data/lecture3/latex-ed1c8da3-e7d0-43b1-bdd5-1d9de377380c.png) |
 |-|-|-|-|-|
 | 2104 | 5 | 1 | 45 | 460 |
 | 1416 | 3 | 2 | 40 | 232 |
@@ -43,7 +43,7 @@ Problems:
 
 - First 4 columns are the input features
 - Last column is the output
-- ![latex-a2b737a3-9191-4ff7-95a5-84f993334585](data/lecture3/latex-a2b737a3-9191-4ff7-95a5-84f993334585.png)
+- ![latex-7a3444da-7e6d-4778-8f7b-354860d0c811](data/lecture3/latex-7a3444da-7e6d-4778-8f7b-354860d0c811.png)
 
 #### Formally
 
@@ -52,16 +52,16 @@ Assumptions
   - this is more important, we can replace x with something non-linear
 - Linear in x
 
-![latex-39b13e3b-991e-4e2e-922a-5bff96aa83a4](data/lecture3/latex-39b13e3b-991e-4e2e-922a-5bff96aa83a4.png)
+![latex-1d731801-42ec-42fc-abac-b45a08492750](data/lecture3/latex-1d731801-42ec-42fc-abac-b45a08492750.png)
 - w and x are both column vectors, this is an inner product.
-- Note: ![latex-0b7ae29f-5245-4f44-8b9d-151805bf77fb](data/lecture3/latex-0b7ae29f-5245-4f44-8b9d-151805bf77fb.png)
+- Note: ![latex-d3200e5e-6c04-49f5-b514-d22d3175625a](data/lecture3/latex-d3200e5e-6c04-49f5-b514-d22d3175625a.png)
 - Loss function: Mean Squared Error
-  - ![latex-062fe93d-ab69-412e-bd8b-99ba3a8e04fb](data/lecture3/latex-062fe93d-ab69-412e-bd8b-99ba3a8e04fb.png)
+  - ![latex-49f176f3-c0fc-4da7-9ae9-9047f68c2407](data/lecture3/latex-49f176f3-c0fc-4da7-9ae9-9047f68c2407.png)
 - Empirical Risk (mean)
   - Ideally we would want to use the true distribution, but we don't know what this is.
 
 ### Simplification Again (Slide 11)
-- ![latex-e78995e1-fe83-406d-9c41-e72c594776fe](data/lecture3/latex-e78995e1-fe83-406d-9c41-e72c594776fe.png): Just add 1 to the top of x
+- ![latex-936da5a7-b51c-4f40-b936-e2f975687a69](data/lecture3/latex-936da5a7-b51c-4f40-b936-e2f975687a69.png): Just add 1 to the top of x
 - add the bias to the top of w, is a d+1 vector
 - Last one is L2 Norm
 
@@ -73,32 +73,32 @@ Recall that the constant coeifficents can be ignored as they don't effect the op
 - Maximizing the negative is the same as minimizing the positive
 
 ### Normal Equation
-- Recall that the squared L2-Norm can be written as ![latex-88a5b7f8-3713-4905-9104-87bfa8190e17](data/lecture3/latex-88a5b7f8-3713-4905-9104-87bfa8190e17.png)
+- Recall that the squared L2-Norm can be written as ![latex-7bf44073-40bf-472c-b02f-af5632b6fc9c](data/lecture3/latex-7bf44073-40bf-472c-b02f-af5632b6fc9c.png)
 - To simplify remember
-  - ![latex-a01bc052-750d-427c-94dd-4806de39b42d](data/lecture3/latex-a01bc052-750d-427c-94dd-4806de39b42d.png)
-  - ![latex-b8fb84c7-71af-41eb-b076-9813efc587ee](data/lecture3/latex-b8fb84c7-71af-41eb-b076-9813efc587ee.png)
-- Using the facts we get: ![latex-3ca9f11a-51c1-475c-a7db-7824233c4325](data/lecture3/latex-3ca9f11a-51c1-475c-a7db-7824233c4325.png)
+  - ![latex-4b70ec56-39bf-4b22-818d-391b2260e218](data/lecture3/latex-4b70ec56-39bf-4b22-818d-391b2260e218.png)
+  - ![latex-336044f7-f6a6-4258-8647-899f038006c8](data/lecture3/latex-336044f7-f6a6-4258-8647-899f038006c8.png)
+- Using the facts we get: ![latex-cfdc2dde-885a-4131-8ccf-26cf767399db](data/lecture3/latex-cfdc2dde-885a-4131-8ccf-26cf767399db.png)
   - solve and divide by 2 to get the Normal equation
-- Normal Equation: ![latex-def42be3-cf38-4b62-a519-1a76b3307573](data/lecture3/latex-def42be3-cf38-4b62-a519-1a76b3307573.png)
+- Normal Equation: ![latex-5b29b19b-ffa3-46b0-97b8-c27f3805e1e1](data/lecture3/latex-5b29b19b-ffa3-46b0-97b8-c27f3805e1e1.png)
   - Solve this using the system of linear equations
-    - Easier / more efficient to implement: ![latex-fe6f97f9-69e8-4940-b1f9-f02759149c6b](data/lecture3/latex-fe6f97f9-69e8-4940-b1f9-f02759149c6b.png), instead of ![latex-77db7bd2-7de6-4aba-93ca-59910a9821e4](data/lecture3/latex-77db7bd2-7de6-4aba-93ca-59910a9821e4.png)
-  - Analytical solution is ![latex-3e3532a7-98cb-41ee-96ae-bdf1372c6da9](data/lecture3/latex-3e3532a7-98cb-41ee-96ae-bdf1372c6da9.png)
+    - Easier / more efficient to implement: ![latex-c92907d5-f5e1-4c51-b6df-045e2b3f540b](data/lecture3/latex-c92907d5-f5e1-4c51-b6df-045e2b3f540b.png), instead of ![latex-05876266-639d-40d4-9202-f68ea63aaef4](data/lecture3/latex-05876266-639d-40d4-9202-f68ea63aaef4.png)
+  - Analytical solution is ![latex-7446b5b2-257e-4c04-877e-32e80719c421](data/lecture3/latex-7446b5b2-257e-4c04-877e-32e80719c421.png)
 
 #### When it is non-invertable
 - Redundent features (linearly dependent)
   - Can get around this by deleting the redundent features
-- Can also occur if there are too many features ![latex-bfd75579-9c68-415b-9b08-31a24c3aab20](data/lecture3/latex-bfd75579-9c68-415b-9b08-31a24c3aab20.png)
+- Can also occur if there are too many features ![latex-6840832f-9ab8-4435-a2eb-3716df310629](data/lecture3/latex-6840832f-9ab8-4435-a2eb-3716df310629.png)
   - Delete features or use regularization
 
 ### Gradient Descent
-- ![latex-9aa92c15-5501-4609-9d7b-c0cf8768e367](data/lecture3/latex-9aa92c15-5501-4609-9d7b-c0cf8768e367.png)
+- ![latex-bb9ce7ae-1874-4767-8184-384d9c12363f](data/lecture3/latex-bb9ce7ae-1874-4767-8184-384d9c12363f.png)
   - iterate until convergence
   - If the learning rate is too low, the algorithm will take a very long time
   - If the learning rate is too high, it will fail to converge
   - See chapter 9 in Convex Optimization to choose learning rate.
-- ![latex-2330f67d-12d8-47a6-a1ca-81f374d1bd84](data/lecture3/latex-2330f67d-12d8-47a6-a1ca-81f374d1bd84.png)
+- ![latex-a9c26e63-664f-41cf-aafe-47dfc6f528f0](data/lecture3/latex-a9c26e63-664f-41cf-aafe-47dfc6f528f0.png)
 - Need to make sure that the features are on the same scale
-  - We can do standardization: ![latex-0b2ba9e1-605a-4078-b5ab-d1402cf8609a](data/lecture3/latex-0b2ba9e1-605a-4078-b5ab-d1402cf8609a.png)
+  - We can do standardization: ![latex-36a4a10f-7a2b-4ba6-9af2-0135c113246d](data/lecture3/latex-36a4a10f-7a2b-4ba6-9af2-0135c113246d.png)
   - Example: In the housing example the features are not on the same scale
 
 ### Gradient vs. Normal Equation Trade-offs
@@ -112,17 +112,17 @@ Normal Equation
 - No learning rate
 - No iterations
 - Slow if the number of features is large
-  - Recall that ![latex-579f7a37-e9fc-45f2-924d-48df3aacb7e0](data/lecture3/latex-579f7a37-e9fc-45f2-924d-48df3aacb7e0.png)
+  - Recall that ![latex-5c420d26-fdc5-43f7-bd55-9122c0a10c41](data/lecture3/latex-5c420d26-fdc5-43f7-bd55-9122c0a10c41.png)
 
 ### Non-Linear Regression
 - We can do it by constructing a different features space and doing linear regression in that space
 
 #### Example
-- Suppose we have a quadratic model: ![latex-d297351e-2127-49a5-b2d6-c761f81d54a6](data/lecture3/latex-d297351e-2127-49a5-b2d6-c761f81d54a6.png)
-- Construct a vector ![latex-c1df1a55-448f-4e4d-a1f0-dc12b096b19f](data/lecture3/latex-c1df1a55-448f-4e4d-a1f0-dc12b096b19f.png), then ![latex-cafebba3-8309-4ea6-bf84-166e983c1c4b](data/lecture3/latex-cafebba3-8309-4ea6-bf84-166e983c1c4b.png)
+- Suppose we have a quadratic model: ![latex-abfe7599-2462-4576-9411-b3d95ad4fdb5](data/lecture3/latex-abfe7599-2462-4576-9411-b3d95ad4fdb5.png)
+- Construct a vector ![latex-eb6bb54a-ea52-4e4a-902a-6c90595b748b](data/lecture3/latex-eb6bb54a-ea52-4e4a-902a-6c90595b748b.png), then ![latex-b652f03e-e1d5-48f2-91dd-d9a4c57ac601](data/lecture3/latex-b652f03e-e1d5-48f2-91dd-d9a4c57ac601.png)
 
 #### Quadratic Fitting
 - underlying function is quadratic
-- ![latex-9a8ec2c8-0e53-43a6-b56c-6a88d88fcc6e](data/lecture3/latex-9a8ec2c8-0e53-43a6-b56c-6a88d88fcc6e.png)
-- Polynomial Regression: ![latex-18b34e42-e05a-443f-a570-29901cc0b413](data/lecture3/latex-18b34e42-e05a-443f-a570-29901cc0b413.png)
+- ![latex-55e3e60a-c676-4c33-8410-63aabf259aa5](data/lecture3/latex-55e3e60a-c676-4c33-8410-63aabf259aa5.png)
+- Polynomial Regression: ![latex-391227d4-a24a-4d2e-b03d-751be740b301](data/lecture3/latex-391227d4-a24a-4d2e-b03d-751be740b301.png)
   - Use the linear regression framework as usual.
