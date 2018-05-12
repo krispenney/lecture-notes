@@ -26,10 +26,10 @@
   - We would prefer unbiased
 
 ### Likelihood Function
-- Descrete: ![latex-e3039a17-8b70-4244-9101-f11610f7096e](data/lecture2/latex-e3039a17-8b70-4244-9101-f11610f7096e.png)_
+- Descrete: ![latex-e3039a17-8b70-4244-9101-f11610f7096e](data/lecture2/latex-e3039a17-8b70-4244-9101-f11610f7096e.png)
   - Use the probability mass function
   - Notice L is a function of ![latex-0c671db4-3c78-42c4-b161-9784e24c3f03](data/lecture2/latex-0c671db4-3c78-42c4-b161-9784e24c3f03.png), but pms is a function of x given ![latex-c3ab47a5-4a3d-41c9-94f8-0318aa1a7178](data/lecture2/latex-c3ab47a5-4a3d-41c9-94f8-0318aa1a7178.png)
-- Continuous: ![latex-2de64296-1836-4f20-9666-543d56346929](data/lecture2/latex-2de64296-1836-4f20-9666-543d56346929.png)_
+- Continuous: ![latex-2de64296-1836-4f20-9666-543d56346929](data/lecture2/latex-2de64296-1836-4f20-9666-543d56346929.png)
   - Density function
 - We would typically use the log-likelihood function
   - ![latex-6fe0e4b6-7394-4828-802d-319f76d3194c](data/lecture2/latex-6fe0e4b6-7394-4828-802d-319f76d3194c.png)
@@ -84,8 +84,8 @@ Suppose that we have a **convex** function ![latex-7ab89c57-0dc4-4ed9-ba0e-d33db
 ### Fully Bayesian Approach
 - Include all possible values of ![latex-ee09fe2b-179f-4082-af9d-86f812ff04a9](data/lecture2/latex-ee09fe2b-179f-4082-af9d-86f812ff04a9.png)
 - Typically generalize better with limited training data, high computational cost, usually intractable.
-- ![latex-60b3912a-d5a3-4d50-bcd1-8cc1ecd86b45](data/lecture2/latex-60b3912a-d5a3-4d50-bcd1-8cc1ecd86b45.png)_
-- ![latex-03957ea0-8db2-449a-9f42-5be89b70f37c](data/lecture2/latex-03957ea0-8db2-449a-9f42-5be89b70f37c.png)_
+- ![latex-60b3912a-d5a3-4d50-bcd1-8cc1ecd86b45](data/lecture2/latex-60b3912a-d5a3-4d50-bcd1-8cc1ecd86b45.png)
+- ![latex-03957ea0-8db2-449a-9f42-5be89b70f37c](data/lecture2/latex-03957ea0-8db2-449a-9f42-5be89b70f37c.png)
 
 ## Bias-Variance Tradeoff
 - Recall that we would like a small bias and small variance, but there are some tradeoffs...
@@ -116,7 +116,7 @@ Suppose that we have a **convex** function ![latex-7ab89c57-0dc4-4ed9-ba0e-d33db
   - Mean 0, variance 1
 - Scaling: Make sure all features have roughly the same scale
   - ![latex-3f091565-c41d-4906-aca1-60152efb7c08](data/lecture2/latex-3f091565-c41d-4906-aca1-60152efb7c08.png)
-  - ![latex-2aacdb7b-2e7d-4f0f-8906-3517ad4d4744](data/lecture2/latex-2aacdb7b-2e7d-4f0f-8906-3517ad4d4744.png)_ (The mean)
+  - ![latex-2aacdb7b-2e7d-4f0f-8906-3517ad4d4744](data/lecture2/latex-2aacdb7b-2e7d-4f0f-8906-3517ad4d4744.png) (The mean)
 
 When to do standardization
 - Some features are significantly smaller or larger than the others.
