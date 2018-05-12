@@ -14,7 +14,7 @@ Problems:
   - Which one should we use?
 
 ### Risk Minimization
-- Minimize the expected loss: ![latex-66e94cee-e7f6-411c-847c-82e254b8136e](data/lecture3/latex-66e94cee-e7f6-411c-847c-82e254b8136e.png)_
+- Minimize the expected loss: ![latex-66e94cee-e7f6-411c-847c-82e254b8136e](data/lecture3/latex-66e94cee-e7f6-411c-847c-82e254b8136e.png)
 - Note that f(x) and Y are in the Y range.
 - ![latex-5927c129-4df9-4611-8855-c1d55ced8a58](data/lecture3/latex-5927c129-4df9-4611-8855-c1d55ced8a58.png)
 - Least Squares: ![latex-2e80456e-6614-426e-a705-226580d5904c](data/lecture3/latex-2e80456e-6614-426e-a705-226580d5904c.png)
@@ -22,9 +22,9 @@ Problems:
 
 ### Regression Function
 - We can compose the expectation over 2 steps
-  - ![latex-8374a896-1cf6-4204-9aef-129d8a6ba64d](data/lecture3/latex-8374a896-1cf6-4204-9aef-129d8a6ba64d.png)_
+  - ![latex-8374a896-1cf6-4204-9aef-129d8a6ba64d](data/lecture3/latex-8374a896-1cf6-4204-9aef-129d8a6ba64d.png)
   - Note that if we minimize the inner objective (![latex-ddce66a7-c8f9-4fae-9be9-f09143a70be0](data/lecture3/latex-ddce66a7-c8f9-4fae-9be9-f09143a70be0.png)), then it's the same as minimzing the entire
-  - ![latex-6a2bf1f4-4043-4e73-aa5c-dadb66b0cec1](data/lecture3/latex-6a2bf1f4-4043-4e73-aa5c-dadb66b0cec1.png)_
+  - ![latex-6a2bf1f4-4043-4e73-aa5c-dadb66b0cec1](data/lecture3/latex-6a2bf1f4-4043-4e73-aa5c-dadb66b0cec1.png)
   - ![latex-651a74b1-c1ad-490c-aaf9-14f415f7aceb](data/lecture3/latex-651a74b1-c1ad-490c-aaf9-14f415f7aceb.png)
 
 ### linear hypothesis
