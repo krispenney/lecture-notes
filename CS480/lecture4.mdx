@@ -1,0 +1,89 @@
+# Lecture 4 - May 14, 2018
+
+## Linear Regression
+- Must be linear wrt w, we can make a transform using a non-linear basis function for x.
+
+### What if the normal equation matrix is not invertible?
+- Too many features
+  - delete redundant
+- Add regularization terms
+
+### Gradient Descent
+- Need to do feature scaling in order to increase likelihood of convergence
+
+## Generalized Linear Regression
+- Why do we do this? We know linear regression well, this allows use to extend our knowledge to non-linear problems.
+
+## Overfitting
+- Model can't generalize to new data.
+- Very low training error, high testing error
+
+### How to address?
+- Reduce the number of features
+- regularization: penalize high magnitude features
+
+### Polynomial Curve Fitting Example
+- $$x_{i,j} = x^i_j$$
+- $$\min_{w,b} \frac{1}{N} \sum_{i=1}^N [(\sum_{j=1}^9 w_j x_{i,j}) + b - y_i]^2 + \lambda(w^2_4 + w^2_5 + w^2_6 + \ldots + w^2_9)$$
+- If we set $$\lambda$$ to be very large, then when we minimize the objective functions, these terms will be zero close to 0.
+
+### Ridge Regression
+- Add a penalty term
+- Some hyperparameter $$\lambda$$, that controls the penalty
+  - Larger lambda puts those terms to 0
+- L1, L2 norms.
+
+Goals of the terms
+- First: Minimize the training error
+- Second: Regulatization terms. Goal is to get a simplify the model.
+  - This term is only related to w, not to the bias.
+  - The reason for this is that bias just control the intercept, not really the complexity of the model.
+
+- $$x \rightarrow 0$$ (small): basically back to Least Squares
+- $$x \rightarrow \infty$$: w close to 0.
+
+What happens if we remove $$\frac{1}{N}$$?
+- changes the optimal $$\lambda$$
+
+### Pre-processing
+- To simplify the model, we can remove the intercept param via centering and standardization
+
+#### Center Output
+- $$y_i = y_i - \bar{y}_i$$_
+  - subtract by the mean
+- See feature scaling
+
+#### Standardize input
+- subtract by the mean, divide by standardization.
+
+#### Solution (slide 31)
+- Optimal value of $$b = \bar{y}$$
+- Take the derivative of the equation, solve for b.
+- Basically redefine X and Y in terms of the centered and standardized output
+- Quadratic optimization problem
+
+#### Ridge Regression with Gradient Descent
+- $$w = w(1 - 2\alpha\lambda) - \frac{\alpha}{N}(2X^TXw - 2X^Ty)$$
+
+#### Predictions
+- We have some new input value
+- Need to standardize it (using the empirical values on the training set)
+- transform the output by adding the empirical mean $$\bar{y}$$ back (again from the model)
+
+### Connection to MAP
+- $$f(x_1, x_2, \ldots, x_k)$$ ~ N(u, sig)
+  - pdf is regular normal
+- $$P(w \mid x, y) = \frac{P(w, x, y)}{P(x, y)} = \frac{P(W)P(X \mid W)P(Y \mid x, w)}{P(x, y)}$$
+
+### Sparse
+- When terms are close to 0
+- Use L1 regularization
+- downside: no closed form solution
+
+## Cross Validation
+
+### Conventional Validation
+- Partition datasets into train, validation, and test sets (typical ratio: 60/20/20)
+  - Train: Helps us fit the model
+  - validation set: helps us to choose the best hyperparams
+  - test set: assess the model (generalization error)
