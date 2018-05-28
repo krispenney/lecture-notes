@@ -1,0 +1,157 @@
+# Lecture 8 - May 28, 2018
+
+## Perceptrons
+- Basic neural network, Inspired by the brain.
+- Artifical network: just input and output (no hidden layers)
+
+---------
+x -> y1
+x -> y2
+x -> y3
+x -> y4
+x -> y5
+---------
+
+Neuron is activated if: $$h(xw) > threshold$$
+- activation function could be the `sign(t)` function: 1 if t > 0, -1 otherwise
+- $$\hat{y} = sign(w^Tx + b)$$
+- Note that higher order features will have greater influence on the predictions
+  - if you want equal, just feature scaling
+- batch learning
+  - evaluate performance on test dataset
+  - divide dataset into training and testing sets
+- online learning
+  - streaming data samples
+  - predict outputs before knowing the target values
+  - Interested in making the lowest error possible
+- Online -> batch
+  - can simply use
+  - online to batch may not work properly
+
+### Online training algorithm
+
+```python
+for i in range(1, maxIter):
+  for (x, y) in D:
+    a = np.dot(w.T, x) + b
+    if y*a <= 0: # This tells us that the prediction was wrong (differing signs)
+      w[d] = w[d] + y*x[d] # for all d = 1..D
+      b += y
+
+return w, b
+```
+
+Why error driven updates?
+- if we're incorrect, push the parameters to the correct direction.
+
+### Spam Filtering Classification Example
+- Feature set: 6 words, x[i] is 1 if the word[i] is present
+- output: 1 -> ham, -1 -> spam
+- initially set all parameters to 0
+
+| Iteration | Weights, bias | prediction |
+|-|-|-|
+| 0 | $$w = 0, b = 0$$ | $$y*a = 0 \implies y*a \le 0 \implies $$ Update|
+| 1 | $$w_d = w_d + y*x_d \forall d \in \{1, 5\}$$, $$b += y = 1$$ | $$y*a \le 0 \implies $$ update |
+... See slide 13
+
+continue until convergence or have some maximum number of iterations
+- convergence: pass through the entire training set, without any updates to weights / bias
+  - the algorithm can correctly predict all training examples
+
+### Perceptron Convergence Theorem
+- Linearly separable dataset: data points can be separated by some linear function (hyperplane)
+- margin: $$\gamma > 0$$, L1 norm of X is less than or equal to 1
+- algorithm will converge after at most $$\frac{1}{\gamma^2}$$ updates
+- **Note**: if the dataset isn't linearly separable then the algorithm will never converge
+
+#### Margin
+- distance between a point x and a hyperplane: $$w^Tx + b = 0 \rightarrow d = \frac{\mid w^Tx + b \mid}{\mid\mid w \mid\mid}$$
+- $$margin(D, w, b) = min(d)$$ for all x (the minimum distance), if linearly separable. Otherwise margin is $$-\infty$$
+- $$\gamma = sup(margin(D, w, b))$$
+  - sup: maximum margin
+  - Think support vectors
+
+#### Training tips
+- suppose dataset is 500 positive examples, then 500 negative
+- origionally, the perceptron algorithm would place too much emphasis on later examples
+- **solution**: shuffle the dataset before each training iteration
+
+#### Abitrary Linear Separator
+- the larger the margin, the faster convergence
+- but it may not stop at the optimal linear separator
+  - there could be other separators that work in your dataset
+  - order of training examples and initial values of w,b influence this separator
+
+#### When to stop
+- online: never
+- batch: have some maximum number of iterations
+  - 1 too small (underfitting)
+  - too high (overfitting)
+  - save weights and biases at each iteration, use the ones that give the best test error.
+
+### Alternative Approach
+- $$M = \{(x_i, y_i)\}$$ be the set of misclassified examples (i.e. $$y_i(w^Tx_i + b) < 0$$)
+- Use vector forms, add bias to the weights matrix and each feature (augmented form).
+- If correct prediction, the loss is 0. Otherwise, $$y_i * \hat{y_i} < 0 \implies -y_i * \hat{y_i} > 0$$
+
+#### Stocastic gradient descent
+- Perform an update after looking at each sample (note: still online, update as we get stream)
+- $$\bar{w} = \bar{w} - n \delta L_i$$
+  - n is the learning rate
+  - when learning rate is 1, just the threshold algorithm
+  - typically want to decrease overtime, sum of squares less than inf, sum less equal to inf
+
+### Multiclass Perceptron
+- Up to now, binary classification
+- y is now k classes, predictions $$\hat{y} = argmax_y (w^y)^Tx$$
+  - have a weight matrix for each class
+  - predicted class is just the output that has the maximum score
+- still do error driven updates
+  - if incorrect, we know the correct class, update the relevant weight matrix ($$w^y = w^y + x$$) and the incorrect weight matrix ($$w^\hat{y} = w^\hat{y} - x$$)
+  - move the weights of the correct class in the right direction, move the incorrect weights away from that guess.
+
+### What not linearlly separable
+
+If not linearlly separable, won't converge
+- typically the weights will enter some infinite cycle.
+- Find better features
+- kernel methods
+- Deeper neural networks
+
+## Kernels
+
+### Feature space mappings
+
+Recall basis functions.
+Given inputs on some d dimensional space, map them to M dimensions
+- $$\phi(x) = \[\phi_1(x), \phi_2(x), \ldots, \phi_n(x)\]$$
+- M could be infinite
+- example
+  - $$d = 1$$, $$\phi(x) = \[1, x, x^2\]$$
+
+### Kernel Functions
+- some function k: $$R^d x R^d \rightarrow R$$
+  - $$k(x, x') = \phi(x)^T\phi(x')$$
+  - $$\phi(x)$$ is some feature space mapping
+  - just inner product
+  - we don't care about the specific values of the phi functions, just the kernel function value.
+    - For example, if M is infinite, we can often compute the kernel function without needing the infinite vectors.
+
+#### Verify Kernel Function example
+- can just separate the variables, define the phi function, show the inner product.
+
+#### Gram Matrix
+- Defines a condition to be a valid kernel function
+- N: the number of training examples
+- $$K_{i, j} = k(x_i, x_j)$$
+  - symmetric: $$K_{i, j} = K_{j, i}$$
+  - positive semi-definite: $$a^TKa \ge 0$$
+    - check that all eigenvalues of K are positive
+    - K can be decomposed as $$K = A^TA$$
+
+#### Constructing Kernels
+- start with $$\phi(x)$$, make $$k(x, x')$$
+- Construct the kernel function directly (without needing to know the phi function)
+
+next class...

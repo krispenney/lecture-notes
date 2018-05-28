@@ -1,0 +1,13 @@
+digraph {
+	x
+	y1
+	x -> y1
+	y2
+	x -> y2
+	y3
+	x -> y3
+	y4
+	x -> y4
+	y5
+	x -> y5
+}
