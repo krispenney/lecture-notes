@@ -1,0 +1,15 @@
+digraph {
+	s_EG_SU
+	ts_EG_SU
+	s_EG_SU -> ts_EG_SU
+	ts_EG
+	ts_EG -> ts_EG_SU
+	s_EG
+	s_EG -> s_EG_SU
+	c_EG
+	c_EG -> s_EG_SU
+	uc
+	uc -> c_EG
+	uc -> s_EG
+	uc -> ts_EG
+}
