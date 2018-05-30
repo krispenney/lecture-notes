@@ -1,0 +1,188 @@
+# Lecture 9 - May 30, 2018
+
+## Trusted OS Design
+- fundamental: access control between subjects and objects
+  - subjects: users
+  - object: files, media
+- Make security part of the design process from the beginning
+
+### Least Privilege
+- Give the lowest access possible
+- limits the possibility for damage
+
+### Economy of mechanism
+- simple, minimal, straightforward
+- easy to understand, test
+
+### Open Design
+- no **security by obscurity**: hiding something doesn't mean it's secret
+  - Might just mean a bit more work for an attacker
+- secrets should be keys
+
+### Complete Mediation
+- check every access
+- make sure the user still has the permissions
+
+### Permission Based / Fail-safe defaults
+- defaults should be denial
+- whitelists vs. blacklists
+  - whitelists minimize the scope of access
+
+### Separation of Privileges
+- 2+ conditions met to gain access
+- 2FA
+- Cashier needs manager to approve large transactions
+
+### Least Common Mechanisms
+- Every shared mechanism could be used as a covert channel
+- libraries, files
+
+### Ease of Use
+- If protection is hard to use, no one will use it.
+- Bad example: Windows Vista, annoying permission system, no one used it
+
+## Security Features of a Trusted OS
+
+### Access Control
+- Mandatory Access Control (MAC)
+  - Central authority establishes who can access what
+  - implement: Chinese Wall, Bell-la Padula, Biba
+  - military, very inflexible
+- Discretionary Access Control (DAC)
+  - owners of an object have some control
+  - grant others access
+  - Unix or Windows
+  - good for organizations (workplaces)
+- Role Based Access Control (RBAC)
+  - last lecture
+
+- Use combinations: follow strictest first (MAC -> DAC)
+
+### Object Reuse protection
+- Alice allocates a buffer to store her password, the process frees it, another process could come along and later read.
+  - Spectre, information leaked in registers.
+- **Defensive Programming:** Don't rely on the OS, clear the region yourself.
+
+### Hidden Data
+- Soft deletion of data
+- You think you deleted some data, but it still exists somewhere, allowing it to be reused.
+
+### Complete Mediation / Trusted Paths
+- Complete Mediation: Ensure that all accesses are checked, proper permissions
+  - If data has multiple access paths and one isn't checked, then possible to bypass
+  - Only as strong as the weakest link
+- Trusted Paths: Tricking users into trusted scenarios
+  - fake OS login screens. `CTRL+ALT+DELETE`
+  - enter `sudo` into an untrusted application
+
+### Accountability and Audit
+- keep of log of all security events
+- if something bad happens, events can be replayed to understand what went wrong.
+  - hold others accountable
+- How Granular?
+  - find-grain logs: space / performance issues. Few malicious attempts compared to legit. Harder to analyze.
+  - Coarse-grained: You could be missing information that could assist the analysis.
+
+### Intrusion Detection
+- OS can detect abnormal / potentially malicous patterns of behaviour.
+  - anomalies
+- Alert the user / try to mitigate.
+- False positive / negatives are an issue
+  - false positives could wrongly alert the user to benign programs
+
+### Trusted Computing Base (TCB)
+- Part of a Trusted OS that enforces the OS's security policy
+- Possible implementations
+  1. Kernelized Design
+    - monolithic, TCB is distributed throughout the kernel
+  2. Isolation
+    - separate small module to handle these operations
+    - easier to test
+  3. Ring-like structure
+    - Security kernel enforces for the OS
+    - Sits infront of the hardware
+
+#### Rings
+- different "layers" of security
+- If process runs in ring n, can access higher rings
+- Attempts to access lower rings will cause the security policy to be consulted.
+
+#### Reference Monitor
+
+--------
+subjects -> access_request
+access_request -> monitor
+monitor -> objects
+monitor -> policy
+policy -> monitor
+subjects -> authentication
+-------
+
+- tamperproof, unbypassible
+- should be simple
+
+### Virtualization
+- logical isolation / separation of processes
+- Virtual memory: processes believe they own all of the memory
+  - Page mapping
+- Virtual machine: Belief that it has access to all of the hardware / IO
+  - attacks could be limited to the virtual environment (sandboxing)
+  - A rootkit is wrap your OS in a virtual environment
+
+### Application Insulation
+- Memory encryption applcation shielding from other apps
+- trusted and untrusted applications / code
+- untrusted code talks to trusted code via an API
+- store data in a secure enclave.
+- If the memory leaks to another process, it would be basically useless.
+- How it compares with virtualization
+  - virtualization the OS / other applications could still have access
+
+### Least Privilege Examples
+- Windows NT: any process has full access
+- pre-Vista: fine-grain access, but users always just ran as administer
+- Vista: temporary access control
+  - integrity levels (lower for downloaded files, web browsers)
+- SELinux, AppArmor
+  - difficult to set up
+  - lots of things to specify
+- iPhone
+  - Original: run all Apps as root, but no third part apps
+  - Post-App Store: run all apps in a sandbox
+- Chroot
+  - sandbox a command by changing its root directory, can't access files outside of that folder
+  - libraries need to be in that directory
+  - problem if you can break out of the sandbox
+  - Trick processes into using a spoofed `/etc/passwd` file
+
+#### Compartmentalization
+- Divide application into different parts
+- some compartments may have different priviliges, run in a sandbox
+- parts that deal with untrusted data, run in sandboxed process
+- child needs to contact the monitor to get access to certain data
+  - monitor could reject / terminate the child
+
+### setuid/suid bit
+- read/write/exec bits, and suid bit
+- If suid bit is set for executable, the program will run with the prividges of the owner, not the caller
+  - Problem if owned by root, if Alice runs could cause damage to real files.
+
+### Assurance
+
+We want other people to trust the security of our OS, convince them via:
+
+- testing
+  - demonstrate existence of problems, not absence
+  - can't check all possible cases (in most cases)
+  - pen testing: ask outside experts to break in.
+- formal verification
+  - logic proofs
+- validation
+  - traditional software engineering methods
+  - requirements, code reviews, etc.
+
+### Evaluation
+- trusted entity evaluate the OS, give rating if it satisfies some criteria
+- criteria
+  - protection profiles: security threats and objectives
+  - rate on the profiles

@@ -1,0 +1,14 @@
+digraph {
+	subjects
+	access_request
+	subjects -> access_request
+	monitor
+	access_request -> monitor
+	objects
+	monitor -> objects
+	policy
+	monitor -> policy
+	policy -> monitor
+	authentication
+	subjects -> authentication
+}
