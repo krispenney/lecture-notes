@@ -1,0 +1,101 @@
+# Lecture 10 - June 4, 2018
+
+## Gaussian Processes
+Facts
+1. If x is Gaussian, then $$Ax$$ is Gaussian
+2. If $$x, y\midx$$ are gaussian, then $$y, x\midy$$ is gaussian
+- Gaussian process is a set of joint functions
+
+### Verifying a Kernel
+- Gram matrix K, where $$K_{ij} = k(x_i, x_j)$$
+  - symmetric: $$K_{i,j} = K_{j,i}$$
+  - positive semi-definate
+
+### Relating to covariance function
+- can verify that it's symmetric and PSD
+- given any mean function and kernel function, there exists a gaussian process
+
+### Gaussian Process for Regression
+
+- we have a linear model: $$y = w^T\phi(x)$$, $$w ~ N(0, \alpha^{-1}I)$$
+- Using a feature space mapping for x, $$x \in R^d \rightarrow \phi(x) \in R^m$$
+- Construct a $$\phi$$ matrix, where $$\phi_{n,k} = \phi_k(x_n)$$
+  - this $$\phi$$ matrix is nxm
+  - basically take our feature mapping, and stack all of our samples
+- Then, $$y = \phi w$$
+  - y is also a vector
+- We can recall the fact that $$Ax$$ is Gaussian, then y is also gaussian.
+  - mean is 0, since mean w is 0
+  - covarience is: $$k = \frac{1}{\alpha}\phi(x_n)\phi(x_m)^T$$
+    - This is just the kernel function, Gram matrix
+    - Therefore, we only need the kernel function, not $$\phi(x)$$
+
+#### With Noise
+
+$$t = y + \epsilon = w^T\phi(x) + \epsilon$$
+- w is same as before
+- $$\epsilon ~ N(0, \beta^{-1})$$
+
+Prediction:
+
+$$P(t_{N+1} \mid t)$$_
+- we know $$P(w)$$ and $$P(t \mid w)$$ are both gaussian, use fact 2. We can obtain $$P(t), P(w \mid t)$$
+- $$P(t)$$ is a gaussian process, Gaussian,
+  - covariance matrix: $$C_{n, m} = k(x_n, x_m) + \beta^{-1}\delta$$
+  - delta is 0-1 error
+
+#### Baysian Linear Regression
+- as before we knwo $$P(w), P(t \mid w)$$
+- Therefore by 2: $$P(t), P(w \mid t)$$
+
+### Gaussian Process for Classification
+
+output is no longer continuous, comes from some finite set
+
+#### Binary Classification
+- outputs in {0, 1}
+- N data samples
+- Given an N+1 input, want to predict $$P(t_{N+1} \mid t)$$_
+- $$\alpha(x)$$ is a GP, which has continuous output. Transform this with the sigmoid function $$\sigma(\alpha(x))$$
+- recall logistic regression:
+- $$P(t=1 \mid \alpha) = \sigma(\alpha(x))$$
+- Can construct the likelihood function
+  - $$P(t \mid \alpha) = \sigma(\alpha(x))^t (1 - \sigma(\alpha(x)))^{(1-t)}$$
+
+## Mixture Models and EM
+
+### K-Means Clustering
+- don't assume any distributional information
+- N data samples, want to group into k clusters (given)
+- $$r_{nk} = 1$$_ then the n-th point belongs to the k-th cluster
+- Objective function: want to minimize the distance between each data point to the center of the cluster.
+  - $$J = \sum_{n=1}^N\sum_{k=1}^K r_{nk} L2(x_n - u_k)^2$$
+  - Note that each point can only be in a single cluster, therefore only 1 term in the inner sum.
+
+Algorithm
+1. Minimize J with respect to the mappings, keeping the centers fixed
+  - New mappings
+  - Each point belongs to the cluster with the closest center
+2. Minimize J with respect to the centers, keeping the mappings fixed
+  - compute new centers
+  - Centers are just average of all of the points in the cluster
+3. repeat (some convergence criteria)
+  - iterations
+  - stability
+  - check loss delta, set some threshold
+
+**Hard Clustering**
+- Each point can only belong to a single cluster
+- K-MEAN
+
+**Soft Clustering**
+- Each point has a probability distribution over the clusters.
+- Gaussian
+
+### Mixture Models
+- Notice that each gaussian distribution has a single peak (at the mean)
+- Mixtures allow for multiple peaks
+- Mixed Gaussian: $$p(x \mid \theta) = \sum_{k=1}^K \pi_k N(x \mid u_k, \Sigma_k)$$
+  - sum of the $$\pi$$s must equal 1.
+- **Latent Random Variables**: Not observed directly, inferred from other observed variables
+  - Introduce z to model this mixed distribution
