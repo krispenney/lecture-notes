@@ -1,0 +1,12 @@
+digraph {
+	internal_network
+	internal_firewall
+	internal_network -> internal_firewall
+	dmz
+	internal_firewall -> dmz
+	external_firewall
+	dmz -> external_firewall
+	internal_firewall -> external_firewall
+	external_network
+	external_firewall -> external_network
+}

@@ -1,0 +1,7 @@
+digraph {
+	client
+	proxy
+	client -> proxy
+	internet
+	proxy -> internet
+}
