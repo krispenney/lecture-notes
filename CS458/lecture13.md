@@ -1,0 +1,150 @@
+# Lecture 13 - June 13, 2018
+
+## Intrusion Detection Systems (IDS)
+
+Detect if attacks are happening on the network
+- second line of defence, in case firewall fails
+- monitor various parts of the network
+  - ports
+  - traffic
+- store and analyze these events
+1. Host based vs. Network based
+2. Signature based vs. Heuristic/Anomaly based
+  - signature: each known attack has a signature. Polymorphic worms are an issue
+  - Heuristic: look for anomalous behaviour, can help with Polymorphic. False positives and Negatives are an issue.
+    - machine learning
+
+### Example: Tripwire
+- Anomaly, host--based IDS
+- detect changes to system files
+- hash system files, store on read-only CD
+- Periodically compare the files to the CD
+  - use a second machine to do this.
+  - If the system itself is compromised, we can't trust the information coming from it
+- may need to recompute in the case of upgrade, valid changes, etc
+
+### Stealth Mode
+- wiretapping, reading traffic
+- another interface to respond to alarms
+
+### Respond to alarms
+- the actual response depends on the impact of attack
+- write log to alert a person
+
+### False Positives / False Negatives
+- FP: Flag a benign event as an attack
+  - might lead to true positives being ignored
+  - cry wolf
+- FN: Let an attack slip through
+
+IDs needs to be monitored to tune params, find a balance
+
+## Module 5: Internet Security and Privacy
+
+### Crytography
+- send secret messages over a public channel
+- write the message in such a way so that the message can only be read by authorized parties
+- plaintext -> ciphertext
+- **cryptanalysis**: Break secret messages
+
+#### Terms
+- Alice, Bob, Carol, Dave: Innocent people
+- Eve: Passive adversary
+- Mallory: Man-in-the-middle
+- Trent: Trusted Third Party
+
+#### Building blocks
+- **confidentiality**: Prevent Eve from reading Alice's messages
+- **integrity**: Prevent Mallory from changing Alice's messages, without detection
+- **authenticity**: prevent Mallory from impersonating Alice
+
+#### Kerckhoff' Principal
+
+The security of a cryptosystem should not rely on a secret that's hard (or expensive) to change.
+
+Why not?
+- If someone learns the secrets of your system, you have to design a new system
+- If you can't tell anyone about the system's details, only the designer can validate
+  - when the system is open, many people can be analyzed
+
+Instead have an open system, with parameters dictating the secrets (ex. keys)
+
+implications
+- System security is bounded from above by the number of secret keys
+
+#### crypto scheme
+- Encryption algorithm: ![latex-e37fb20c-4a26-40d0-869f-df13e14dfbde](data/lecture13/latex-e37fb20c-4a26-40d0-869f-df13e14dfbde.png)
+- decryption algorithm: ![latex-2cec90e6-c782-4743-b3ca-05b7f56e618f](data/lecture13/latex-2cec90e6-c782-4743-b3ca-05b7f56e618f.png)
+- Key generation algorithm: Generates k.
+
+### Secret/symmetric Key Encryption
+
+Alice and Bob use the same key the encrypt and decrypt the messages.
+
+#### Perfect Secret Key: One-Time Pad
+- given a message of bit-length N, generate a random N-bit string, XOR
+- ![latex-301982b7-51fe-4303-bf04-faafd6779eba](data/lecture13/latex-301982b7-51fe-4303-bf04-faafd6779eba.png)
+- Very important that the pad is only used once
+  - ![latex-1e8f8214-2d17-4611-8728-fa3d07a9a0a9](data/lecture13/latex-1e8f8214-2d17-4611-8728-fa3d07a9a0a9.png) - which doesn't depend on the secret key
+
+The key needs to be communicated over some secure channel, but note that the key length is the same as the plaintext length.
+- Secure channels tend to be slower that open channels
+
+If we don't have the key, then it is equally likely that a given message could be using a given key.
+- You have no information on which one it was
+- ![latex-4f90165a-4b5c-44a7-a135-1ef1259a0bdb](data/lecture13/latex-4f90165a-4b5c-44a7-a135-1ef1259a0bdb.png) possible keys
+
+### Computational Security
+
+Use the hardness of the problem to provide security. You're adversary doesn't have enough resources to solve the problem.
+- Large key sizes
+
+Worst case is exhaustive key search
+- Should be difficult enough such that this isn't feasible in a reasonable amount of time.
+
+#### US Crypto Export limits
+- DES Encryption developed by US government
+- Use inside states: 56-bit
+- internationally: 40-bit (since the government could break it)
+
+Moore's law becomes an issue. If you wait long enough, computers will be fast enough such that exhaustive key search is feasible.
+- Another issue is Grover's Search: Can perform exhaustive key search in ![latex-d92a097b-1272-497d-ac50-3d57dcf88ab0](data/lecture13/latex-d92a097b-1272-497d-ac50-3d57dcf88ab0.png)
+- But realistically, this isn't a huge issue.
+
+### Stream Cipher
+- Have some secret key, given to a keystream generator
+  - If you use the secret key twice, then the keystream generator will generate the same stream.
+  - same scenario as One-time pad
+- Generate a key that is the same length as the plaintext, XOR
+- Only pseudorandom
+- RC4 is an example
+
+Pros
+- Very fast
+  - good to send lots of data
+
+cons
+- hard to use correctly
+
+How to use the same key multiple times?
+- Add a salt or pepper
+
+### Block Ciphers
+- Key of size N
+- Divide the plaintext into blocks of size N
+- Operate on one block at a time
+- AES
+
+If the messages isn't a multiple of the block size: pad the message
+
+Different modes of operation dictate how the algorithm operates on multiple blocks
+- ECB: Electronic Cook Book Mode
+  - Just encrypt each block individually
+  - pointless, exposes patterns in the plaintext. Same blocks result in the same ciphertext
+- CBC: Cipher Block Chaining
+  - Have some ![latex-4fa10727-c51b-45b3-b8f0-dfd7452e75cf](data/lecture13/latex-4fa10727-c51b-45b3-b8f0-dfd7452e75cf.png)
+  - Blocks feed into eachother
+  - C_i = E_k(P_i) \oplus C_{i-1}$$_
+- GCM: Galois Counter Mode
+  - Define a nonce
+  - increment the counter for each block
