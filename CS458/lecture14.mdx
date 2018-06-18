@@ -1,0 +1,17 @@
+# Lecture 14 - June 18, 2018
+
+## Public Key Encryption
+
+### Key Exchange
+
+Alice and Bob need to exchange a secret key in order communicate.
+
+Use public key crypto to share a shared secret (session key), then use a symettric scheme (AES)
+- RSA requires large keys (2048+ bit) to be secure, slow, expensive.
+- AES 128-ish bit keys are sufficient, much faster
+- **Hybrid Cryptography**
+
+### Properties of secure hash functions
+- Preimage resistance: Given H(x), infeasible to find x
+- Second Preimage resistance: Given $$(x, H(x))$$, infeasible to find x' s.t $$H(x) = H(x')$$ and $$x \neq x'$$
+- Collision resistant: It is infeasible to find $$x, x'$$ st. $$H(x) = H(x')$$ and $$x \neq x'$$
