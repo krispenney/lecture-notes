@@ -1,0 +1,172 @@
+# Lecture 9 - July 10, 2018
+
+## Excercise Strategies - Question 3
+Short Strangle
+- underlying price needs to stay close to the strike price
+- betting against high volatility
+- max loss: infinite. If the underlying price keeps rising
+- Breakeven points: 1799-5 and 1949+5
+  - Profits in between
+
+## Option Properties
+
+### Effects of variables on Option Price
+- slide 2: First 2 columns -> European Options, Last 2 -> American
+  - Both c->call, p->put
+
+- **Current Stock Price:** $$S_0$$
+  - Draw the graphs
+  - notice that as the price increase, for calls: move closer to being in the money, puts: moves farther away
+  - Same for american and euro
+- **Strike Price**: $$K$$
+  - again: draw the graphs
+  - For calls: Notice that a lower strike prices increases your chances of being in the money
+    - Negative correlation on price
+  - For puts: Lower strike price decreases your chances of being in the money
+    - positive correlation on price
+  - Same for american and euro
+- **Maturity**: $$T$$
+  - Recall the difference between American and European options, American: can excercise at any point.
+  - Euro: can't do anything until maturity
+    - Therefore maturity has no effect on the price of an option
+  - American: Can excercise at anypoint during the lifecycle of the option
+    - Have an increased oppourtunity of observing a profitable scenario.
+    - American options are higher priced
+  - **American** options can never be priced less than an equivalent **European** bond
+- **Volatility**: $$\sigma$$
+  - Call/Put and Euro/American doesn't matter
+  - probability of possible values that the underlying price could take on
+  - lower volatility: (assuming a normal distribution) the expected value is much clearer, lower standard deviation, lower odds of being in the money
+  - higher: higher standard deviation, potentially increasing your chances of being in the money
+- **Risk Free Rate** $$r$$
+  - Examine CAPM: $$E[r_i] = r + \beta(E[r_n] - r)
+  - With a higher risk free rate, faster rate of appreciation, end up in the money sooner.
+  - With a call (euro/american) increases price
+  - With a put: decreases prices
+- **Dividend Payments**: $$D$$
+  - Price goes down when a dividend is payed
+    - we are removing money from the company
+  - Call: Negative relation
+    - decreasing the value of the underlying, decreasing likelihood of being in the money
+  - Puts: Positive relation
+
+#### Replication with Options
+
+We want to find a way to price options
+
+Recall that pricing forwards is a linear relationship
+- Via the no-arbitrage principal
+
+With options, need additional information to determine the price
+- How the stock price will evolve
+
+##### Put-Call Parity (PCP)
+A combination of options and the underlying can produce a call or put option
+
+- combination of a short call, long underlying
+- combination of call + underlying
+  - short put
+- long put + long call
+  - long call
+
+$$c = p + S - BK$$
+- Long call = Long put + long stock - short bonds
+- $$c, p$$ are today's price of Euro calls and puts
+  - Strike price K, expiration T
+- $$B$$: today's price of zero-coupon bond $$e^{-rT}$$
+- $$S$$: Underlying price today
+
+If this equality does not hold, there is an arbitrage oppoutunity to be exploited
+
+###### Establishing PCP by Payoff Diagram
+- Long put: Strike Price 20
+- fund the purchase of a long call
+- funded transaction: Not you're money
+  - that's why the minimum payoff is $$0$$
+- Combined effect: a long call
+  - "It's not really a call"
+  - a real call would have minimum payoff of 0
+- To get a true call
+  - Need to be worth $$-20$$ no matter the value of the underlying
+  - short sell 20 zero-coupon bonds
+- If this porfolio has a different value to an actual call, then there is an arbitrage oppourtunity.
+
+###### Slide 11 Example:
+- IBM Stock: $22.50 today ($$T_0$$)
+- options have Strike price of $20, mature in 6 months
+- put price is $0.50
+- $$r = 0.05$$ per year
+- $$\implies B = e^{-rT} = 0.9753$$
+- no dividends
+- $$c = 0.5 + 22.50 - 0.9753 * 20 = 3.49$$
+- real call price: $4
+- Short real, long synthetic
+- Profit of $$4 - 3.49 = 0.51$$
+- Columns in the table on slide 13 is comparing Stock price to the strike price
+
+IF the call price is $3
+- The we need to create a synthetic short call
+- The call is underpriced: Profit is $$3.49 - 3 = 0.49$$
+- short put, short stock, buy bonds
+  - as always, short case is just the equation * -1
+
+## Binomial Tree for Valuing Options
+- Build a binary tree over time, outcomes of events are branches
+  - each level in the tree is a period
+  - Some probability of taking each branch, i.e. the world ending up in some state
+- "State of the world up" vs. "State of the world down"
+  - do we win or loose
+- $$\mu = \sum_{i=1}^N P(state_i) * Payoff(state_i)$$
+- $$\sigma^2 = \sum_{i=1}^N P(state_i) * (Payoff(state_i) - \mu)^2$$
+
+### Example: Euro Call Pricing
+
+Asset A:
+- Current price: $$S_0 = 100$$
+- In one year
+  - go upto $120 (suppose probability $$q$$)
+  - go down to $90.25
+
+Asset B:
+- Dollar invested in money market account grows to $1.0513
+
+Consider a Euro call option, $$K = 100$$, maturity in 1 year
+- $$Payoff = max(S_T - 110, 0)$$
+  - Upside: $$Payoff = max(120 - 110, 0) = 10$$
+  - Downside: $$Payoff = 0$$
+
+How much to pay?
+- Come up with a portfolio that looks like the call options (i.e. that has the same payoff)
+  - Build it using asset A and B
+
+- Let $$\Delta$$ be the number of underlying units purchased
+- Let $$b$$ be the number of units put into the money market account
+- $$V(0) = \Delta * S_0 + b$$
+  - Want $$(\Delta, b)$$ such that payoff at time 1 matches the call
+  - upside: $$\Delta * 120 + b * 1.053 = 10$$
+  - downside: $$\Delta * 90.25 + b * 1.053 = 0$$
+  - $$\Delta * (120 - 90.25) = 10 - 0 \implies \Delta = 0.336$$
+  - Solve for b, $$\implies b = -28.85$$
+
+To construct the portfolio:
+- Time 0: Need to buy $$\Delta$$ units of underlying, borrow $$b$$ dollars
+  - $$V(0) = \Delta * 100 + b = 4.76$$
+  - This price must be the same as the price of the call, otherwise there is an arbirage opportunity
+
+Arbitrage:
+- suppose a trader quotes $7 for the call
+  - sell the overpriced traded call for $7
+  - construct the synthetic call for $4.76 (as above)
+  - immediate profit of $$7 - 4.76 = 2.24$$
+- suppose the quote is $3
+  - buy the call for $3
+  - short the portfolio, rebuild the portfolio with reversed positions
+
+**Euro put Example**
+
+Payoff:
+- upside: max(110 - 120, 0) = 0
+- Downside: max(110 - 90.25, 0) = 19.75
+
+$$\Delta * (90.25 - 120) = 19.75 \implies \Delta = -0.6638$$
+$$\Delta * 120 + 1.053 * b = 0 \implies b = 75.78$$
