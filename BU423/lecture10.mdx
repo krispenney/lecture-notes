@@ -1,0 +1,112 @@
+# Lecture 10 - July 17, 2018
+
+## Synthetic calls
+- recall that we can synthesize a call by constructing a portfolio
+
+## Developing the Binomial Model
+
+### Assumptions
+- no market frictions
+  - no bid ask spreads
+- no credit risk
+  - no possibility of bankrupcy
+- competitive and well-functioning markets
+- no intermediate cash flows
+  - no lump sum dividends
+- no arbitrage oppourtunities
+- no interest rate uncertainty
+  - constant with continuous compounding
+
+### Binomial Process
+- S is the current stock price
+- The next periods stock price is modelled by:
+  - Up factor: $$U > 1$$ gives $$S_U = U * S$$
+  - Down factor: $$D > 1$$ gives $$S_D = D * S$$
+  - Assumption: $$U > e^{rT} . D$$
+    - no arbitrage oppourtunities
+- Let $$q > 0$$ denote the probability of the stock going up
+
+#### Replicating Portfolio - Binomial Model
+- Portfolio construction: purchase $$\Delta$$ units of the underlying, b units invested in money market account
+  - b earns the risk free rate
+- Initial value of portfolio: $$V(0) = \Delta * S + b$$
+- At maturity: $$t=T$$
+  - $$V_u(T) = \Delta * U * S * be^{rT} = \Delta * S_U * be^{rT} = c_u$$
+  - $$V_d(T) = \Delta * D * S * be^{rT} = \Delta * S_D * be^{rT} = c_d$$
+
+We can then derive the values for $$\Delta$$ and b:
+- $$\Delta = \frac{c_u - c_d}{S_U - S_D}$$
+  - Just subtract both equations
+  - $$\Delta$$ becomes similar to the hedging ratio
+- $$b = (c_u - \Delta * S_U) e^{-rT}$$
+  - Can use either equation, just use the relevant position
+
+#### How to find the value of the option?
+- The value of the portfolio V is equal to the value of the option c at any time, $$V = \Delta * S + b = c$$
+- $$b = (c_u - \Delta * S_U) e^{-rT}$$
+  - $$\implies c = (c_u - \Delta * S_U)e^{-rT} + \Delta S$$
+- Let $$\pi = \frac{e^{rT} - D}{U - D}$$
+- Then, $$c = e^{-rT} \[\pi c_u + (1-\pi) c_d\]$$
+
+#### Risk neutral valuation of the principal
+- Interpret $$\pi$$ as probability
+- As an expectation: $$E^\pi\[e^{-rT}c(T)\]$$
+
+#### Example: Pricing a call option
+- YBM's stock price is 100 today
+- after one year
+  - $$U=1.2 \implies S_U = 100 * 1.2 = 120$$
+  - $$D=0.9025 \implies S_D = 100 * D = 90.25$$
+  - $$r = 0.05 \implies e^{0.05 * 1} = 1.0513$$
+- $$\pi = \frac{1.0513 - 0.9025}{1.2 - 0.9025} = 0.5002$$
+- With strike price 110
+  - $$c_u = max(120 - 110, 0) = 10$$
+  - $$c_d = max(90.25 - 110, 0) = 0$$
+  - $$e^{-0.05 * 1} \[0.5002 * 10 + (1 - 0.5002) * 0\] = 4.76$$
+
+The expected return follows the risk-free rate if investors are risk neutral
+
+We can add additional periods by adding intermediate layers
+
+#### Two-Step Binomial Trees
+- update state is always: $$\pi$$, down is always $$(1-\pi)$$
+- Just multiply by the proper probabilty as you traverse through the tree
+  - Number of nodes grows exponentially, too much work to do by hand
+- Need a structure to allow for many periods, without exponential properties
+  - **REcombining**: Note that `down, up` is the same as `up, down`
+    - For this property we need $$U * D = 1$$
+    - Then the number of nodes in each layer is linearlly proportional to the layer
+      - $$l + 1$$
+- Periods are always the same distance from eachother
+  - $$\delta t$$ defines the length of each individual timestep
+  - Total length is T
+    - Sum of all periods: $$n * \delta * t$$
+
+#### How to price option
+1. Build the tree
+2. Compute value of the derivative for each node in the second layer
+  - Use the strike price and derivative type
+  - Ex: for a put with strike price 52: $$max(52 - S_T, 0)$$
+3. Work backwards computing the option values
+  - Need $$\pi = \frac{e^{r * \delta * t} - D}{U - D}$$
+  - $$c_u = e^{-r\delta T} \[\pi c_{uu} + (1 - \pi) c_{ud}\]$$
+  - $$c_d = e^{-r\delta T} \[\pi c_{ud} + (1 - \pi) c_{dd}\]$$
+4. Then find C
+  - Note that $$\pi$$ doesn't change
+  - $$c = e^{-r\delta T} \[\pi c_{u} + (1 - \pi) c_{d}\]$$
+
+Then to compute: $$E^\pi \[e^{-rT} C(T)\]$$ **(for european case)**
+- C(T) can take on multiple values
+- sum of the probabilities, just look at path in the tree
+- **For american** have to work through the iterative approach
+  - Can exercise at any point in time
+  - The payoff is the max of present value (keep holding), or the intrinsic value
+  - This has implications for the present value of the option, because of the possibility to exercise in the future
+
+#### How to Choose U and D?
+- $$U = e^{\sigma \sqrt{dt}}$$
+  - $$\sigma$$ is the volatility of the underlying stock's price
+- $$D = \frac{1}{U}$$
+
+#### Increasing the number of steps
+- A smaller time step gives a better approximation of the true
