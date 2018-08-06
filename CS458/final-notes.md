@@ -539,4 +539,59 @@ Easy to modify a system to have a higher levl of nymity, hard to lower
 - Many applications want true end-to-end encryption (machine-to-machine)
 
 ### Remote Login (ssh)
+- client connects to server
+- server sends verification key
+  - client should authenticate
+- client and server run a key agreement proceedure, establish session key
+  - Everything is encrypted and MAC-ed
+- client authenticates to server
+- server accepts authentication, login proceeds
+  1. Using a password over encrypted channel
+  2. Sign a random challenge with your private signature key, server needs to know public verification key
 
+### Anonymity for emails (remailers)
+
+Anonymous remailers allow you to send email without revealing your email address
+- **Type 0**: send email to remailer, it gets forwarded to recipient, remailer maintains mapping from real addresses to anonymous addresses, manages replies
+  - remailer must remain trustworthy
+  - mapping must be kept secret
+  - no one is watching connections to / from remailer
+- **Type 1**: Remove the central point of trust
+  - use several remailers in sequence
+  - each step is encrypted to avoid tracking throught the chain
+  - remailers delay and reorder messages
+  - no replies possible
+- **Type 2**: send message as multiple constant length blocks
+  - protection against replay attacks
+  - requires a special mail client to reconstruct fragments
+
+### Pretty Good Privacy (PGP)
+- Public key crypto: provides encryption and digital signatures
+- Primary use case is to protect contents of emails
+- keys are obtained through a web of trust
+- Use fingerprints as a means of verifying keys
+  - Trusted signers can sign other user's public keys, allowing people they know and trust to use them
+- **Problem**: no forward secrecy if the same keys are used for all messages
+
+Ideal properties (for private conversation):
+- **Perfect Forward Secrecy**: key compromises in the future should not reveal past communiction
+  - use short lived keys session keys
+  - use long term keys only to authenticate diffie-hellman protocol messages
+- **Deniable Authentication**: want authentication, without digital signatures (repudiation)
+  - Use MACs
+  - can't prove who signed a message, anyone with the key could. Allows the possibility to deny sending it.
+
+### Off the Record Messaging (OTR)
+
+Software that allows for private conversations over instant messaging, provides
+- **Confidentiality**: Only Bob can read messages that Alice sends him
+- **Authentication**: Bob is assured that the message came from Alice
+- **Perfect Forward Secrecy**: Shortly after Bob reads the message, it becomes unreadable to anyone
+- **Deniability**: Although Bob is assured that the message came from Alice, he can't convince Charlie of that fact.
+  - Charlie could also forge conversations that look to be as accurate as the real messages.
+
+#### Signal Protocol
+
+Based off of OTR, used for encrypted SMS. It provides:
+- **Perfect Forward Secrecy**: Uses a ratchet technique to constantly rotate session keys
+- **Deniability**: Triple diffie hellman deniable authenticated key exchange
