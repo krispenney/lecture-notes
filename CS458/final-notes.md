@@ -373,3 +373,170 @@ Operate on blocks of bits (64 or 128 bits)
 #### Hybrid Crypto
 - Use public key crypto to establish a session key
 - Use a block cipher using the session key
+
+## Integrity
+
+Use a cryptographic checksum to tell if a message has changed in transit.
+
+### Cryptographic hash functions
+
+A hash function accepts an arbitrary length string `x` and computes a fixed length string `y = h(x)` <- this is called a **message digest**
+
+Properties
+- **Pre-image resistance:** given `y = h(x)` it should be infeasible to find `x`.
+- **second pre-image resistance**: given `(x, h(x))` is should be infeasible to find an `x'` such that `x != x && h(x) == h(x')`.
+- **Collision resistance**: Infeasible to find distinct `(x, x')` such that `h(x) == h(x')`
+
+**Note**: Hash functions can only provide integrity guarantees when there is a secure way of sending and storing the digests.
+- on paper
+
+### Message Authentication Codes
+
+Have a symettric key that is used to compute a signature of a message. If a message is changed by an unauthorized party, they should not be able to compute the MAC.
+- Encrypt-Then-MAC: send `(E(M), MAC(E(M)))` to Bob
+
+**Repudiation**: Deniability of having sent a message
+- using a MAC scheme Bob could sign an arbitrary message and claim that Alice had signed it. Likewise, Alice could sign a message, but deny doing so.
+
+### Digital Signatures
+
+Digital signature schemes provide non-repudiation, can't deny having sent a message.
+- similar to public key crypto
+- Private signing key, public verification key
+- This is slow for large messages, instead Alice can sign the hash of a message.
+
+The (signature, verification) pair is long lived, while the (encryption, decryption) key pair is short lived.
+- Provides forward secrecy: If ciphertexts compromised in the future, this gives the ability to not leak all of the plaintexts as they use different encryption keys
+
+### Key Management
+
+Key management is difficult, need to ensure that you have an authenticated copy of the message recipient's public key (encyption or verification).
+- **Manual Keying**: Can know it personally
+- **Web of Trust**: Trust a friend to tell you
+- **Certificate Authority**: Trusted third party
+  - Everyone has a copy of a CA's verification key in their browser
+  - Alice sends her public keys to the CA who signs it with their verification key
+  - Need the verification key of the root CA in order to verify the certificate chain
+
+## Security Controls using Cryptography
+
+Any secrets need to be available to real users, but not to adversaries.
+- secret key crypto is problematic because if an attacker obtains a key they can decrypt/send messages.
+- Public key: devices can only hold te public key for encryption and verification. e.x. devices (iOS or BlackBerry) will only install / execute code if it's signed by the manufacturer.
+
+**Encrypted Code**: Research into allowing processors to execute only encrypted code, decrypt the instructions before executing them.
+
+**Encrypted Data**: HDD encryption protects lost or stolen devices.
+- doesn't protect against users who have legitimate access to device / someone who installs malware
+- Someone could also extract the decryption key from memory
+
+Primary usage of cryptography is in **Network security and privacy**
+- People who you can only interact with over a network are less trustworthy, may not be who they claim to be
+- Encryption is used throughout the network stack for both security and privacy.
+
+### Link Layer Security: Protect Local Area networks
+
+- WEP wireless protocol
+  - Intended to provide (failed on all):
+    - **Confidentiality**: Prevent an attacker from learning the contents of your wireless traffic
+    - **Access control**: Prevent adversaries from using your wireless network
+    - **Integrity**: Prevent unauthorized modifications to data sent on the network
+  - IV was 24-bits long: can easily be guessed
+  - Checksum used was linear: `c(M ^ D) = c(M) ^ c(D)`
+    - An attacker can generate modifications, compute the checksum independently and XOR it to the message checksum (still a valid checksum)
+  - By obtaining a single plaintext/ciphertext pair, the attacker obtains the IV, can generate modifications, compute the checksum and XOR with `RC4(v, k)`
+    - The authentication protocol gives this pair for free, watch someone else complete the handshake
+- WPA protocol
+  - Short-term replacement for WEP
+  - Increased length of IV
+  - Changed checksum function to a real MAC
+  - Frequent key changes
+- WPA-2 protocol
+  - replacement for WPA
+  - Uses AES for authenticated encryption
+
+### Network Layer Security: Want security across networks
+
+Ideally want end-to-end encryption, typically accomplished with VPNS
+- connect two+ networks that are physically isolated, make them appear to be a single network
+- Attacker between the networks should not be able to read or modify traffic flowing across the VPN
+- One host on each side is the **VPN gateway**
+- traffic designated for the other network is sent to the local VPN gateway
+- local gateway encrypts traffic with integrity, sends to the remote gateway (via **tunnelling**)
+- remote gateway decrypts the message and sends it to it's appropriate destination.
+
+#### Tunnelling
+
+Sending of messages of one protocol inside messages of another protocol as the payload. Outside of the usually nesting sequences
+- TCP-over-ip: **NOT TUNNELLING**
+- IP-over-TCP: **TUNNELLING**
+
+#### IPsec
+
+One method of setting up a VPN
+
+Modes
+1. **Transport Mode**: Useful to connect a single laptop to home network, only contents of the original packet are encrypted and authenticated.
+2. **Tunnel mode**: Useful to connect two networks
+  - The contents and the header of the original packet are authenticated and encrypted, result is placed inside a new packet which is destined for the remote VPN gateway.
+
+#### Transport-Layer Security and Privacy: Send individual packets securely from one network to another
+
+Transform arbitrary TCP connections to add security
+
+**Main transport layer security mechanism**: TLS
+- Client connects to server, indicates it's speaking TLS,
+- server sends it's certificate to the client and selects the ciphersuite to use
+- Client validates the server's certificate
+- Client and server run a key agreement protocol
+- communication proceeds using the chosen symmetric and MAC schemes.
+
+Security properties provided by TLS
+- Server authentication
+- Message integrity
+- Message confidentiality
+- Client authentication (optional)
+
+Very successful: comes installed in browsers, no user requirements
+
+**Main transport layer privacy mechanism**: TOR
+- Also want to protect the metadata of messages
+  - Who is sending the message
+  - hide the existance of a message
+- Tor nodes -> **onion routers**
+- Alice establishes a connection with a Tor node, does a key exchange
+  - Alice tells node 1 to connect to another node (via tunneling), does another key exchange
+  - Alice tells node 2 to connect to another node (via tunneling), does another key exchange
+  - The final node connects to the website
+- Alice has: `(k1, k2, k3)`
+  - to send a message send `E(E(E(M, k3), k2), k1)`
+  - Node 1 decrypts and sends to the next node
+  - node 2 decrypts and sends to node 3
+  - node 3 decrypts and sends to the website
+- Replies are sent in reverse from the website back to Alice, node send backwards and encrypt.
+- **Note** The connection between n3 and the website is unencrypted, to obtain this end-to-end should also be used (HTTPs)
+
+Tor provides **anonymity** in TCP connections
+- **unlikably**: long term
+  - no long term identifier for Tor users
+  - Connections from a Tor server today and tommorrow, can't tell if they're the same person
+- **likably**: short term
+  - two connections in quick succession from the same Tor node are likely the same person
+
+#### Nymity Slider
+
+Transactions can be placed on a continuum according to the level of nymity
+- **Verinymity**: Gov ID, SIn, credit card
+- **Persistent Pseudonymity**: many blogs
+- **Linkable anonymity**: prepaid phone cards, loyalty cards
+- **Unlinkable anonymity**: cash payments, Tor
+
+Easy to modify a system to have a higher levl of nymity, hard to lower
+- It's easy to collect more information (add a loyalty card to cash)
+- Design systems with a low level of nymity, raise if needed
+
+## Application Layer Security and Privacy
+- Many applications want true end-to-end encryption (machine-to-machine)
+
+### Remote Login (ssh)
+
