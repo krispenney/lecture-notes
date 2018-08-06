@@ -595,3 +595,65 @@ Software that allows for private conversations over instant messaging, provides
 Based off of OTR, used for encrypted SMS. It provides:
 - **Perfect Forward Secrecy**: Uses a ratchet technique to constantly rotate session keys
 - **Deniability**: Triple diffie hellman deniable authenticated key exchange
+
+## Databases
+
+- Records: Structured, queryable collection of data
+- Elements: Fields of a record
+- Schema: Structure of database
+  - Subschema: the result of a query
+- DBMS: Database management system
+
+### Security Requirements
+
+- **Database Integrity**: Protect against corruption
+  - only allow authorized users to perform updates
+  - recover from physical problems
+  - Write ahead log to allow transaction replay
+- **Element Integrity**: Ensure correctness/accuracy of database elements
+  - Use access control to limit who can update element
+  - Use element checks to validate correctness
+    - element must be numeric
+    - Typically enforced via triggers
+- Change log or shadow fields to undo erroneous changes
+- **Error detection codes**: Protect against OS or HDD problems
+
+### Two Phase Updates
+- For a set of transactions, either all of them are none are performed
+  - violation of integrity if only some are performed
+- **First Phase**: Gather info required for changes, don't actually perform the updates
+- **Second Phase**: Make changes permanent
+
+**Concurency Control**
+- Concurrent writes lead to integrity violations (possibility of lost values)
+- Need to perform A and B as atomic operations
+
+**Referential Integrity**
+- Each table has a primary key which can uniquely identify a row
+- A table may have multiple foreign keys, which are primary keys of some other table
+- **Referential Integrity**: Ensure that there are no dangling foreign keys
+  - foreign key can't refer to a record that doesn't exist
+
+**Auditability**
+- Keep an audit log of al database accesses (reads and writes)
+- Allows users who make unauthorized changes to be retroactively identified.
+- Need to decide granularity of logs
+  - log too much: lots of data to deal with, store, go through
+  - too little: May miss something important
+
+**Access Control**
+- Harder than OS access control
+- Relationships between tables make it possible to infer sensitive information (without direct access to it)
+  - `SELECT name, salary from Employees where salary > 50000`
+  - `SELECT name from Employees where salary > 50000`
+- Efficiency concerns with large tables
+- Access control may take past queries into consideration
+  - ex. querying for each element in a set will eventually leak the entire set
+
+**User Authentication / Availability**
+- Database may perform it's own authentication checks
+- Availability can suffer if multiple users want to acccess the same record at the same time
+  - Potentially queue access
+
+### Data Disclosure and inference
+
