@@ -324,3 +324,52 @@ Setup a trap to try to catch attackers in the act.
 - **Heuristic/Anomaly Based**
   - Look for behaviour that is out of the ordinary
   - False positive / negative rate
+
+## Cryptography
+- **Cryptography**: Secret writing. Turn plaintexts into ciphertexts
+- **Cryptanalysis**: Breaking secret messages, recover the plaintext from ciphertext
+
+Components:
+- **Confidentiality:** prevent Eve from reading Alice's messages
+- **Integrity**: Preventing mallory from modifying Alice's messages without being detected
+- **Authenticity**: Prevent Mallory from impersonating Alice
+
+**Kerckhoffs' Principal**: The security of a crypto system should not rely on a secret that's hard to change
+- Make the class public information
+- The system is at most as secure as the number of keys
+- Eve can try them all until she finds the right one
+- **Strong Cryptosystem**: Best attack is bruteforce
+
+### Secret Key Encryption (symmetric)
+
+Alice and Bob use the same key to encrypt and decrypt their messages
+
+**Perfect Secret Key: One Time Pad**
+- Generate a random bit string, as long as the message, encrypt and decrypt are just XOR.
+- Must only use each key once, and truely random
+
+**Computational Security**: It is certain that they can be broken, given enough time.
+- At worst, the attacker has to try every key (this can take a very long time)
+
+#### Stream Ciphers
+
+Same as a one time pad, but use a pseudorandom keystream instead of truely random.
+- Can be very fast, good to send lots of data securely
+- If you change a single bit of the plaintext, that bit will change in the ciphertext
+
+#### Block Ciphers
+
+Operate on blocks of bits (64 or 128 bits)
+- Key needs to be as long as a block
+- Don't use ECB mode (exposes patterns in the plaintext)
+
+### Public Key Crypto
+
+- Every party has a public and private key
+- Allows parties to exchange information without needing to establish a prearranged shared secret
+- Needs a longer key (2048+ bits) to obtain security
+- Slower for longer messages
+
+#### Hybrid Crypto
+- Use public key crypto to establish a session key
+- Use a block cipher using the session key
