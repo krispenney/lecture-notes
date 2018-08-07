@@ -657,3 +657,138 @@ Based off of OTR, used for encrypted SMS. It provides:
 
 ### Data Disclosure and inference
 
+Types of data disclosure
+- Exact Data
+- Bounds
+  - Sensitive value is smaller than H, but bigger than L
+  - Could perform a binary search to decrease the range
+- Negative result
+  - knowing that a person does not have 0 felony convications is sensitive
+- Existence
+  - Knowing that a record exists can be sensitive
+- Probable Value
+  - sensitive data has value x with probability y
+
+#### Security vs. Precision
+- **Security**: Forbid any queries that access sensitive data, even if the aggregate is no longer sensitive
+- **Precision**: Aggregated result should reveal as much non-sensitive data as possible
+
+**Data Inference**: The derivation of sensitive data from seemingly non-sensitive data
+- **Direct Attack**: Attacker may try to obfuscate query to fool DBMS
+  - `SELECT SUM(salary) from staff where lastname='Adams' or (sex='M' AND sex='F')`
+- **Indirect Attack**: Infer sensitive data from statistical results
+  - statistical attacks
+    - Sum: If sum only covers one record or if attacker can control (SUM of all - SUM of all except the result you care about => SUM of the result you care about)
+    - Mean: `sum = count * mean`
+    - Median: Intersection of medians may leak sensitive data
+    - controls:
+      - **Suppression**: Sensitive data from results
+      - **Concealing**: answer is cose to the actual value, but not exact
+  - Also tracker attack
+    - Suppose dbms refuses to answer query `C`
+      - it matches fewer than k or more than N-k records
+    - Tracker query T: matches between 2k and N - 2k records
+      - Meaning DBMS will answer `T` and `NOT T`
+    - Let `S` be the set of all records
+    - `q(c) = q(C or T) + q(C or not T) - q(S)`
+
+### Multilevel Security (MLS) Databases
+
+Support the classification / compartmentalization of information according to it's confidentiality
+- ex. 2 sensitivity levels (sensitive and not sensitive)
+- possibly at the element level
+
+**Confidentiality**
+- Depending on a user's clearance, they might get different answers for a query
+  - lower precision for low-clearance users
+- The fact that a record exists could be confidential
+  - Those this could lead to **polyinstantiation**, different records with the same primary key, but different sensitivities
+  - Someone with lower security notices an employee is missing a record, and creates one not knowing it actually exists with higher clearance.
+  - If the DBMS fails, the employee may get suspicious
+
+**Partitioning**
+- Maintain separate databases for different classification levels
+- May lead to redundant data storage
+- Doesn't fix high clearance user needing access to all data
+
+**Encryption**
+- Separate data by encrypting it with a key unique to it's classification level
+- Processing queries becomes expensive, many records need to be decrypted
+
+**Integrity Lock**
+- Provides both integiry and access control
+- Each data item consists of:
+  - the actual data
+  - an integrity level
+  - A cryptographic signature (MAC) convering the above
+- the signature protects against attacks on the above fields, unauthorized modifications
+- This scheme doesn't protect against replay attacks
+
+### Designs of secure databases
+
+**Trusted front end**
+- front end authenticates a user and forwards user query or DBMS
+- front end gets result from DBMS and removes data items that the user is not allowed to see
+- backwards compatible
+- inefficient of DBMS returns lots of results and most of them filtered
+
+**Commutative Filters**
+- front end rewrites user query according to a user's classification
+  - remove fields that user's is not allowed to see
+  - add constraint expressing user's classification
+- benefits from DBMS query processing, discard forbidden results early
+- Front end might have to do post processing
+
+**Distributed/Federated databases**
+- based on partitioning
+- front end forwards user query only to databases that the user can access
+- front end may have to combine results from multiple databases
+- doesn't scale well
+
+**Views**
+- A logical database that represents a subset of some other database
+- A users view of a database consists of only the data that the user is allowed to acess
+
+**Truman vs. Non-truman semantics**
+- Truman: DBMS pretends that the data the user is allowed to see is all the data
+  - all queries will succeed, by may be incorrect
+- Non-Truman: DBMS can reject queries that ask for data that the user is allowed to access
+  - all successful queries are correct
+  - some fail
+
+### Data Mining
+
+Now, no single entity controls the data.
+- Any one can combine multiple released datasets
+- Attempt to gather additional data from third parties
+- **Data Mining**: Attempt to automatically find interesting patterns in data
+
+Security problems of data mining
+- **Confidentiality**: Derivation of sensitive information
+  - can reveal sensitive information
+- **Integrity**: Mistake in data
+  - data may be wrong, leading to wrong conclusions
+  - false positives and false negative results
+- **Availability**: compatibility of different datasets
+  - datasets are often created by different organizations
+- **Privacy**
+  - data mining could reveal sensitive information about individuals
+  - conducted by private companies and governments
+  - Preserve privacy by anonymizing data records prior to release
+    - strip names, addresses
+
+**k-anonymity**: Ensure that for each released record, there are at least k-1 other released records from which a record cannot be distinguished
+- **Homogeneity attack**: If you know Bob (with some identifier) is in the table, you know he has cancer
+- **Background knowledge attack**: If you know Dave is in the table and his risk for heart disease is very low, then he probably has Dave
+- **l-diversity**: For any quasi-identifier, there should be at least l well-represented values of the sensitive fields
+- **Value Swapping**: Swap values for a subset of released records
+  - any linking done can no longer be considered true
+  - trade off between privacy and accuracy
+  - Weaken strong correlations
+- **Adding noise**: manipulate data by adding small errors to each value
+  - Protect privacy without sacrificing accuracy
+- **Sampling / Synthetic data**
+  - release only a subset of data
+  - **Geographic coarsening**: Restrict geo identifiers to regions with a minimum population (100,000 people)
+  - **top/bottom coding**: If there are sufficiently few examples with age > 90, replace these rows with 90
+  - Build a distribution model based on the data, sample synthetic examples from it, has similar characteristics to the real data
