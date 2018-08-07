@@ -792,3 +792,116 @@ Security problems of data mining
   - **Geographic coarsening**: Restrict geo identifiers to regions with a minimum population (100,000 people)
   - **top/bottom coding**: If there are sufficiently few examples with age > 90, replace these rows with 90
   - Build a distribution model based on the data, sample synthetic examples from it, has similar characteristics to the real data
+
+## Non-Technical Issues
+
+### Ethical Issues
+
+**Take Ethics into Consideration**
+- just because something is possible or legal doesn't mean you should be doing it
+- **Code of professional ethics**: as a professional, expected to uphold ethical standards.
+  - Ethics != law
+  - Protect public interest, maintain integrity, avoid conflicts of interest
+
+### Administering Security
+
+**Security Planning**: Many users take digital files with them, need to take the proper precautions
+- **Security plan** is a document put together by an organization that explains:
+  - what the security goals are
+  - how to meet them
+  - how to ensure that they are met
+    - plans for improvement
+  - **contents**
+    - **policy**: high level statement of purpose and intent
+      - **Goals**: Relative importance of CIA
+      - **Responsibility**: Whose job is getting security right
+      - **Commitment**: Who provides security support for staff
+    - **current state**: risk analysis describing the current state of the system
+    - **requirements**: What needs does the organization have
+      - Nothing about how to accomplish the listed goals
+    - **recommended controls**: List mechanisms to control vulnerabilities
+      - satisfy needs of requirements, while taking into account content of policy
+    - **accountability**: Who is accountabile if security controls aren't implemented, or incorrectly implemented
+    - **timetable**: Too big to do at once, list how and when
+      - milestones
+    - **continuing attention**: Organization is always changing
+      - always new vulnerabilities
+      - old controls become ineffective
+- **Business Continuity Plans**
+  - type of security plan, focus is on availability
+  - **Catastrophic**: A large part of a computing capabilitiy is suddenly unavailable
+  - **Long Duration**: the outage is expected to last for so long that the business would suffer if left unattended
+- **Incident Response Plans**
+  - **Legal Issues**: When to involve law enforcement
+  - **Preserving Evidence**: Quickly recover, while maintaining as much evidence as possible
+  - **Records**: keep track of everything once a breach is noticed
+  - **Public Relations**: Speak with one voice
+  - Post-incident: Hold a review
+    - is any security control action to be taken
+    - Did the incident response plan work
+- **Risk**: A potential problem that a system / users may experience
+  - Probability of occurrence
+  - Impact: What harm is caused
+  - Risk exposure = prob * impact
+- **Risk analysis**: Impossible to eliminate risk, do the benefits outweigh?
+  - **Identify assets**: Hardware, software, data, people, docs, supplies
+  - **determine vulnerabilities**: think like an attacker
+    - CIA + privacy
+  - **estimate likelihood of exploitation**
+  - **compute risk exposure**
+  - **survey applicable controls**
+  - **project savings due to control**
+- Physical security: protection of the physical assets
+  - Nature: natural disasters
+  - human: Thieves, vandals
+
+### Legal Issues
+
+**Intellectual Property**
+- Non-depletable
+- replicable
+- has minimal marginal cost
+
+#### Trade Secrets
+
+You want to protect some secret information
+- formula for Coke
+- Just don't tell anyone, call it a trade secret
+- Get legal protection if someone passes it on to someone unauthorized
+
+#### Reverse Engineering
+
+The process of taking a finished product apart in order to learn how it works
+- If someone does this, you've lost your trade secret protection
+
+#### Trademarks
+
+Protect names, brands, and logos
+- make a legal filing showing that your are the one using the name
+
+#### Patents
+
+applies to inventions, must be
+- novel
+- useful
+- non-obvious
+
+To gain
+- You tell everyone how your invention works
+- You get monopoloy over it's use for 20 years
+
+#### Copyright
+
+Protects the expression of ideas in a tangible medium
+- not ideas themselves
+- no filing requirement
+- Limited lifetime (life + 70 years)
+- Copyright holder has a monopoly over uses of work, i.e. making copies.
+
+Legal Copying
+- Allows individual's to legally copy in certain use cases
+- **Fair use**: purposes of criticism, comment, new, reporting
+  - purpose and character of use
+  - nature of copyrighted work
+  - amount and substantiality of the portion used in relation to the copyrighted work as a whole
+  - the effect of use upon a potential market
